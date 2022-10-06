@@ -6,10 +6,20 @@ import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 
 import { ProtectedRoute } from "../../utils/route";
+import useUser from "../../hooks/useUser";
 import NavBar from "../../components/NavBar/NavBar";
 import ProtectedPage from "../ProtectedPage";
 
 function App() {
+  const { refreshAuth } = useUser();
+
+  React.useEffect(() => {
+    async function run() {
+      await refreshAuth();
+    }
+    run();
+  }, [refreshAuth]);
+
   return (
     <div>
       <header className="header">
