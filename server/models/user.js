@@ -3,11 +3,36 @@ import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 6;
 
+// Double check tags and user and image
+
+const blogSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    image: { data: Buffer, contentType: String },
+    tags: [String],
+    comments: [comments],
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const userSchema = new mongoose.Schema(
   {
-    name: String,
+    name: { type: String, required: true },
     email: { type: String, required: true, lowercase: true, unique: true },
-    password: String,
+    password: { type: String, required: true },
+    bio: String,
+    image: { data: Buffer, contentType: String },
+    socialMediaProfiles: [
+      {
+        platform: String,
+        linkToProfile: String,
+      },
+    ],
+    blogs: [{ type: mongoose.Schema.ObjectId, ref: "blogSchema" }],
+    comments: [comments],
   },
   {
     timestamps: true,
