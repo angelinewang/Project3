@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import Blog from "./Blog";
 
 const SALT_ROUNDS = 6;
 
@@ -13,20 +14,20 @@ const tagSchema = new Schema({
   tags: [String],
 });
 
-const blogSchema = new Schema(
-  {
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    content: { type: String, required: true },
-    image: { data: Buffer, contentType: String },
-    tags: [tagSchema],
-    comments: [commentSchema],
-    author: { type: mongoose.Schema.ObjectId, ref: "userSchema" },
-  },
-  {
-    timestamps: true,
-  }
-);
+// const blogSchema = new Schema(
+//   {
+//     title: { type: String, required: true },
+//     description: { type: String, required: true },
+//     content: { type: String, required: true },
+//     image: { data: Buffer, contentType: String },
+//     tags: [tagSchema],
+//     comments: [commentSchema],
+//     author: { type: mongoose.Schema.ObjectId, ref: "userSchema" },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
 
 const userSchema = new mongoose.Schema(
   {

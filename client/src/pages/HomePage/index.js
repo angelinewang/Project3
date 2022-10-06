@@ -1,3 +1,9 @@
+import react, { useEffect, useState } from "react";
 export default function HomePage() {
-  return <div>The Home Page</div>;
+  let [blogs, setBlogs] = useState([]);
+  // useEffect(() => {
+  //   try {} catch (err) {}
+  // }, [])
+
+  return <div></div>;
 }
