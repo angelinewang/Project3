@@ -7,27 +7,14 @@ const SALT_ROUNDS = 6;
 // Double check tags and user and image
 
 const commentSchema = new Schema({
-  comments: [String],
+  text: String,
+  author: { type: mongoose.Schema.ObjectId, ref: "userSchema" },
+  date: Date,
 });
 
 const tagSchema = new Schema({
   tags: [String],
 });
-
-// const blogSchema = new Schema(
-//   {
-//     title: { type: String, required: true },
-//     description: { type: String, required: true },
-//     content: { type: String, required: true },
-//     image: { data: Buffer, contentType: String },
-//     tags: [tagSchema],
-//     comments: [commentSchema],
-//     author: { type: mongoose.Schema.ObjectId, ref: "userSchema" },
-//   },
-//   {
-//     timestamps: true,
-//   }
-// );
 
 const userSchema = new mongoose.Schema(
   {
@@ -43,7 +30,6 @@ const userSchema = new mongoose.Schema(
       },
     ],
     blogs: [{ type: mongoose.Schema.ObjectId, ref: "blogSchema" }],
-    comments: [commentSchema],
   },
   {
     timestamps: true,
