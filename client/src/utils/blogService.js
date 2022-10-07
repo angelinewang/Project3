@@ -38,7 +38,7 @@ export const updateABlog = async (blog) => {
 
 export const createABlog = async (blog) => {
   try {
-    const token = tokenService();
+    const token = tokenService.getToken();
     let res = await fetch(`/api/blogs`, {
       method: "POST",
       headers: {
