@@ -1,5 +1,13 @@
 import mongoose from "mongoose";
-import { tagSchema, commentSchema } from "./user";
+
+
+const commentSchema = new Schema({
+  comments: [String],
+});
+
+const tagSchema = new Schema({
+  tags: [String],
+});
 
 const blogSchema = new Schema(
   {
