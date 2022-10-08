@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
-import { getBlogs } from "../../utils/blogService";
 import "./homepage.css";
 
 export default function HomePage() {
@@ -14,7 +13,7 @@ export default function HomePage() {
 
   async function getBlogs() {
     try {
-      const response = await fetch("http://localhost:3001/");
+      const response = await fetch("/api/blogs");
       const blogs = await response.json();
       setBlogs(blogs);
     } catch (err) {
@@ -33,8 +32,9 @@ export default function HomePage() {
               <h2>{post.title}</h2>
               <p>{post.description}</p>
               <div className="post-settings">
-                <p>Posted on: {post.timestamps}</p>
-                <ul>
+                <p>Posted on: {post.createdAt}</p>
+                <h2>Tags:</h2>
+                <ul className="tags">
                   {post.tags.map((tag) => (
                     <li>
                       <button>{tag}</button>
@@ -50,22 +50,22 @@ export default function HomePage() {
         </main>
         <div className="blogs-side">
           <h2>Sort by:</h2>
-          <input type="radio" id="html" name="fav_language" value="HTML" />
-          <label for="html">Latest</label>
+          <input type="radio" id="latest" name="filter_option" value="latest" />
+          <label for="latest">Latest</label>
           <br />
-          <input type="radio" id="css" name="fav_language" value="CSS" />
+          <input type="radio" id="title" name="filter_option" value="title" />
           <label for="css">Title</label>
           <hr />
           <h2>Filter by:</h2>
-          {blogs.map((blog) => {
+          {blogs.map((blog) =>
             blog.tags.map((tag) => (
               <label class="container">
                 {tag}
                 <input type="checkbox" checked="checked" />
                 <span class="checkmark"></span>
               </label>
-            ));
-          })}
+            ))
+          )}
         </div>
       </div>
     </div>
