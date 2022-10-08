@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useUser from "../../hooks/useUser";
-import { getBlog, getUserBlog } from "../../utils/blogService";
+import { getUserBlog } from "../../utils/blogService";
 
 function Profile() {
   const { user } = useUser();
@@ -19,7 +19,6 @@ function Profile() {
   // };
 
   useEffect(() => {
-    console.log("test");
     if (!userID) {
       return;
     }
@@ -30,24 +29,31 @@ function Profile() {
       console.log("test data ->", blog);
     }
     getBlogData();
-
-    console.log(blog);
-  }, []);
+  }, [userID]);
 
   // TODO: Display most recent blogs by user
   // TODO: Display link to user's blog posts
 
   return (
     <div>
-      {user ? <h2> Blogs by {user.name}</h2> : null}
-
-      {blog
-        ? blog.blogs.map((b) => (
-            <ul>
-              <li>{b.title}</li>
-            </ul>
-          ))
-        : null}
+      <section>
+        {user ? <p> User: {user.name}</p> : null}
+        <p>Joined: {blog.createdAt}</p>
+        <p>Blogs: {blog.blogs.length}</p>
+      </section>
+      <section>
+        <h2> Blogs by {blog.name}</h2>
+        {blog
+          ? blog.blogs.map((b) => (
+              <ul>
+                <li>{b.title}</li>
+              </ul>
+            ))
+          : null}
+      </section>
+      <div>
+        <p>View more of {blog.name}'s blogs -> </p>
+      </div>
     </div>
   );
 }
