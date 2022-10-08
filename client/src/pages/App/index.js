@@ -29,7 +29,7 @@ function App() {
       </header>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/profile/:profileID" element={<Profile />} />
+        <Route exact path="/profile/:userID" element={<Profile />} />
         <Route exact path="/blog/new" element={<CreateBlogPage />} />
         {/* <Route exact path="/blog/edit/:blogID" element={} /> */}
         {/* <Route exact path="/blog/:blogID" element={} /> */}
