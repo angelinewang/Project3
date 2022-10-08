@@ -11,7 +11,18 @@ export const getBlogs = async () => {
 
 export const getBlog = async (blogID) => {
   try {
-    let res = await fetch(`/api/blogs.${blogID}`);
+    let res = await fetch(`/api/blogs/${blogID}`);
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserBlog = async (userID) => {
+  try {
+    console.log("service ran");
+    let res = await fetch(`/api/users/${userID}`);
+
     return res.json();
   } catch (error) {
     console.log(error);

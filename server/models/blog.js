@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema(
     tags: [String],
     comments: [commentSchema],
     //18 and 19 need double checking
-    author: { type: mongoose.Schema.ObjectId, ref: "userSchema" },
+    author: { type: mongoose.Schema.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
