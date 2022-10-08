@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
 
-
-const commentSchema = new Schema({
+const commentSchema = new mongoose.Schema({
   comments: [String],
 });
 
-const tagSchema = new Schema({
+const tagSchema = new mongoose.Schema({
   tags: [String],
 });
 
-const blogSchema = new Schema(
+const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },

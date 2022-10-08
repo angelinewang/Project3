@@ -1,4 +1,4 @@
-import Blog from "../models/Blog";
+import Blog from "../models/Blog.js";
 import { CastError } from "mongoose";
 
 export async function getAllBlogs(req, res, next) {
@@ -10,12 +10,35 @@ export async function getAllBlogs(req, res, next) {
   }
 }
 
+// ! Blog
 export async function getABlog(req, res, next) {
   try {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await Blog.findById(req.params.id).populate("author");
     if (!blog) {
       return res.status(400).json({ error: true, message: "Blog not found." });
     }
+
+    res.json(blog);
+  } catch (error) {
+    if (error instanceof CastError) {
+      res
+        .status(400)
+        .send({ error: "Invalid id - please enter the correct id." });
+    } else {
+      next(error);
+    }
+  }
+}
+
+// ! User
+export async function getUserBlog(req, res, next) {
+  try {
+    const user = await User.findById(req.params.id).populate("blogs");
+    if (!user) {
+      return res.status(400).json({ error: true, message: "User not found." });
+    }
+
+    res.json(user);
   } catch (error) {
     if (error instanceof CastError) {
       res
@@ -42,7 +65,7 @@ export async function createBlog(req, res, next) {
   }
 }
 
-export async function updateBlog(req, res, next) {
+export async function updatedBlog(req, res, next) {
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
