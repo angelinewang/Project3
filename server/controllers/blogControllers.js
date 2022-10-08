@@ -14,8 +14,8 @@ async function getAllBlogs(req, res, next) {
 // ! Blog
 async function getABlog(req, res, next) {
   try {
-   const blog = await Blog.findById(req.params.id).populate("author");
- 
+    const blog = await Blog.findById(req.params.id).populate("author");
+
     if (!blog) {
       return res.status(400).json({ error: true, message: "Blog not found." });
     }
@@ -35,9 +35,7 @@ async function getABlog(req, res, next) {
 // ! User
 async function getUserBlog(req, res, next) {
   try {
-
     const user = await User.findById(req.params.id).populate("blogs");
-
 
     if (!user) {
       return res.status(400).json({ error: true, message: "User not found." });
@@ -72,14 +70,10 @@ async function createBlog(req, res, next) {
 
 async function updatedBlog(req, res, next) {
   try {
-    console.log(req);
-    const updatedBlog = await Blog.findByIdAndUpdate(
-      req.params.blogID,
-      req.body,
-      {
-        new: true,
-      }
-    );
+    // console.log("the blog id is", req.params.id);
+    const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     res.json(updatedBlog);
   } catch (error) {
     next(error);
