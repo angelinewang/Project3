@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "../HomePage";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
-
+import Profile from "../Profile/Profile";
 import { ProtectedRoute } from "../../utils/route";
 import useUser from "../../hooks/useUser";
 import NavBar from "../../components/NavBar/NavBar";
@@ -19,7 +19,7 @@ function App() {
     }
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refreshAuth]);
 
   return (
     <div>
@@ -28,7 +28,10 @@ function App() {
       </header>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-
+        <Route exact path="/profile/:profileID" element={<Profile />} />
+        {/* <Route exact path="/blog/new" element={} /> */}
+        {/* <Route exact path="/blog/edit/:blogID" element={} /> */}
+        {/* <Route exact path="/blog/:blogID" element={} /> */}
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/login" element={<LoginPage />} />
         <Route
