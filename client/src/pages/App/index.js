@@ -9,6 +9,7 @@ import { ProtectedRoute } from "../../utils/route";
 import useUser from "../../hooks/useUser";
 import NavBar from "../../components/NavBar/NavBar";
 import ProtectedPage from "../ProtectedPage";
+import createBlogPage from "../createBlogPage/createBlogPage";
 
 function App() {
   const { refreshAuth } = useUser();
@@ -29,7 +30,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/profile/:profileID" element={<Profile />} />
-        {/* <Route exact path="/blog/new" element={} /> */}
+        <Route exact path="/blog/new" element={<createBlogPage />} />
         {/* <Route exact path="/blog/edit/:blogID" element={} /> */}
         {/* <Route exact path="/blog/:blogID" element={} /> */}
         <Route exact path="/signup" element={<SignupPage />} />
