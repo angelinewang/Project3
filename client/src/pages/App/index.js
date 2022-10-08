@@ -15,12 +15,12 @@ function App() {
   const { refreshAuth } = useUser();
 
   React.useEffect(() => {
-    async function run() {
-      await refreshAuth();
-    }
-    run();
+    // async function run() {
+    refreshAuth();
+    // }
+    // run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refreshAuth]);
+  }, []);
 
   return (
     <div>
