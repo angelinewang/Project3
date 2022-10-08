@@ -14,7 +14,7 @@ const blogSchema = new mongoose.Schema(
     description: { type: String, required: true },
     content: { type: String, required: true },
     image: { data: Buffer, contentType: String },
-    tags: [tagSchema],
+    tags: [String],
     comments: [commentSchema],
     //18 and 19 need double checking
     author: { type: mongoose.Schema.ObjectId, ref: "userSchema" },

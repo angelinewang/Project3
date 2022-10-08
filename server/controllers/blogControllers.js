@@ -1,4 +1,5 @@
 import Blog from "../models/blog.js";
+import User from "../models/user.js";
 import { CastError } from "mongoose";
 
 async function getAllBlogs(req, res, next) {
@@ -52,11 +53,9 @@ async function getUserBlog(req, res, next) {
 
 async function createBlog(req, res, next) {
   let userId = req.user._id;
-  console.log(req);
   try {
     let currentUser = await User.findById(userId);
     const data = req.body;
-    // console.log(data);
     data.author = userId;
     const newBlog = await Blog.create(data);
     currentUser.blogs.push(newBlog._id);

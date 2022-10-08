@@ -5,7 +5,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 
 import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaListOl, FaListUl,
-         FaRedo, FaUndo, FaUnderline, FaGripHorizontal  } from "react-icons/fa"
+         FaRedo, FaUndo, FaUnderline } from "react-icons/fa"
 
 
 import './TextEditor.css'
@@ -151,13 +151,10 @@ const TextEditor =({setBlog, initContValue}) => {
     ],
     content: initContValue,
     editable: true,
-    // closures
     onUpdate: ({editor}) => {
       const html = editor.getHTML();
-      // const json = editor.getJSON()
       setBlog((state) => {
         return { ...state, content: html }
-        // return {...state, content: json}
       });
     }
   })
