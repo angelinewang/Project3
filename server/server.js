@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -7,7 +8,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/api/users.js";
-import blogRoutes from "./routes/api/blogs";
+import blogRoutes from "./routes/api/blogs.js";
 import auth from "./config/auth.js";
 
 import { connectToDb } from "./config/database.js";
