@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "../HomePage";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
@@ -11,6 +11,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import ProtectedPage from "../ProtectedPage";
 import CreateBlogPage from "../createBlogPage/CreateBlogPage";
 import EditBlogPage from "../EditBlogPage/EditBlogPage";
+import UserBlogs from "../UserBlogs/UserBlogs";
 
 function App() {
   const { refreshAuth } = useUser();
@@ -29,8 +30,11 @@ function App() {
         <p>MERN Skeleton</p> <NavBar />
       </header>
       <Routes>
+        <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/profile/:userID" element={<Profile />} />
+        {/* user blogs to be a protected route */}
+        <Route exact path="/profile/:userID/blogs" element={<UserBlogs />} />
         <Route exact path="/blog/new" element={<CreateBlogPage />} />
         <Route exact path="/blog/edit/:blogID" element={<EditBlogPage />} />
         {/* <Route exact path="/blog/:blogID" element={} /> */}
