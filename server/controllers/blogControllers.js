@@ -1,4 +1,4 @@
-import Blog from "../models/Blog.js";
+import Blog from "../models/blog.js";
 import { CastError } from "mongoose";
 
 export async function getAllBlogs(req, res, next) {
