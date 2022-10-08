@@ -28,14 +28,17 @@ export async function getABlog(req, res, next) {
 }
 
 export async function createBlog(req, res, next) {
+  let userId = req.user._id;
   try {
-    const blog = await Blog(req.body);
-    res.json(blog);
+    let currentUser = await User.findById(userId);
+    const data = req.body;
+    data.author = userId;
+    const newBlog = await Blog.create(data);
+    currentUser.blogs.push(newBlog._id);
+    await currentUser.save();
+    res.json(newBlog);
   } catch (error) {
-    res.status(400).send({
-      error:
-        "You must provide a title, description and content when creating a blog.",
-    });
+    res.status(400).json(error);
   }
 }
 
