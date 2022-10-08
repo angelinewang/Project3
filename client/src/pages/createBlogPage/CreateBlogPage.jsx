@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import uuid from 'react-uuid'
 
 import { createABlog } from '../../utils/blogService'
 import TextEditor from '../../components/TextEditor/TextEditor'
@@ -51,7 +52,7 @@ function CreateBlogPage() {
         <label><strong>Tags</strong></label>
         <div className='tags-input-container'>
         {blog.tags.map((tag, index) => (
-          <div className='tag-item' key={index}>
+          <div className='tag-item' key={uuid()}>
             <span className='text'>{tag}</span>
             <span className='close' onClick={() => removeTag(index)}>&times;</span>
           </div>
