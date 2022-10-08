@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
         linkToProfile: String,
       },
     ],
-    blogs: [{ type: mongoose.Schema.ObjectId, ref: "blogSchema" }],
+    blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
   },
   {
     timestamps: true,

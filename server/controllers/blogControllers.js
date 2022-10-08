@@ -35,6 +35,7 @@ async function getABlog(req, res, next) {
 async function getUserBlog(req, res, next) {
   try {
     const user = await User.findById(req.params.id).populate("blogs");
+    // const user = await User.findById(req.params.id).populate("blogs");
     if (!user) {
       return res.status(400).json({ error: true, message: "User not found." });
     }
