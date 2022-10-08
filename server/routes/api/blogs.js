@@ -1,4 +1,4 @@
-import * as blogCtrls from "../../controllers/blogControllers";
+import * as blogCtrls from "../../controllers/blogControllers.js";
 import { Router } from "express";
 import { checkAuth } from "../../middlewares/auth.js";
 
