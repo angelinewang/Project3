@@ -44,7 +44,7 @@ export async function updateBlog(req, res, next) {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.json(updateBlog);
+    res.json(updatedBlog);
   } catch (error) {
     next(error);
   }
