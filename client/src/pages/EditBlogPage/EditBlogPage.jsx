@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 
+import userService from "../../utils/userService"
 import { updateABlog } from '../../utils/blogService'
 import TextEditor from '../../components/TextEditor/TextEditor'
 
 function EditPage() {
+
+    const user = userService.getUser()
 
     const [blog, setBlog] = useState() 
 
@@ -25,7 +28,7 @@ function EditPage() {
             }
         }
         fetchForm()
-    }, [])
+    }, [blogId])
 
     let removeTag = (index) => {
         setBlog({...blog, tags: [...blog.tags.filter((el, i) => i !== index)]})
@@ -53,7 +56,9 @@ function EditPage() {
 
   return (
     <>
-    {blog ? (
+        {user ?
+        blog ? (
+        user._id === blog.author._id ?
         <>
         <form className='form-container' onSubmit={handleSubmit}>
         <label><strong>Title</strong></label>
@@ -75,7 +80,9 @@ function EditPage() {
         <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content} />
         <button type='Submit'>UPDATE FORM</button>
       </form>
-    </>): null}
+      </>
+      : 
+      <p>You Do Not Have the Authorization to Edit This Blog</p>): <p>Blog does not exist</p> : <p>Only Logged In Users Can Edit Their Blogs</p>}
     </>
   )
 }
