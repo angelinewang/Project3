@@ -76,5 +76,7 @@ export const removeABlog = async (blog) => {
       body: JSON.stringify(blog),
     });
     return res;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -43,6 +43,57 @@ function login(creds) {
     .then(({ token }) => tokenService.setToken(token));
 }
 
+// TODO: Post profile info
+export const addProfileInfo = async (profileEdit) => {
+  try {
+    const token = tokenService.getToken();
+    let res = await fetch(`/api/users/${profileEdit._id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(profileEdit),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// // TODO: Update profile info
+// export const updateProfileInfo = async (profileEdit) => {
+//   try {
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${profileEdit._id}`, {
+//       method: "PATCH",
+//       headers: {
+//         Authorization: "Bearer " + token,
+//       },
+//       body: JSON.stringify(profileEdit),
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+//  // TODO: Delete profile info
+// export const deleteProfileInfo = async (formData) => {
+//   try {
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${formData._id}`, {
+//       method: "DELETE",
+//       headers: {
+//         Authorization: "Bearer " + token,
+//       },
+//       body: formData,
+//     });
+//     return res;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 const exports = {
   signup,
   getUser,
