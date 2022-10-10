@@ -30,6 +30,19 @@ function EditPage() {
         fetchForm()
     }, [blogId])
 
+    const [titleTouched, setTitleTouched] = useState(false)
+    const [descriptionTouched, setDescriptionTouched] = useState(false)
+    const [contentTouched, setContentTouched] = useState(false)
+
+    let titleIsValid, descriptionIsValid, contentIsValid = null
+
+    if (blog) {
+    titleIsValid = blog.title.trim() !== "" && blog.title.length > 25
+    descriptionIsValid = blog.description.trim() !== "" && blog.description.length > 100
+    contentIsValid = blog.content.trim() !== "" && blog.content.length > 1000
+    }
+
+
     let removeTag = (index) => {
         setBlog({...blog, tags: [...blog.tags.filter((el, i) => i !== index)]})
       }
@@ -54,6 +67,26 @@ function EditPage() {
         e.target.value = ''
       }
 
+      let blurHandler = (e) => {
+        if (e.target.name === 'title') {
+          setTitleTouched(true)
+        }
+        if (e.target.name === 'description') {
+          setDescriptionTouched(true)
+          console.log(blog.content.length)
+        }
+        if (e.target.name === 'content') {
+          setContentTouched(true)
+        }
+      }
+    
+      let titleIsInvalid = titleTouched && !titleIsValid
+      let descriptionIsInvalid = descriptionTouched && !descriptionIsValid
+      let contentIsInvalid = contentTouched && !contentIsValid
+      let formIsValid = titleIsValid && descriptionIsValid && contentIsValid
+    
+
+
   return (
     <>
         {user ?
@@ -61,8 +94,11 @@ function EditPage() {
         user._id === blog.author._id ?
         <>
         <form className='form-container' onSubmit={handleSubmit}>
+
         <label><strong>Title</strong></label>
-        <input name='title' value={blog.title} onChange={handleChange} />
+        <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} />
+        {titleIsInvalid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
+
         <label><strong>Tags</strong></label>
         <div className='tags-input-container'>
         {blog.tags ? ( blog.tags.map((tag, index) => (
@@ -73,12 +109,16 @@ function EditPage() {
         ))): <></>}
         <input type='text' name={blog.tags} placeholder='Add a tag' className='tags-input' onKeyDown={handleKeyDown}/>
       </div>
+
         <label><strong>Description</strong></label>
-        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} />
+        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} onBlur={blurHandler} />
+        {descriptionIsInvalid ? <p className='error-message'>Please provide a valid description (min. 100 characters)</p>: <></> }
+
         <label><strong>Content</strong></label>
-        {/* <textarea rows={10} name='content' value={form.content} onChange={handleChange} /> */}
-        <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content} />
-        <button type='Submit'>UPDATE FORM</button>
+        <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content} setContentTouched={setContentTouched}/>
+        {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
+
+        <button type='Submit' disabled={!formIsValid} className={!formIsValid ? 'not-allowed': 'allowed'}>UPDATE BLOG</button>
       </form>
       </>
       : 
