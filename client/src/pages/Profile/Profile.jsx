@@ -34,8 +34,6 @@ function Profile() {
     getBlogData();
   }, [userID]);
 
-  // TODO: Display most recent blogs by user
-  // TODO: Display link to user's blog posts
   // TODO: Upload / edit profile picture
   // TODO: Upload / edit bio
 
