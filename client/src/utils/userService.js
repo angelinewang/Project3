@@ -44,6 +44,24 @@ function login(creds) {
 }
 
 // TODO: Post profile info
+//form
+
+// export const addProfileInfo = async (formData) => {
+//   try {
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${formData._id}`, {
+//       method: "POST",
+//       headers: {
+//         Authorization: "Bearer " + token,
+//       },
+//       body: formData
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 export const addProfileInfo = async (profileEdit) => {
   try {
     const token = tokenService.getToken();
