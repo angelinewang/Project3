@@ -10,18 +10,22 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     bio: String,
     image: { data: Buffer, contentType: String },
-    socialMediaProfiles: [
-      {
-        platform: String,
-        linkToProfile: String,
-      },
-    ],
+    twitterProfile: String,
+    instagramProfile: String,
     blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
   },
   {
     timestamps: true,
   }
 );
+
+// Removed from userSchema for testing - AM:
+// socialMediaProfiles: [
+//   {
+//     platform: String,
+//     linkToProfile: String,
+//   },
+// ],
 
 userSchema.set("toJSON", {
   transform: function (doc, ret) {

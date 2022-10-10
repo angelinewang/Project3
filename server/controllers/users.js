@@ -36,6 +36,50 @@ export async function login(req, res) {
   }
 }
 
+// TODO: Add profile info
+export async function addProfile(req, res, next) {
+  console.log("testing server req", req);
+  let userId = req.user._id;
+  try {
+    let currentUser = await User.findById(userId);
+
+    const addedProfile = await User.create(req.body);
+    await currentUser.save();
+
+    // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+    //   new: true,
+    // });
+
+    res.json(addedProfile);
+  } catch (error) {
+    next(error);
+  }
+}
+
+// // TODO: Update profile info
+// export async function updatedProfile(req, res, next) {
+//   try {
+//     const updatedProfile = await User.findByIdAndUpdate(
+//       req.params.id,
+//       req.body,
+//       {
+//         new: true,
+//       }
+//     );
+//     res.json(updatedProfile);
+//   } catch (error) {
+//     next(error);
+//   }
+// }
+
+// // TODO: Delete profile info
+// export async function deleteProfile(req, res, next) {
+//   try {
+//   } catch (error) {
+//     next(error);
+//   }
+// }
+
 /*----- Helper Functions -----*/
 
 function createJWT(user) {

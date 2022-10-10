@@ -11,8 +11,6 @@ function Profile() {
 
   const { userID } = useParams();
 
-  // TODO: Display blogs by user
-
   // const getBlogData = async () => {
   //   const blog = await getUserBlog(userID);
   //   setBlog(blog);
@@ -28,14 +26,11 @@ function Profile() {
     async function getBlogData() {
       const blog = await getUserBlog(userID);
       setBlog(blog);
-      console.log("blog data ->", blog);
-      console.log("blog created", blog.blogs);
+      console.log("profile data ->", blog);
+      console.log("blog data", blog.blogs);
     }
     getBlogData();
   }, [userID]);
-
-  // TODO: Upload / edit profile picture
-  // TODO: Upload / edit bio
 
   return (
     <div>
@@ -44,9 +39,15 @@ function Profile() {
           <div>
             <div>
               <p>User: {blog.name}</p>
+              <p>Bio:</p>
               <p>Joined: {blog.createdAt}</p>
               <p>Blogs: {blog.blogs.length}</p>
-              {blog._id === user._id ? <button>Edit</button> : null}
+              {blog._id === user._id ? (
+                <Link to={`/profile/${blog._id}/edit`}>
+                  {" "}
+                  <button>Edit</button>{" "}
+                </Link>
+              ) : null}
             </div>
 
             <h2> Blogs by {blog.name}</h2>

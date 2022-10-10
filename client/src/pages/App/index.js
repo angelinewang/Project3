@@ -12,6 +12,7 @@ import ProtectedPage from "../ProtectedPage";
 import CreateBlogPage from "../createBlogPage/CreateBlogPage";
 import EditBlogPage from "../EditBlogPage/EditBlogPage";
 import UserBlogs from "../UserBlogs/UserBlogs";
+import ProfileEdit from "../ProfileEdit/ProfileEdit";
 
 function App() {
   const { refreshAuth } = useUser();
@@ -33,7 +34,8 @@ function App() {
         <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/profile/:userID" element={<Profile />} />
-        {/* user blogs to be a protected route */}
+        {/* user blogs and profile edit to be a protected route */}
+        <Route exact path="/profile/:userID/edit" element={<ProfileEdit />} />
         <Route exact path="/profile/:userID/blogs" element={<UserBlogs />} />
         <Route exact path="/blog/new" element={<CreateBlogPage />} />
         <Route exact path="/blog/edit/:blogID" element={<EditBlogPage />} />
