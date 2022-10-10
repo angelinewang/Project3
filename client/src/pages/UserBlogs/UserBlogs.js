@@ -27,7 +27,9 @@ function UserBlogs() {
     <div>
       {userBlogs ? (
         <>
-          <h2>Blogs by {user.name} </h2>
+          <h2>
+            Blogs by <Link to={`/profile/${user._id}`}> {user.name} </Link>
+          </h2>
 
           {userBlogs.blogs
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
