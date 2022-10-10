@@ -7,6 +7,8 @@ import Underline from '@tiptap/extension-underline'
 import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaListOl, FaListUl,
          FaRedo, FaUndo, FaUnderline } from "react-icons/fa"
 
+import { MdHorizontalRule } from "react-icons/md"
+
 
 import './TextEditor.css'
 
@@ -109,6 +111,12 @@ const MenuBar = ({ editor }) => {
       >
         <FaListOl />
       </button>
+      <button onClick={(e) => {
+        e.preventDefault()
+        editor.chain().focus().setHorizontalRule().run()
+        }}>
+          <MdHorizontalRule/>
+      </button>
       <button
         onClick={(e) => {
           e.preventDefault()
@@ -143,7 +151,7 @@ const MenuBar = ({ editor }) => {
   )
 }
 
-const TextEditor =({setBlog, initContValue}) => {
+const TextEditor =({setBlog, initContValue, setContentTouched}) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -156,6 +164,9 @@ const TextEditor =({setBlog, initContValue}) => {
       setBlog((state) => {
         return { ...state, content: html }
       });
+    }, 
+    onBlur: ({editor}) => {
+      setContentTouched(true)
     }
   })
 
