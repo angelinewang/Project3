@@ -18,6 +18,7 @@ function Profile() {
   //   setBlog(blog);
   //   console.log("test data ->", blog);
   // };
+  // console.log(typeof user.createdAt);
 
   useEffect(() => {
     if (!userID) {
@@ -27,7 +28,8 @@ function Profile() {
     async function getBlogData() {
       const blog = await getUserBlog(userID);
       setBlog(blog);
-      console.log("test data ->", blog);
+      console.log("blog data ->", blog);
+      console.log("blog created", blog.blogs);
     }
     getBlogData();
   }, [userID]);
@@ -40,23 +42,27 @@ function Profile() {
   return (
     <div>
       <section>
-        {user ? <h2> {user.name}</h2> : null}
-
         {blog ? (
           <div>
-            <p>User: {blog.name}</p>
-            <p>Joined: {blog.createdAt}</p>
-            <p>Blogs: {blog.blogs.length}</p>
-            <h2> Blogs by {blog.name}</h2>
-            {blog.blogs.map((b) => (
-              <>
-                <Link to={`/blog/${b._id}`}>
-                  <h3>{b.title}</h3>
-                </Link>
+            <div>
+              <p>User: {blog.name}</p>
+              <p>Joined: {blog.createdAt}</p>
+              <p>Blogs: {blog.blogs.length}</p>
+              {blog._id === user._id ? <button>Edit</button> : null}
+            </div>
 
-                <div>{HTMLReactParser(b.content)}</div>
-              </>
-            ))}
+            <h2> Blogs by {blog.name}</h2>
+            {blog.blogs
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((b) => (
+                <>
+                  <Link to={`/blog/${b._id}`}>
+                    <h3>{b.title}</h3>
+                  </Link>
+
+                  <div>{HTMLReactParser(b.content)}</div>
+                </>
+              ))}
             <Link to={`/profile/${blog._id}/blogs`}>
               <p>View more of {blog.name}'s blogs </p>
             </Link>
