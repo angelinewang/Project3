@@ -18,7 +18,7 @@ function UserBlogs() {
     async function getUserBlogs() {
       const blog = await getUserBlog(userID);
       setUserBlogs(blog);
-      console.log("test data ->", blog);
+      console.log("user blogs data ->", blog);
     }
     getUserBlogs();
   }, [userID]);
@@ -28,7 +28,8 @@ function UserBlogs() {
       {userBlogs ? (
         <>
           <h2>
-            Blogs by <Link to={`/profile/${user._id}`}> {user.name} </Link>
+            Blogs by{" "}
+            <Link to={`/profile/${userBlogs._id}`}> {userBlogs.name} </Link>
           </h2>
 
           {userBlogs.blogs
