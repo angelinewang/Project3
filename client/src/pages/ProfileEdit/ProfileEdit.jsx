@@ -11,8 +11,16 @@ function ProfileEdit() {
 
   const [profileEdit, setProfileEdit] = useState({
     bio: "",
-    twitterHandle: "",
-    instagramHandle: "",
+    socialMediaProfiles: [
+      {
+        platform: "twitter",
+        linkToProfile: "",
+      },
+      {
+        platform: "instagram",
+        linkToProfile: "",
+      },
+    ],
   });
 
   const handleChange = (e) => {
@@ -61,15 +69,15 @@ function ProfileEdit() {
         <label>Twitter handle:</label>
         <input
           type="text"
-          name="twitterHandle"
-          value={profileEdit.twitterHandle}
+          name="linkToProfile"
+          value={profileEdit.socialMediaProfiles.linkToProfile}
           onChange={handleChange}
         />
         <label>Instagram handle:</label>
         <input
           type="text"
-          name="instagramHandle"
-          value={profileEdit.instagramHandle}
+          name="linkToProfile"
+          value={profileEdit.socialMediaProfiles.linkToProfile}
           onChange={handleChange}
         />
         <button>Submit</button>
