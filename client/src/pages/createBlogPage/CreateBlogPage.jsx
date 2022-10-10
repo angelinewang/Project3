@@ -2,11 +2,14 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import uuid from 'react-uuid'
 
+import userService from "../../utils/userService"
 import { createABlog } from '../../utils/blogService'
 import TextEditor from '../../components/TextEditor/TextEditor'
 import "./CreateBlog.css"
 
 function CreateBlogPage() {
+
+  let user = userService.getUser()
 
   let navigate = useNavigate()
 
@@ -43,7 +46,7 @@ function CreateBlogPage() {
 
 
   return (
-    <>
+    <> { user ?
       <form className='form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
 
         <label><strong>Title</strong></label>
@@ -73,7 +76,7 @@ function CreateBlogPage() {
 
         <button type='Submit'>CREATE NEW BLOG</button>
 
-      </form>
+      </form> : <p>You are not logged in</p> }
     </>
   )
 }
