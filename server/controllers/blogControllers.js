@@ -1,9 +1,10 @@
 import Blog from "../models/blog.js";
+
 import { CastError } from "mongoose";
 
 export async function getAllBlogs(req, res, next) {
   try {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find().populate("image author");
     return res.json(blogs);
   } catch (err) {
     next(err);
@@ -12,10 +13,15 @@ export async function getAllBlogs(req, res, next) {
 
 export async function getABlog(req, res, next) {
   try {
-    const blog = await Blog.findById(req.params.id);
+    // console.log(req.params.id);
+    const blog = await Blog.findById(req.params.id).populate("image author");
+    // blog.author.get("User");
+    // blog.populate("author");
+    // console.log(blog.author.name);
     if (!blog) {
       return res.status(400).json({ error: true, message: "Blog not found." });
     }
+    return res.json(blog);
   } catch (error) {
     if (error instanceof CastError) {
       res

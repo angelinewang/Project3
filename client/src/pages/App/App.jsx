@@ -1,9 +1,12 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../HomePage";
+import HomePage from "../HomePage/HomePage.jsx";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
+import DetailPage from "../DetailPage/DetailPage";
+import ImageUpload from "../ImageUpload/ImageUpload";
+import UserBlogs from "../UserBlogs/UserBlogs";
 
 import { ProtectedRoute } from "../../utils/route";
 import useUser from "../../hooks/useUser";
@@ -28,9 +31,13 @@ function App() {
       </header>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-
+        <Route exact path="/detail/:id" element={<DetailPage />} />
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/upload" element={<ImageUpload />} />
+        <Route exact path="/user" element={<UserBlogs />} />
+
+
         <Route
           exact
           path="/protected"

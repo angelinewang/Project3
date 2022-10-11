@@ -2,6 +2,12 @@ import tokenService from "./tokenService";
 
 const BASE_URL = "/api/users/"; // Note: Once deployed this should be updated.
 
+// import dotenv from "dotenv";
+
+// dotenv.config();
+
+// const API_KEY = process.env.API_KEY;
+
 function signup(user) {
   return (
     fetch(BASE_URL + "signup", {
@@ -25,14 +31,34 @@ function getUser() {
   return tokenService.getUserFromToken();
 }
 
+//Retrieves
+// function getUserInfo(id) {
+//   return fetch(`/api/users/info/${id}`, {
+//     method: "GET",
+//     headers: new Headers({
+//       "Content-Type": "application/json",
+//     }),
+//   }).then((res) => {
+//     // Valid login if we have a status of 2xx (res.ok)
+//     if (res.ok) return res.json();
+//     throw new Error("Oops something went wrong!");
+//   });
+// }
+
 function logout() {
   tokenService.removeToken();
 }
 
 function login(creds) {
-  return fetch(BASE_URL + "login", {
+  console.log("Reached Login function!");
+  console.log(creds);
+  // debugger;
+  //Works for any client-side code
+  return fetch("/api/users/login", {
     method: "POST",
-    headers: new Headers({ "Content-Type": "application/json" }),
+    headers: new Headers({
+      "Content-Type": "application/json",
+    }),
     body: JSON.stringify(creds),
   })
     .then((res) => {
@@ -48,6 +74,7 @@ const exports = {
   getUser,
   logout,
   login,
+  // getUserInfo,
 };
 
 export default exports;

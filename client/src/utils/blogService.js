@@ -1,4 +1,43 @@
 import tokenService from "./tokenService.js";
+import axios from "axios";
+const BASE_URL = "/api/blogs/";
+
+// export const getImages = async () => {
+//   try {
+//     let res = await fetch("/images");
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// export const getImage = async (id) => {
+//   try {
+//     // axios.get(`api/blogs/${id}`);
+//     let res = await fetch(`/images/${id}`);
+//     // console.log(res.json());
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// export const createImage = async (image) => {
+//   try {
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/images`, {
+//       method: "POST",
+//       headers: {
+//         "content-type": "application/json",
+//         Authorization: "Bearer " + token,
+//       },
+//       body: JSON.stringify(image),
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const getBlogs = async () => {
   try {
@@ -9,9 +48,11 @@ export const getBlogs = async () => {
   }
 };
 
-export const getBlog = async (blogID) => {
+export const getBlog = async (id) => {
   try {
-    let res = await fetch(`/api/blogs.${blogID}`);
+    // axios.get(`api/blogs/${id}`);
+    let res = await fetch(BASE_URL + id);
+    // console.log(res.json());
     return res.json();
   } catch (error) {
     console.log(error);
@@ -67,3 +108,16 @@ export const removeABlog = async (blog) => {
     return res;
   } catch (error) {}
 };
+
+const exports = {
+  getBlogs,
+  getBlog,
+  updateABlog,
+  createABlog,
+  removeABlog,
+  // getImage,
+  // getImages,
+  // createImage,
+};
+
+export default exports;
