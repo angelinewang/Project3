@@ -13,7 +13,6 @@ function ProfileEdit() {
   let navigate = useNavigate();
 
   // TODO: Upload / edit profile picture
-  // TODO: Upload / edit bio
 
   const [profileEdit, setProfileEdit] = useState({
     bio: "",
@@ -29,8 +28,6 @@ function ProfileEdit() {
       },
     ],
   });
-
-  // const [profileEdit, setProfileEdit] = useState([]);
 
   useEffect(() => {
     if (!userID) {
@@ -53,7 +50,6 @@ function ProfileEdit() {
   };
 
   const handleTwitterChange = (e) => {
-    // console.log(e.target.files[0]);
     setProfileEdit({
       ...profileEdit,
       socialMediaProfiles: [
@@ -69,7 +65,6 @@ function ProfileEdit() {
     });
   };
   const handleInstagramChange = (e) => {
-    // console.log(e.target.files[0]);
     setProfileEdit({
       ...profileEdit,
       socialMediaProfiles: [
@@ -104,15 +99,6 @@ function ProfileEdit() {
   return (
     <div>
       <form onSubmit={handleSubmit} className="form">
-        {/* <label>bio:</label>
-        <input
-          type="text"
-          name="bio"
-          value={profileEdit.bio}
-          onChange={handleChange}
-             <button>Button</button>
-        /> */}
-
         <label>Bio:</label>
         <input
           type="text"
@@ -146,7 +132,6 @@ function ProfileEdit() {
           value={profileEdit.socialMediaProfiles[1].linkToProfile}
           onChange={handleInstagramChange}
         />
-
         <button>Submit</button>
       </form>
     </div>
