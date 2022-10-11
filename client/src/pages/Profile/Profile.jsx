@@ -39,8 +39,8 @@ function Profile() {
           <div>
             <div>
               <p>User: {blog.name}</p>
-              <p>Bio:</p>
-              <p>Joined: {blog.createdAt}</p>
+              <p>Bio: {blog.bio} </p>
+              <p>Joined: {blog.createdAt.split("T")[0]}</p>
               <p>Blogs: {blog.blogs.length}</p>
               {blog._id === user._id ? (
                 <Link to={`/profile/${blog._id}/edit`}>

@@ -38,12 +38,14 @@ export async function login(req, res) {
 
 // TODO: Add profile info
 export async function addProfile(req, res, next) {
-  console.log("testing server req", req);
+  console.log("req received on server");
   let userId = req.user._id;
   try {
     let currentUser = await User.findById(userId);
+    const data = req.body;
+    const addedProfile = await User.create(data);
+    // currentUser.bio.push(data);
 
-    const addedProfile = await User.create(req.body);
     await currentUser.save();
 
     // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
@@ -56,21 +58,24 @@ export async function addProfile(req, res, next) {
   }
 }
 
-// // TODO: Update profile info
-// export async function updatedProfile(req, res, next) {
-//   try {
-//     const updatedProfile = await User.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       {
-//         new: true,
-//       }
-//     );
-//     res.json(updatedProfile);
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+// TODO: Update profile info
+export async function updatedProfile(req, res, next) {
+  // console.log(req.body);
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    console.log(req.body);
+    console.log(updatedProfile);
+    res.json(updatedProfile);
+  } catch (error) {
+    next(error);
+  }
+}
 
 // // TODO: Delete profile info
 // export async function deleteProfile(req, res, next) {
