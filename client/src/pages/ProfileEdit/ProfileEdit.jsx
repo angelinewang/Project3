@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import useUser from "../../hooks/useUser";
-import { addProfileInfo } from "../../utils/userService";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateProfileInfo } from "../../utils/userService";
 import "./ProfileEdit.css";
 
 function ProfileEdit() {
   const { user } = useUser();
+
+  const { userID } = useParams();
+  // console.log("userID ->", userID);
+
+  let navigate = useNavigate();
 
   // TODO: Upload / edit profile picture
   // TODO: Upload / edit bio
 
   const [profileEdit, setProfileEdit] = useState({
     bio: "",
+    image: "",
     socialMediaProfiles: [
       {
         platform: "twitter",
@@ -23,6 +30,20 @@ function ProfileEdit() {
     ],
   });
 
+  // const [profileEdit, setProfileEdit] = useState([]);
+
+  useEffect(() => {
+    if (!userID) {
+      return;
+    }
+    fetch(`/api/users/${userID}`)
+      .then((res) => res.json())
+      .then((userData) => {
+        setProfileEdit(userData);
+        console.log(userData);
+      });
+  }, [userID]);
+
   const handleChange = (e) => {
     // console.log(e.target.files[0]);
     setProfileEdit({
@@ -31,23 +52,67 @@ function ProfileEdit() {
     });
   };
 
+  const handleTwitterChange = (e) => {
+    // console.log(e.target.files[0]);
+    setProfileEdit({
+      ...profileEdit,
+      socialMediaProfiles: [
+        {
+          platform: "twitter",
+          linkToProfile: e.target.value,
+        },
+        {
+          platform: "instagram",
+          linkToProfile: profileEdit.socialMediaProfiles[1].linkToProfile,
+        },
+      ],
+    });
+  };
+  const handleInstagramChange = (e) => {
+    // console.log(e.target.files[0]);
+    setProfileEdit({
+      ...profileEdit,
+      socialMediaProfiles: [
+        {
+          platform: "twitter",
+          linkToProfile: profileEdit.socialMediaProfiles[0].linkToProfile,
+        },
+        {
+          platform: "instagram",
+          linkToProfile: e.target.value,
+        },
+      ],
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // let formData = new FormData();
-    // formData.append("bio", e.target.value);
-    // formData.append("image", e.target.files[0]);
-    // formData.append("twitterHandle", e.target.value);
-    // formData.append("instagramHandle", e.target.value);
-
-    addProfileInfo(profileEdit).then((res) => {
-      console.log("testing form data", res.data);
+    console.log(profileEdit);
+    updateProfileInfo(profileEdit, userID).then((res) => {
+      console.log("testing form data", res);
+      navigate(`/profile/${userID}`);
     });
+
+    //! not working
+    // let formData = new FormData();
+    // formData.append("bio", profileEdit.value);
+    // formData.append("image", profileEdit.files[0]);
+    // formData.append("twitterHandle", profileEdit.value);
+    // formData.append("instagramHandle", profileEdit.value);
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit} className="form">
+        {/* <label>bio:</label>
+        <input
+          type="text"
+          name="bio"
+          value={profileEdit.bio}
+          onChange={handleChange}
+             <button>Button</button>
+        /> */}
+
         <label>Bio:</label>
         <input
           type="text"
@@ -55,31 +120,33 @@ function ProfileEdit() {
           value={profileEdit.bio}
           onChange={handleChange}
         />
-        {/* 
+
         <label>Profile picture:</label>
         <input
           type="file"
           name="image"
+          accept="image/*"
           value={profileEdit.image}
           className="pfp"
           onChange={handleChange}
         />
-        <button>Upload photo</button> */}
+        <button>Upload photo</button>
 
         <label>Twitter handle:</label>
         <input
           type="text"
-          name="linkToProfile"
-          value={profileEdit.socialMediaProfiles.linkToProfile}
-          onChange={handleChange}
+          name="twitter"
+          value={profileEdit.socialMediaProfiles[0].linkToProfile}
+          onChange={handleTwitterChange}
         />
         <label>Instagram handle:</label>
         <input
           type="text"
-          name="linkToProfile"
-          value={profileEdit.socialMediaProfiles.linkToProfile}
-          onChange={handleChange}
+          name="instagram"
+          value={profileEdit.socialMediaProfiles[1].linkToProfile}
+          onChange={handleInstagramChange}
         />
+
         <button>Submit</button>
       </form>
     </div>

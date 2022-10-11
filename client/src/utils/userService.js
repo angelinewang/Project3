@@ -44,17 +44,16 @@ function login(creds) {
 }
 
 // TODO: Post profile info
-//form
-
-// export const addProfileInfo = async (formData) => {
+//! dc
+// export const updateProfileInfo = async (profileEdit, userID) => {
 //   try {
 //     const token = tokenService.getToken();
-//     let res = await fetch(`/api/users/${formData._id}`, {
-//       method: "POST",
+//     let res = await fetch(`/api/users/${userID}`, {
+//       method: "PATCH",
 //       headers: {
 //         Authorization: "Bearer " + token,
 //       },
-//       body: formData
+//       body: profileEdit
 //     });
 //     return res.json();
 //   } catch (error) {
@@ -62,28 +61,11 @@ function login(creds) {
 //   }
 // };
 
-export const addProfileInfo = async (profileEdit) => {
-  try {
-    const token = tokenService.getToken();
-    let res = await fetch(`/api/users/${profileEdit._id}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(profileEdit),
-    });
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// // TODO: Update profile info
-// export const updateProfileInfo = async (profileEdit) => {
+// export const addProfileInfo = async (profileEdit, userID) => {
 //   try {
 //     const token = tokenService.getToken();
-//     let res = await fetch(`/api/users/${profileEdit._id}`, {
-//       method: "PATCH",
+//     let res = await fetch(`/api/users/${userID}`, {
+//       method: "POST",
 //       headers: {
 //         Authorization: "Bearer " + token,
 //       },
@@ -95,11 +77,30 @@ export const addProfileInfo = async (profileEdit) => {
 //   }
 // };
 
-//  // TODO: Delete profile info
-// export const deleteProfileInfo = async (formData) => {
+// TODO: Update profile info
+export const updateProfileInfo = async (profileEdit, userID) => {
+  try {
+    console.log("user service check", profileEdit);
+    const token = tokenService.getToken();
+    let res = await fetch(`/api/users/${userID}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(profileEdit),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// // TODO: Delete profile info
+// export const deleteProfileInfo = async (formData, userID) => {
 //   try {
 //     const token = tokenService.getToken();
-//     let res = await fetch(`/api/users/${formData._id}`, {
+//     let res = await fetch(`/api/users/${userID}`, {
 //       method: "DELETE",
 //       headers: {
 //         Authorization: "Bearer " + token,
