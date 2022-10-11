@@ -6,17 +6,10 @@ import HTMLReactParser from "html-react-parser";
 
 function Profile() {
   const { user } = useUser();
-  // console.log(user);
+
   const [blog, setBlog] = useState();
 
   const { userID } = useParams();
-
-  // const getBlogData = async () => {
-  //   const blog = await getUserBlog(userID);
-  //   setBlog(blog);
-  //   console.log("test data ->", blog);
-  // };
-  // console.log(typeof user.createdAt);
 
   useEffect(() => {
     if (!userID) {
@@ -54,13 +47,13 @@ function Profile() {
             {blog.blogs
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((b) => (
-                <>
+                <div key={b._id}>
                   <Link to={`/blog/${b._id}`}>
                     <h3>{b.title}</h3>
                   </Link>
 
-                  <div>{HTMLReactParser(b.content)}</div>
-                </>
+                  <div>{HTMLReactParser(b.description)}</div>
+                </div>
               ))}
             <Link to={`/profile/${blog._id}/blogs`}>
               <p>View more of {blog.name}'s blogs </p>
