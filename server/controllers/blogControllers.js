@@ -54,6 +54,7 @@ async function getUserBlog(req, res, next) {
 }
 
 async function createBlog(req, res, next) {
+  console.log("filename", req.file.size, req.file.filename, req.file.path);
   let userId = req.user._id;
   try {
     let currentUser = await User.findById(userId);
