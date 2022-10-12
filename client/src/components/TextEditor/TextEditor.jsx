@@ -173,7 +173,7 @@ const TextEditor =({setBlog, initContValue, setContentTouched}) => {
   return (
     <div className='text-editor'>
       <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} spellcheck="false"/>
     </div>
   )
 }

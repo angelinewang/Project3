@@ -54,13 +54,17 @@ async function getUserBlog(req, res, next) {
 }
 
 async function createBlog(req, res, next) {
-  console.log("filename", req.file.size, req.file.filename, req.file.path);
+  // console.log("filename", req.file.size, req.file.filename, req.file.path);
+  // console.log("this is the request body", req.body);
   let userId = req.user._id;
   try {
+    let filePath = req.file.path;
     let currentUser = await User.findById(userId);
     const data = req.body;
     data.author = userId;
+    data.image = filePath;
     const newBlog = await Blog.create(data);
+    console.log(newBlog);
     currentUser.blogs.push(newBlog._id);
     await currentUser.save();
     res.json(newBlog);

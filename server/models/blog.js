@@ -13,7 +13,8 @@ const blogSchema = new mongoose.Schema(
     title: { type: String, required: true },
     description: { type: String, required: true },
     content: { type: String, required: true },
-    image: { data: Buffer, contentType: String },
+    // image: { data: Buffer, contentType: String },
+    image: String,
     tags: [String],
     comments: [commentSchema],
     //18 and 19 need double checking
