@@ -56,6 +56,8 @@ async function getUserBlog(req, res, next) {
 async function createBlog(req, res, next) {
   // console.log("filename", req.file.size, req.file.filename, req.file.path);
   // console.log("this is the request body", req.body);
+  //req.body.tags = req.body.tags.split(",");
+  console.log(req.body);
   let userId = req.user._id;
   try {
     let filePath = req.file.path;

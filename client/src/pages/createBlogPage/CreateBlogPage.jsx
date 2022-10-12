@@ -42,8 +42,15 @@ function CreateBlogPage() {
     e.preventDefault()
     const formData = new FormData();
     Object.keys(blog).forEach(key => {
-      formData.append(key, blog[key])
+      if (blog[key].constructor === Array) {
+        blog[key].forEach(item => {
+          formData.append(key, item)
+        })
+      } else {
+        formData.append(key, blog[key])
+      }
     })
+    
     createABlog(formData).then(res => {
       console.log(res)
       navigate("/")
