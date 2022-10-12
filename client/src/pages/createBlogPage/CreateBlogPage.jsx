@@ -17,7 +17,8 @@ function CreateBlogPage() {
     title: '', 
     description: "",
     content: '',
-    tags: []
+    tags: [],
+    image: undefined
   })
 
   const [titleTouched, setTitleTouched] = useState(false)
@@ -34,8 +35,17 @@ function CreateBlogPage() {
   }
 
   let handleSubmit = (e) => {
+    // e.preventDefault()
+    // createABlog(blog).then(res => {
+    //   navigate("/")
+    // })
     e.preventDefault()
-    createABlog(blog).then(res => {
+    const formData = new FormData();
+    Object.keys(blog).forEach(key => {
+      formData.append(key, blog[key])
+    })
+    createABlog(formData).then(res => {
+      console.log(res)
       navigate("/")
     })
   }
@@ -100,9 +110,9 @@ function CreateBlogPage() {
         <TextEditor  setBlog={setBlog} initContValue='' setContentTouched={setContentTouched} />
         {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
 
-        <div className='image-input-container'>
-          <label>Upload Image</label>
-          <input type="file" name="image" />
+         <div className='image-input-container'>
+          <label>Upload Image <span>*</span></label>
+          <input type="file" name="image" className='image-input' onChange={(e) => setBlog(state => ({ ...state, image:  e.target.files[0]}))} />
         </div>
 
         <button type='Submit' disabled={!formIsValid} className={!formIsValid ? 'not-allowed': 'allowed'}>CREATE NEW BLOG</button>
