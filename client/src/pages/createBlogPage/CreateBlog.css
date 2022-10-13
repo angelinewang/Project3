@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: column;
 
-    width: 20vw;
+    width: max-content;
     margin-top: 20px;
 }
 
@@ -94,4 +94,13 @@
 .allowed:hover {
     cursor: pointer;
     color: blue;
+}
+
+.button-container {
+    margin-top: 20px;
+    width: max-content;
+}
+
+.button-container > button {
+    margin-right: 1.5rem;
 }
