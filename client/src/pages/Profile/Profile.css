@@ -1,4 +1,20 @@
 .pfp {
+  /* vertical-align: middle;
+  width: 50px;
   height: 50px;
-  /* width: 0px; */
+  border-radius: 50%; */
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+}
+
+.pfp img {
+  height: 50%;
+  width: 50%;
+}
+
+.twitter,
+.instagram {
+  height: 30px;
+  width: 30px;
 }

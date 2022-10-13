@@ -37,6 +37,31 @@ function Profile() {
               <p>Bio: {blog.bio} </p>
               <p>Joined: {blog.createdAt.split("T")[0]}</p>
               <p>Blogs: {blog.blogs.length}</p>
+              <div>
+                <a
+                  href={`https://www.twitter.com/${blog.socialMediaProfiles[0].linkToProfile}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={require("../../images/twitter.png")}
+                    alt="twitter"
+                    className="twitter"
+                  />
+                </a>
+                <a
+                  href={`https://www.instagram.com/${blog.socialMediaProfiles[1].linkToProfile}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={require("../../images/instagram.png")}
+                    alt="twitter"
+                    className="instagram"
+                  />
+                </a>
+              </div>
+
               {blog._id === user._id ? (
                 <Link to={`/profile/${blog._id}/edit`}>
                   {" "}
