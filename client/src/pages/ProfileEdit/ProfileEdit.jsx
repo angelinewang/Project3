@@ -13,7 +13,6 @@ function ProfileEdit() {
   let navigate = useNavigate();
 
   // TODO: Upload / edit profile picture
-
   const [profileEdit, setProfileEdit] = useState({
     bio: "",
     image: "",
@@ -41,13 +40,13 @@ function ProfileEdit() {
       });
   }, [userID]);
 
-  const handleChange = (e) => {
-    // console.log(e.target.files[0]);
-    setProfileEdit({
-      ...profileEdit,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   // console.log(e.target.files[0]);
+  //   setProfileEdit({
+  //     ...profileEdit,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   const handleTwitterChange = (e) => {
     setProfileEdit({
@@ -64,6 +63,7 @@ function ProfileEdit() {
       ],
     });
   };
+
   const handleInstagramChange = (e) => {
     setProfileEdit({
       ...profileEdit,
@@ -80,20 +80,62 @@ function ProfileEdit() {
     });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(profileEdit);
+  //   updateProfileInfo(profileEdit, userID).then((res) => {
+  //     console.log("testing form data", res);
+  //     navigate(`/profile/${userID}`);
+  //   });
+
+  // const [profileEdit, setProfileEdit] = useState({
+  //   image: "",
+  // });
+
+  async function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      let baseURL = "";
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  }
+
+  const handleChange = async (e) => {
+    // console.log(e.target.files[0]);
+
+    // If there is an image then we'll want to convert to a Base64
+    // - have conditional to test for image
+
+    // console.log(e.target); -> to get the name of image in console write: temp1['name']
+    if (e.target["name"] === "image") {
+      const imageURL = await getBase64(e.target.files[0]);
+      setProfileEdit({
+        ...profileEdit,
+        image: imageURL,
+      });
+    } else {
+      setProfileEdit({
+        ...profileEdit,
+        [e.target.name]: e.target.value,
+      });
+    }
+
+    // console.log("profile image content", profileEdit);
+    // console.log(e.target.files);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(profileEdit);
+    console.log("check submit", profileEdit);
     updateProfileInfo(profileEdit, userID).then((res) => {
       console.log("testing form data", res);
       navigate(`/profile/${userID}`);
     });
-
-    //! not working
-    // let formData = new FormData();
-    // formData.append("bio", profileEdit.value);
-    // formData.append("image", profileEdit.files[0]);
-    // formData.append("twitterHandle", profileEdit.value);
-    // formData.append("instagramHandle", profileEdit.value);
   };
 
   return (
@@ -108,15 +150,14 @@ function ProfileEdit() {
         />
 
         <label>Profile picture:</label>
+        <img src={profileEdit.image} alt="profile avatar" className="pfp" />
         <input
           type="file"
           name="image"
           accept="image/*"
-          value={profileEdit.image}
           className="pfp"
           onChange={handleChange}
         />
-        <button>Upload photo</button>
 
         <label>Twitter handle:</label>
         <input
