@@ -45,21 +45,25 @@ function login(creds) {
 
 // TODO: Post profile info
 //! dc
-// export const updateProfileInfo = async (profileEdit, userID) => {
-//   try {
-//     const token = tokenService.getToken();
-//     let res = await fetch(`/api/users/${userID}`, {
-//       method: "PATCH",
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//       body: profileEdit
-//     });
-//     return res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const updateProfileInfo = async (formData, userID) => {
+  console.log("UserService check ->", formData);
+
+  try {
+    const token = tokenService.getToken();
+    let res = await fetch(`/api/users/${userID}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(formData),
+    });
+    console.log("res ->", res);
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const addProfileInfo = async (profileEdit, userID) => {
 //   try {
@@ -78,23 +82,23 @@ function login(creds) {
 // };
 
 // TODO: Update profile info
-export const updateProfileInfo = async (profileEdit, userID) => {
-  try {
-    console.log("user service check", profileEdit);
-    const token = tokenService.getToken();
-    let res = await fetch(`/api/users/${userID}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(profileEdit),
-    });
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const updateProfileInfo = async (profileEdit, userID) => {
+//   try {
+//     console.log("user service check", profileEdit);
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${userID}`, {
+//       method: "PATCH",
+//       headers: {
+//         "content-type": "application/json",
+//         Authorization: "Bearer " + token,
+//       },
+//       body: JSON.stringify(profileEdit),
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // // TODO: Delete profile info
 // export const deleteProfileInfo = async (formData, userID) => {
