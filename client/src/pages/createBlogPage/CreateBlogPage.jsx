@@ -96,7 +96,7 @@ function CreateBlogPage() {
       <form className='form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
 
         <label><strong>Title</strong></label>
-        <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" />
+        <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={50} />
         {titleIsInvalid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
 
         <label><strong>Tags</strong></label>
@@ -111,7 +111,7 @@ function CreateBlogPage() {
         </div>
 
         <label><strong>Description</strong></label>
-        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} onBlur={blurHandler} spellCheck="false" />
+        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={150} />
         {descriptionIsInvalid ? <p className='error-message'>Please provide a valid description (min. 100 characters)</p>: <></> }
 
         <label><strong>Content</strong></label>
