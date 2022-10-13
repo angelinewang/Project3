@@ -1,12 +1,12 @@
 import React from 'react';
 import './DetailPage.css';
 import axios from 'axios';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
 import blogService from "../../utils/blogService";
-import Buffer from 'Buffer';
+// import Buffer from 'Buffer';
 
 function DetailPage() {
 
@@ -46,7 +46,7 @@ function DetailPage() {
 
     React.useEffect(() => {
         fetchBlog()
-     }, [])
+     })
 
     let deleteBlog = () => {
         axios.delete(`api/blogs/${id}`)

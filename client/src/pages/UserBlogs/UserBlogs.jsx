@@ -22,7 +22,7 @@ export default function UserBlogs() {
 
     React.useEffect(() => {
         fetchUser()
-     }, [])
+     })
     
     return (
         user ? ( 
