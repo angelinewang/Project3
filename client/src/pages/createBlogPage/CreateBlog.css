@@ -1,40 +1,47 @@
 .form-container {
     margin: 0px 20px;
+    border: 2px solid red;
+
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    height: 80vh;
+    margin: 0 auto;
 }
 
 .form-container > label {
     display: block;
+
     margin-top: 20px;
 }
 
-.form-container > input {
-    width: 70%;
+.form-container > input, 
+.form-container > textarea,
+.tags-input-container,
+.tags-input {
+    width: 95%;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    padding: 0.15rem 0.25rem;
 }
 
-.form-container > textarea {
-    width: 70%;
-}
-
-.form-container > button {
-    display: block;
-    margin: 20px 0px;
+.tags-input-container:focus-within {
+    border: 2px solid black;
+    border-radius: 3px;
 }
 
 .tags-input-container {
-    width: 70%;
-    margin-top: 20px;
-    border: .5px solid black;
-    padding: .3em;
-    border-radius: 3px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+
     gap: .15em;
 }
 
 .tag-item {
-    background-color: rgb(218, 216, 216);
     display: inline-block;
+
+    background-color: rgb(218, 216, 216);
     padding: .15em .50em;
     border-radius: 20px;
 }
@@ -45,14 +52,15 @@
 
 
 .tag-item .close {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
     height: 20px;
     width: 20px;
     background-color: rgb(48, 48, 48);
     color: #fff;
     border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     margin-left: .5em;
     font-size: 10px;
 }

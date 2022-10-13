@@ -73,7 +73,6 @@ function CreateBlogPage() {
     }
     if (e.target.name === 'description') {
       setDescriptionTouched(true)
-      console.log(blog.content.length)
     }
     if (e.target.name === 'content') {
       setContentTouched(true)
