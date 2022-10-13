@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 import { getUserBlog } from "../../utils/blogService";
 import HTMLReactParser from "html-react-parser";
+import "./Profile.css";
 
 function Profile() {
   const { user } = useUser();
@@ -20,7 +21,7 @@ function Profile() {
       const blog = await getUserBlog(userID);
       setBlog(blog);
       console.log("profile data ->", blog);
-      console.log("blog data", blog.blogs);
+      // console.log("blog data", blog.blogs);
     }
     getBlogData();
   }, [userID]);
@@ -31,6 +32,7 @@ function Profile() {
         {blog ? (
           <div>
             <div>
+              <img src={blog.image} alt="profile avatar" className="pfp" />
               <p>User: {blog.name}</p>
               <p>Bio: {blog.bio} </p>
               <p>Joined: {blog.createdAt.split("T")[0]}</p>

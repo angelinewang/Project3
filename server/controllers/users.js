@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import formidable from "formidable";
 
 dotenv.config();
 
@@ -36,31 +37,31 @@ export async function login(req, res) {
   }
 }
 
-// TODO: Add profile info
-export async function addProfile(req, res, next) {
-  console.log("req received on server");
-  let userId = req.user._id;
-  try {
-    let currentUser = await User.findById(userId);
-    const data = req.body;
-    const addedProfile = await User.create(data);
-    // currentUser.bio.push(data);
+// // TODO: Add profile info
+// export async function addProfile(req, res, next) {
+//   console.log("req received on server");
+//   let userId = req.user._id;
+//   try {
+//     let currentUser = await User.findById(userId);
+//     const data = req.body;
+//     const addedProfile = await User.create(data);
+//     // currentUser.bio.push(data);
 
-    await currentUser.save();
+//     await currentUser.save();
 
-    // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
-    //   new: true,
-    // });
+//     // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+//     //   new: true,
+//     // });
 
-    res.json(addedProfile);
-  } catch (error) {
-    next(error);
-  }
-}
+//     res.json(addedProfile);
+//   } catch (error) {
+//     next(error);
+//   }
+// }
 
 // TODO: Update profile info
 export async function updatedProfile(req, res, next) {
-  // console.log(req.body);
+  console.log("check req body", req.body);
   try {
     const updatedProfile = await User.findByIdAndUpdate(
       req.params.id,
@@ -69,7 +70,7 @@ export async function updatedProfile(req, res, next) {
         new: true,
       }
     );
-    console.log(req.body);
+
     console.log(updatedProfile);
     res.json(updatedProfile);
   } catch (error) {
