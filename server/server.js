@@ -1,6 +1,6 @@
 import express from "express";
 import { fileURLToPath } from "url";
-import path, { dirname, join } from "path";
+import { dirname, join } from "path";
 
 import logger from "morgan";
 import cors from "cors";
@@ -21,13 +21,12 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json({ limit: "30mb" }));
 // ? Teach the app to understand/parse forms
-app.use(express.urlencoded());
+// app.use(express.urlencoded());
 app.use(cors());
 app.use(auth);
 
 // Proxy
 app.use(express.static(join(__dirname, "..", "client", "build")));
-app.use("/uploads", express.static("uploads"));
 
 // Put API routes here, before the "catch all" route
 app.use("/api/users", userRoutes);

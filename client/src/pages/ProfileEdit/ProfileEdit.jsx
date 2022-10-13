@@ -150,12 +150,11 @@ function ProfileEdit() {
         />
 
         <label>Profile picture:</label>
-        <img src={profileEdit.image} alt="profile avatar" className="pfp" />
+        <img src={profileEdit.image} alt="profile avatar" className="profile" />
         <input
           type="file"
           name="image"
           accept="image/*"
-          className="pfp"
           onChange={handleChange}
         />
 
