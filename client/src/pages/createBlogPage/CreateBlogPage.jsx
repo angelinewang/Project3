@@ -94,11 +94,11 @@ function CreateBlogPage() {
     <> { user ?
       <form className='form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
 
-        <label><strong>Title</strong></label>
+        <label>Title <span>*</span></label>
         <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={50} />
         {titleIsInvalid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
 
-        <label><strong>Tags</strong></label>
+        <label>Tags</label>
         <div className='tags-input-container'>
         {blog.tags.map((tag, index) => (
           <div className='tag-item' key={uuid()}>
@@ -106,14 +106,14 @@ function CreateBlogPage() {
             <span className='close' onClick={() => removeTag(index)}>&times;</span>
           </div>
         ))}
-        <input type='text' name={blog.tags} placeholder='Add a tag' className='tags-input' onKeyDown={handleKeyDown}/>
+        <input type='text' name={blog.tags} className='tags-input' onKeyDown={handleKeyDown}/>
         </div>
 
-        <label><strong>Description</strong></label>
-        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={150} />
+        <label>Description <span>*</span></label>
+        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={200} />
         {descriptionIsInvalid ? <p className='error-message'>Please provide a valid description (min. 100 characters)</p>: <></> }
 
-        <label><strong>Content</strong></label>
+        <label>Content</label>
         <TextEditor  setBlog={setBlog} initContValue='' setContentTouched={setContentTouched} />
         {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
 
@@ -123,7 +123,7 @@ function CreateBlogPage() {
         </div>
 
         <div className="button-container">
-          <button onClick={handleCancel} >CANCEL</button>
+          <button onClick={handleCancel} className="cancel-button">CANCEL</button>
           <button type='Submit' disabled={!formIsValid} className={!formIsValid ? 'not-allowed': 'allowed'}>CREATE NEW BLOG</button>
         </div>
 

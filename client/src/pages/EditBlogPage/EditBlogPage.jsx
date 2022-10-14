@@ -5,6 +5,8 @@ import userService from "../../utils/userService"
 import { updateABlog } from '../../utils/blogService'
 import TextEditor from '../../components/TextEditor/TextEditor'
 
+import "./EditBlogPage.css"
+
 function EditPage() {
 
     const user = userService.getUser()
@@ -65,7 +67,9 @@ function EditPage() {
 
       let formIsValid = titleIsValid && descriptionIsValid && contentIsValid
     
-
+      let handleCancel = () => {
+        navigate(-1)
+      }
 
   return (
     <>
@@ -73,13 +77,13 @@ function EditPage() {
         blog ? (
         user._id === blog.author._id ?
         <>
-        <form className='form-container' onSubmit={handleSubmit}>
+        <form className='form_container' onSubmit={handleSubmit}>
 
-        <label><strong>Title</strong></label>
+        <label>Title <span>*</span></label>
         <input name='title' value={blog.title} onChange={handleChange} maxLength={50}/>
         {!titleIsValid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
 
-        <label><strong>Tags</strong></label>
+        <label>Tags</label>
         <div className='tags-input-container'>
         {blog.tags ? ( blog.tags.map((tag, index) => (
           <div className='tag-item' key={index}>
@@ -90,15 +94,18 @@ function EditPage() {
         <input type='text' name={blog.tags} placeholder='Add a tag' className='tags-input' onKeyDown={handleKeyDown}/>
       </div>
 
-        <label><strong>Description</strong></label>
-        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} maxLength={150}/>
+        <label>Description <span>*</span></label>
+        <textarea rows={3} name='description' value={blog.description} onChange={handleChange} maxLength={200}/>
         {!descriptionIsValid ? <p className='error-message'>Please provide a valid description (min. 100 characters)</p>: <></> }
 
-        <label><strong>Content</strong></label>
+        <label>Content <span>*</span></label>
         <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content}/>
         {!contentIsValid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
 
+        <div className="button-container">
+        <button className="cancel-button" onClick={handleCancel} >CANCEL</button>
         <button type='Submit' disabled={!formIsValid} className={!formIsValid ? 'not-allowed': 'allowed'}>UPDATE BLOG</button>
+        </div>
       </form>
       </>
       : 

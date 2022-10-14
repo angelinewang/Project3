@@ -1,18 +1,21 @@
 .form-container {
     margin: 0px 20px;
-    border: 2px solid red;
 
     display: flex;
     flex-direction: column;
-    width: 60vw;
-    height: 80vh;
+    width: 70vw;
     margin: 0 auto;
 }
 
-.form-container > label {
+.form-container  label {
     display: block;
 
+    font-weight: bold;
     margin-top: 20px;
+}
+
+.form-container span {
+    color: #D0342C;
 }
 
 .form-container > input, 
@@ -48,6 +51,7 @@
 
 .tag-item .text {
     font-size: 12px;
+    color: black;
 }
 
 
@@ -67,7 +71,7 @@
 
 .tag-item .close:hover {
     cursor: pointer;
-    background-color: red;
+    background-color: #D0342C;
 }
 
 .tags-input {
@@ -75,6 +79,7 @@
     padding: .15em 0;
     border: none;
     outline: none;
+    width: fit-content;
 }
 
 .image-input-container {
@@ -92,23 +97,61 @@
 }
 
 .image-input {
-    width: 100%;
+    width: max-content;
+}
+
+.not-allowed {
+    background-color: #EBEBE4;
+    border: none;
+}
+
+.cancel-button {
+    background-color: white;
+    border: 1px solid #084CDF;
+    color: #084CDF;
+}
+
+.not-allowed,
+.cancel-button,
+.allowed {
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .not-allowed:hover {
     cursor: not-allowed;
 }
 
-.allowed:hover {
+.allowed {
+    border: none;
+    background-color: #084CDF;
+    color: white;
+}
+
+.allowed:hover,
+.cancel-button:hover,
+input[type=file]::file-selector-button:hover {
     cursor: pointer;
-    color: blue;
+    box-shadow: 3px 2px 2px #2F4858;
 }
 
 .button-container {
-    margin-top: 20px;
+    margin: 20px 0px;
     width: max-content;
 }
 
 .button-container > button {
     margin-right: 1.5rem;
+}
+
+input[type=file]::file-selector-button {
+    margin: 5px 0px;
+    margin-right: 10px;
+    border: none;
+    background: #084cdf;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
 }
