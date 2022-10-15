@@ -40,16 +40,16 @@ const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com";
 
 export const getBlogs = async () => {
   try {
-    let res = await fetch(BASE_URL + "/api/blogs");
+    let res = await fetch(BASE_URL + "/api/blogs/");
     return res.json();
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getBlog = async (id) => {
+export const getBlog = async (blogID) => {
   try {
-    let res = await fetch(`/api/blogs/${blogID}`);
+    let res = await fetch(BASE_URL + `/api/blogs/${blogID}`);
     return res.json();
   } catch (error) {
     console.log(error);
@@ -59,7 +59,7 @@ export const getBlog = async (id) => {
 export const getUserBlog = async (userID) => {
   try {
     // console.log("service ran");
-    let res = await fetch(`/api/users/${userID}`);
+    let res = await fetch(BASE_URL + `/api/users/${userID}`);
 
     return res.json();
   } catch (error) {

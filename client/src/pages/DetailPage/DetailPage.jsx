@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
 import blogService from "../../utils/blogService";
-// import Buffer from 'Buffer';
 
 function DetailPage() {
 
@@ -14,16 +13,12 @@ function DetailPage() {
 
     const [blog, setBlog] = React.useState(!!blogService.getBlog(id))
 
-    // var [like, setLike] = React.useState(!!blog)
-
     var MySwal = withReactContent(Swal)
 
     const [comment, setComment] = React.useState(!!blog)
 
     const [isAuthor, setIsAuthor] = React.useState(!!TokenService.getUserFromToken())
     const [isUser, setIsUser] = React.useState(!!blog)
-
-    // console.log(TokenService.getUserFromToken()._id)
 
     let fetchBlog = () => {
         // setBlog(blog = "Apple");
