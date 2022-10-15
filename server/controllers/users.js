@@ -7,6 +7,36 @@ dotenv.config();
 
 const SECRET = process.env.SECRET;
 
+// export async function getUserBlogs(req, res, next) {
+//   try {
+//     // console.log(req.params.id);
+//     const user = await User.findById();
+//     blog.populate("author");
+//     console.log(blog);
+//     if (!blog) {
+//       return res.status(400).json({ error: true, message: "Blog not found." });
+//     }
+//     return res.json(blog);
+//   } catch (error) {
+//     if (error instanceof CastError) {
+//       res
+//         .status(400)
+//         .send({ error: "Invalid id - please enter the correct id." });
+//     } else {
+//       next(error);
+//     }
+//   }
+// }
+
+// export async function getUserInfo(req, res) {
+//   try {
+//     const user = User.findById(req.params.id).populate();
+//     return res.json(user);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
 export async function signup(req, res) {
   const user = new User(req.body);
   try {
@@ -22,7 +52,10 @@ export async function signup(req, res) {
 
 export async function login(req, res) {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    console.log("Reached login function");
+    let user = await User.findOne({ email: req.body.email }).populate("blogs");
+    //Blogs successfully populated
+    console.log(user.blogs);
     if (!user) return res.status(401).json({ err: "bad credentials" });
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
@@ -94,6 +127,8 @@ export async function updatedProfile(req, res, next) {
 /*----- Helper Functions -----*/
 
 function createJWT(user) {
+  console.log("Reached CreateJWT");
+  console.log(user.blogs);
   return jwt.sign(
     { user }, // data payload
     SECRET,
