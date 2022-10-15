@@ -1,7 +1,7 @@
 # openapi2-functions.yaml
 swagger: '2.0'
 info:
-  title: blogging-platform-365219 API Creation
+  title: blogging-platform-365219
   description: Sample API on API Gateway with a Google Cloud Functions backend
   version: 1.0.0
 schemes:
