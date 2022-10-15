@@ -94,8 +94,7 @@ function DetailPage() {
             <article className="message is-primary" key={blog._id}>
                 <div className="message-header">
 
-                    {blog.image ? (<img src={`data:image/${blog.image.contentType};base64,
-                     ${blog.image.image.toString('base64')}`} alt={blog.title}/>) : null}
+                    {blog.image ? (<img src={blog.image} alt={blog.title}/>) : null}
                     <h3 className="title">{blog.title}</h3>
                     <h4 className="description">{blog.description} </h4>
                 </div>
