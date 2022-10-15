@@ -1,10 +1,11 @@
 .form-container {
-    margin: 0px 20px;
-
     display: flex;
     flex-direction: column;
+
+    margin: 0px 20px;
     width: 70vw;
     margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .form-container  label {
@@ -22,10 +23,12 @@
 .form-container > textarea,
 .tags-input-container,
 .tags-input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
     width: 95%;
     border: 1px solid #ccc;
     background: #f8f8f8;
-    padding: 0.15rem 0.25rem;
+    padding: 0.25rem 0.25rem;
 }
 
 .tags-input-container:focus-within {
@@ -50,7 +53,6 @@
 }
 
 .tag-item .text {
-    font-size: 12px;
     color: black;
 }
 
@@ -66,7 +68,6 @@
     color: #fff;
     border-radius: 50%;
     margin-left: .5em;
-    font-size: 10px;
 }
 
 .tag-item .close:hover {
@@ -114,6 +115,7 @@
 .not-allowed,
 .cancel-button,
 .allowed {
+    font-size: 16px;
     padding: 5px;
     border-radius: 5px;
 }
@@ -153,5 +155,4 @@ input[type=file]::file-selector-button {
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
-    transition: background .2s ease-in-out;
 }

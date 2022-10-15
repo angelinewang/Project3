@@ -30,9 +30,11 @@ function Profile() {
   // {blog.socialMediaProfiles.map(social => (
 
   // ))}
+  console.log('help me smh')
   return (
     <div>
       <section>
+
         {blog ? (
           <div>
             <div>
@@ -45,9 +47,11 @@ function Profile() {
               <p>Blogs: {blog.blogs.length}</p>
 
               <div>
-                {blog.socialMediaProfiles[0].linkToProfile.length ? (
+                
+                {blog.socialMediaProfiles[0] &&
+                blog.socialMediaProfiles[0]?.linkToProfile?.length ? (
                   <a
-                    href={`https://www.twitter.com/${blog.socialMediaProfiles[0].linkToProfile}`}
+                    href={`https://www.twitter.com/${blog.socialMediaProfiles[0]?.linkToProfile}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -58,9 +62,9 @@ function Profile() {
                     />
                   </a>
                 ) : null}
-                {blog.socialMediaProfiles[1].linkToProfile.length ? (
+                {blog.socialMediaProfiles[1] && blog.socialMediaProfiles[1]?.linkToProfile?.length ? (
                   <a
-                    href={`https://www.instagram.com/${blog.socialMediaProfiles[1].linkToProfile}`}
+                    href={`https://www.instagram.com/${blog.socialMediaProfiles[1]?.linkToProfile}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

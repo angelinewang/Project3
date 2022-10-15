@@ -28,7 +28,7 @@ function App() {
   return (
     <div>
       <header className="header">
-        <p>MERN Skeleton</p> <NavBar />
+        <NavBar />
       </header>
       <Routes>
         <Route exact path="*" element={<Navigate to="/" />} />
@@ -45,11 +45,7 @@ function App() {
         <Route
           exact
           path="/protected"
-          element={
-            <ProtectedRoute>
-              <ProtectedPage />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute>{/* <ProtectedPage /> */}</ProtectedRoute>}
         />
       </Routes>
     </div>
