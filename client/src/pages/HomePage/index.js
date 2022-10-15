@@ -11,8 +11,7 @@ export default function HomePage() {
     getTags();
   }, []);
 
-  console.log(tags);
-  console.log(blogs);
+  console.log(blogs, tags);
 
   async function getBlogs() {
     try {
@@ -60,26 +59,28 @@ export default function HomePage() {
       <h1>HomePage</h1>
       <div className="main-flex">
         <main className="blogs-feed">
-          {blogs.map((post) => (
-            <article className="article-post">
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
-              <div className="post-settings">
-                <p>Posted on: {post.createdAt}</p>
-                <h2>Tags:</h2>
-                <ul className="tags">
-                  {post.tags.map((tag) => (
-                    <li>
-                      <button>{tag}</button>
-                    </li>
-                  ))}
-                </ul>
-                <Link to={`/blogpost/detail/${post._id}`}>
-                  <button>Read on</button>
-                </Link>
-              </div>
-            </article>
-          ))}
+          {blogs.map((post) =>
+            tags.some((el) => post.tags.includes(el)) ? (
+              <article className="article-post">
+                <h2>{post.title}</h2>
+                <p>{post.description}</p>
+                <div className="post-settings">
+                  <p>Posted on: {post.createdAt}</p>
+                  <h2>Tags:</h2>
+                  <ul className="tags">
+                    {post.tags.map((tag) => (
+                      <li>
+                        <button>{tag}</button>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link to={`/blogpost/detail/${post._id}`}>
+                    <button>Read on</button>
+                  </Link>
+                </div>
+              </article>
+            ) : null
+          )}
         </main>
         <div className="blogs-side">
           <h2>Sort by:</h2>
