@@ -19,6 +19,7 @@ const MenuBar = ({ editor }) => {
 
   return (
     <div className='menu-bar'>
+      <div>
       <button
         onClick={(e) => {
           e.preventDefault()
@@ -117,6 +118,8 @@ const MenuBar = ({ editor }) => {
         }}>
           <MdHorizontalRule/>
       </button>
+      </div>
+      <div>
       <button
         onClick={(e) => {
           e.preventDefault()
@@ -147,6 +150,7 @@ const MenuBar = ({ editor }) => {
       >
         <FaRedo />
       </button>
+      </div>
     </div>
   )
 }
@@ -173,7 +177,7 @@ const TextEditor =({setBlog, initContValue, setContentTouched}) => {
   return (
     <div className='text-editor'>
       <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} spellcheck="false"/>
     </div>
   )
 }

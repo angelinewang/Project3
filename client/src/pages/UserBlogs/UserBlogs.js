@@ -27,7 +27,7 @@ function UserBlogs() {
     <div>
       {userBlogs ? (
         <>
-          <h2>
+          <h2 key={userBlogs._id}>
             Blogs by{" "}
             <Link to={`/profile/${userBlogs._id}`}> {userBlogs.name} </Link>
           </h2>
@@ -35,12 +35,12 @@ function UserBlogs() {
           {userBlogs.blogs
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .map((b) => (
-              <>
+              <div key={b._id}>
                 <Link to={`/blog/${b._id}`}>
                   <h3>{b.title}</h3>
                 </Link>
-                <div>{HTMLReactParser(b.content)}</div>
-              </>
+                <div>{HTMLReactParser(b.description)}</div>
+              </div>
             ))}
         </>
       ) : null}

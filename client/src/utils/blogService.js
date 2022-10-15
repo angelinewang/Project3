@@ -53,10 +53,10 @@ export const createABlog = async (blog) => {
     let res = await fetch(`/api/blogs`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        //"content-type": 'multipart/form-data',
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(blog),
+      body: blog,
     });
     return res.json();
   } catch (error) {

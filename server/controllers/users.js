@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import formidable from "formidable";
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ export async function login(req, res) {
     if (!user) return res.status(401).json({ err: "bad credentials" });
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
+        user.image = "";
+        console.log(user);
         const token = createJWT(user);
         res.json({ token });
       } else {
@@ -36,45 +39,53 @@ export async function login(req, res) {
   }
 }
 
-// TODO: Add profile info
-export async function addProfile(req, res, next) {
-  console.log("testing server req", req);
-  let userId = req.user._id;
-  try {
-    let currentUser = await User.findById(userId);
-
-    const addedProfile = await User.create(req.body);
-    await currentUser.save();
-
-    // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
-    //   new: true,
-    // });
-
-    res.json(addedProfile);
-  } catch (error) {
-    next(error);
-  }
-}
-
-// // TODO: Update profile info
-// export async function updatedProfile(req, res, next) {
+// // TODO: Add profile info
+// export async function addProfile(req, res, next) {
+//   console.log("req received on server");
+//   let userId = req.user._id;
 //   try {
-//     const updatedProfile = await User.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       {
-//         new: true,
-//       }
-//     );
-//     res.json(updatedProfile);
+//     let currentUser = await User.findById(userId);
+//     const data = req.body;
+//     const addedProfile = await User.create(data);
+//     // currentUser.bio.push(data);
+
+//     await currentUser.save();
+
+//     // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+//     //   new: true,
+//     // });
+
+//     res.json(addedProfile);
 //   } catch (error) {
 //     next(error);
 //   }
 // }
 
+// TODO: Update profile info
+export async function updatedProfile(req, res, next) {
+  console.log("check req body", req.body);
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    console.log(updatedProfile);
+    res.json(updatedProfile);
+  } catch (error) {
+    next(error);
+  }
+}
+
 // // TODO: Delete profile info
 // export async function deleteProfile(req, res, next) {
+//   console.log("req body", req.body);
 //   try {
+//     await User.findByIdAndDelete(req.params.id);
+//     res.status(204).send();
 //   } catch (error) {
 //     next(error);
 //   }

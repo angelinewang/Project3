@@ -17,10 +17,6 @@ const NavBar = () => {
       </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <Link to={`/profile/${user._id}`}>WELCOME, {user.name}</Link>
-      {/* <NavLink to="/profile" className="NavBar-link">
-        WELCOME, {user.name}
-      </NavLink> */}
-      {/* <span className="NavBar-welcome">WELCOME, {user.name}</span> */}
     </div>
   ) : (
     <div>
