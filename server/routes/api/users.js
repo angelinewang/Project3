@@ -11,6 +11,7 @@ router.post("/login", usersCtrl.login);
 router
   .route("/:id")
   .get(blogControllers.getUserBlog)
-  .patch(usersCtrl.updatedProfile);
+  .patch(checkAuth, usersCtrl.updatedProfile);
+// .delete(usersCtrl.deleteProfile);
 
 export default router;

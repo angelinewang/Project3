@@ -45,10 +45,11 @@ function login(creds) {
 
 // TODO: Post profile info
 //! dc
-export const updateProfileInfo = async (formData, userID) => {
-  console.log("UserService check ->", formData);
+export const updateProfileInfo = async (profileEdit, userID) => {
+  console.log("UserService check ->", profileEdit);
 
   try {
+    console.log("user service check 2");
     const token = tokenService.getToken();
     let res = await fetch(`/api/users/${userID}`, {
       method: "PATCH",
@@ -56,9 +57,9 @@ export const updateProfileInfo = async (formData, userID) => {
         "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(profileEdit),
     });
-    console.log("res ->", res);
+    console.log("res ->", profileEdit);
     return res.json();
   } catch (error) {
     console.log(error);
@@ -101,16 +102,19 @@ export const updateProfileInfo = async (formData, userID) => {
 // };
 
 // // TODO: Delete profile info
-// export const deleteProfileInfo = async (formData, userID) => {
+// export const deleteProfileBio = async (profileEdit, userID) => {
+//   console.log("user service check", profileEdit);
 //   try {
 //     const token = tokenService.getToken();
 //     let res = await fetch(`/api/users/${userID}`, {
 //       method: "DELETE",
 //       headers: {
+//         "content-type": "application/json",
 //         Authorization: "Bearer " + token,
 //       },
-//       body: formData,
+//       body: JSON.stringify(profileEdit.bio),
 //     });
+//     console.log("body check user service", profileEdit.bio);
 //     return res;
 //   } catch (error) {
 //     console.log(error);

@@ -26,40 +26,51 @@ function Profile() {
     getBlogData();
   }, [userID]);
 
+  // console.log(blog.socialMediaProfiles.linkToProfile);
+  // {blog.socialMediaProfiles.map(social => (
+
+  // ))}
   return (
     <div>
       <section>
         {blog ? (
           <div>
             <div>
-              <img src={blog.image} alt="profile avatar" className="pfp" />
+              {blog.image ? (
+                <img src={blog.image} alt="profile avatar" className="pfp" />
+              ) : null}
               <p>User: {blog.name}</p>
               <p>Bio: {blog.bio} </p>
               <p>Joined: {blog.createdAt.split("T")[0]}</p>
               <p>Blogs: {blog.blogs.length}</p>
+
               <div>
-                <a
-                  href={`https://www.twitter.com/${blog.socialMediaProfiles[0].linkToProfile}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={require("../../images/twitter.png")}
-                    alt="twitter"
-                    className="twitter"
-                  />
-                </a>
-                <a
-                  href={`https://www.instagram.com/${blog.socialMediaProfiles[1].linkToProfile}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={require("../../images/instagram.png")}
-                    alt="twitter"
-                    className="instagram"
-                  />
-                </a>
+                {blog.socialMediaProfiles.length ? (
+                  <a
+                    href={`https://www.twitter.com/${blog.socialMediaProfiles[0].linkToProfile}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={require("../../images/twitter.png")}
+                      alt="twitter"
+                      className="twitter"
+                    />
+                  </a>
+                ) : null}
+                {blog.socialMediaProfiles.length ? (
+                  <a
+                    href={`https://www.instagram.com/${blog.socialMediaProfiles[1].linkToProfile}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={require("../../images/instagram.png")}
+                      alt="twitter"
+                      className="instagram"
+                    />
+                  </a>
+                ) : null}
               </div>
 
               {blog._id === user._id ? (
@@ -73,6 +84,7 @@ function Profile() {
             <h2> Blogs by {blog.name}</h2>
             {blog.blogs
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .slice(0, 3)
               .map((b) => (
                 <div key={b._id}>
                   <Link to={`/blog/${b._id}`}>
