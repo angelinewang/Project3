@@ -6,6 +6,7 @@ import uploadFile from "../../middlewares/upload.js";
 const router = Router();
 router
   .route("/")
+
   .get(blogControllers.getAllBlogs)
   .post(checkAuth, uploadFile, blogControllers.createBlog);
 
