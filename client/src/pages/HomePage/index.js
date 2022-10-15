@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/NavBar/NavBar";
 import "./homepage.css";
 
 export default function HomePage() {
@@ -23,7 +22,6 @@ export default function HomePage() {
 
   return (
     <div>
-      <NavBar />
       <h1>HomePage</h1>
       <div className="main-flex">
         <main className="blogs-feed">
