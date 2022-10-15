@@ -92,10 +92,11 @@ function CreateBlogPage() {
 
   return (
     <> { user ?
+      
       <form className='form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
-
+        <h2>Create New Blog</h2>
         <label>Title <span>*</span></label>
-        <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={50} />
+        <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={50} className="title-input"/>
         {titleIsInvalid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
 
         <label>Tags</label>
@@ -113,7 +114,7 @@ function CreateBlogPage() {
         <textarea rows={3} name='description' value={blog.description} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={200} />
         {descriptionIsInvalid ? <p className='error-message'>Please provide a valid description (min. 100 characters)</p>: <></> }
 
-        <label>Content</label>
+        <label>Content <span>*</span></label>
         <TextEditor  setBlog={setBlog} initContValue='' setContentTouched={setContentTouched} />
         {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
 
@@ -127,7 +128,7 @@ function CreateBlogPage() {
           <button type='Submit' disabled={!formIsValid} className={!formIsValid ? 'not-allowed': 'allowed'}>CREATE NEW BLOG</button>
         </div>
 
-      </form> : <p>You are not logged in</p> }
+      </form>: <p>You are not logged in</p> }
     </>
   )
 }
