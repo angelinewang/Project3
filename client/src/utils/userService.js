@@ -10,7 +10,7 @@ const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com"; // Note: O
 
 function signup(user) {
   return (
-    fetch("/api/users/signup", {
+    fetch(BASE_URL + "/api/users/signup", {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify(user),
@@ -31,20 +31,6 @@ function getUser() {
   return tokenService.getUserFromToken();
 }
 
-//Retrieves
-// function getUserInfo(id) {
-//   return fetch(`/api/users/info/${id}`, {
-//     method: "GET",
-//     headers: new Headers({
-//       "Content-Type": "application/json",
-//     }),
-//   }).then((res) => {
-//     // Valid login if we have a status of 2xx (res.ok)
-//     if (res.ok) return res.json();
-//     throw new Error("Oops something went wrong!");
-//   });
-// }
-
 function logout() {
   tokenService.removeToken();
 }
@@ -54,7 +40,7 @@ function login(creds) {
   console.log(creds);
   // debugger;
   //Works for any client-side code
-  return fetch("/api/users/login", {
+  return fetch(BASE_URL + "/api/users/login", {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/json",
@@ -152,7 +138,6 @@ const exports = {
   getUser,
   logout,
   login,
-  // getUserInfo,
 };
 
 export default exports;
