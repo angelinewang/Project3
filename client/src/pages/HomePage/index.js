@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/NavBar/NavBar";
 import "./homepage.css";
 
 export default function HomePage() {
   let [blogs, setBlogs] = useState([]);
+  let [tags, setTags] = useState([]);
 
   useEffect(() => {
     getBlogs();
-    console.log(blogs);
+    getTags();
   }, []);
+
+  console.log(tags);
+  console.log(blogs);
 
   async function getBlogs() {
     try {
@@ -21,9 +24,39 @@ export default function HomePage() {
     }
   }
 
+  async function getTags() {
+    try {
+      const response = await fetch("/api/blogs");
+      const blogs = await response.json();
+      blogs.forEach((blog) => {
+        blog.tags.forEach((tag) => {
+          tags.push(tag);
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const onFilterChange = (e) => {
+    const thisTag = e.target["name"];
+    if (e.target.checked) {
+      setTags([...tags, thisTag]);
+    } else {
+      setTags(tags.filter((tag) => tag !== thisTag));
+    }
+
+    if (tags.size) {
+      setBlogs(
+        blogs.filter((blog) => {
+          return tags.includes(blog.tags);
+        })
+      );
+    }
+  };
+
   return (
     <div>
-      <NavBar />
       <h1>HomePage</h1>
       <div className="main-flex">
         <main className="blogs-feed">
@@ -61,8 +94,13 @@ export default function HomePage() {
             blog.tags.map((tag) => (
               <label class="container">
                 {tag}
-                <input type="checkbox" checked="checked" />
-                <span class="checkmark"></span>
+                <input
+                  type="checkbox"
+                  name={tag}
+                  onChange={onFilterChange}
+                  checked={tags.includes(tag)}
+                />
+                {/* <span class="checkmark"></span> */}
               </label>
             ))
           )}
@@ -71,3 +109,74 @@ export default function HomePage() {
     </div>
   );
 }
+
+/*
+function Product(props) {
+  const { product } = props
+  
+  return (
+    <li
+      key={product.id}
+      className="product">
+      <img src={product.image} />
+      <div className="product-details">
+        <header>{product.title}</header>
+        <div className="category">{product.category}</div>
+        <div className="price">{`$${padPrice(product.price)}`}</div>
+      </div>
+    </li>
+  )
+}
+
+function ProductsList(props) {
+  const { products } = props
+  
+  return (
+    <ul className="products">
+      {products.map(product => (
+        <Product product={product} />
+      ))}
+    </ul>
+  )
+}
+
+function App() {
+  const [state, setState] = useState({
+    products: PRODUCTS,
+    filters: new Set(),
+  })
+  
+  const handleFilterChange = useCallback(event => {
+    setState(previousState => {
+      let filters = new Set(previousState.filters)
+      let products = PRODUCTS
+      
+      if (event.target.checked) {
+        filters.add(event.target.value)
+      } else {
+        filters.delete(event.target.value)
+      }
+      
+      if (filters.size) {
+        products = products.filter(product => {
+          return filters.has(product.category)
+        })
+      }
+      
+      return {
+        filters,
+        products,
+      }
+    })
+  }, [setState])
+  
+  return (
+    <main>
+      <ProductFilters 
+        categories={CATEGORIES}
+        onFilterChange={handleFilterChange}/>
+      <ProductsList products={state.products} />
+    </main>
+  )
+}
+*/
