@@ -4,6 +4,7 @@ info:
   title: blogging-platform-365219
   description: Sample API on API Gateway with a Google Cloud Functions backend
   version: 1.0.0
+host: "echo-api.endpoints.blogging-platform-365219.cloud.goog"
 schemes:
   - https
 produces:
