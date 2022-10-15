@@ -3,16 +3,16 @@ import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 6;
 
-var schemaOptions = {
-  toObject: {
-    virtuals: true,
-  },
-  toJSON: {
-    virtuals: true,
-  },
-};
+// var schemaOptions = {
+//   toObject: {
+//     virtuals: true,
+//   },
+//   toJSON: {
+//     virtuals: true,
+//   },
+// };
 
-const opts = { toJSON: { virtuals: true }, toObject: { virtuals: true } };
+// const opts = { toJSON: { virtuals: true }, toObject: { virtuals: true } };
 
 var userSchema = new mongoose.Schema(
   {
@@ -29,8 +29,8 @@ var userSchema = new mongoose.Schema(
     ],
 
     blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
-  },
-  schemaOptions
+  }
+  // schemaOptions
   // {
   //   timestamps: true,
   //   toJSON: { toObjectOptions {virtuals: true } },
@@ -39,11 +39,11 @@ var userSchema = new mongoose.Schema(
   // { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-userSchema.virtual("blogs", {
-  ref: "Blog",
-  localField: "_id",
-  foreignField: "author",
-});
+// userSchema.virtual("blogs", {
+//   ref: "Blog",
+//   localField: "_id",
+//   foreignField: "author",
+// });
 
 userSchema.set("toJSON", {
   //Below line adds the Blogs population to the JSON content
