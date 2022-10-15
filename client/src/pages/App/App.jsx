@@ -30,7 +30,7 @@ function App() {
         <p>MERN Skeleton</p> <NavBar />
       </header>
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="*" element={<HomePage />} />
         <Route exact path="/detail/:id" element={<DetailPage />} />
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/login" element={<LoginPage />} />
