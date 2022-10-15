@@ -1,5 +1,5 @@
 import tokenService from "./tokenService.js";
-const BASE_URL = "https://blogging-platform-zdrxz7zzzq-nw.a.run.app/api/blogs/";
+const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com";
 
 // export const getImages = async () => {
 //   try {
@@ -40,7 +40,7 @@ const BASE_URL = "https://blogging-platform-zdrxz7zzzq-nw.a.run.app/api/blogs/";
 
 export const getBlogs = async () => {
   try {
-    let res = await fetch("/api/blogs");
+    let res = await fetch(BASE_URL + "/api/blogs");
     return res.json();
   } catch (error) {
     console.log(error);
@@ -50,7 +50,7 @@ export const getBlogs = async () => {
 export const getBlog = async (id) => {
   try {
     // axios.get(`api/blogs/${id}`);
-    let res = await fetch(BASE_URL + id);
+    let res = await fetch(BASE_URL + `/api/blogs/${id}`);
     // console.log(res.json());
     return res.json();
   } catch (error) {
@@ -62,7 +62,7 @@ export const updateABlog = async (blog) => {
   try {
     const token = tokenService.getToken();
 
-    let res = await fetch(`/api/blogs/${blog._id}`, {
+    let res = await fetch(BASE_URL + `/api/blogs/${blog._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -79,7 +79,7 @@ export const updateABlog = async (blog) => {
 export const createABlog = async (blog) => {
   try {
     const token = tokenService.getToken();
-    let res = await fetch(`/api/blogs`, {
+    let res = await fetch(BASE_URL + `/api/blogs/`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -96,7 +96,7 @@ export const createABlog = async (blog) => {
 export const removeABlog = async (blog) => {
   try {
     const token = tokenService();
-    let res = await fetch(`/api/blogs/${blog._id}`, {
+    let res = await fetch(BASE_URL + `/api/blogs/${blog._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
