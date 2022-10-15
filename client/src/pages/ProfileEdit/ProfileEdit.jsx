@@ -4,29 +4,31 @@ import { useNavigate, useParams } from "react-router-dom";
 import { updateProfileInfo } from "../../utils/userService";
 import "./ProfileEdit.css";
 
+const initialProfileDataObject = {
+  bio: "",
+  image: "",
+  socialMediaProfiles: [
+    {
+      platform: "twitter",
+      linkToProfile: "",
+    },
+    {
+      platform: "instagram",
+      linkToProfile: "",
+    },
+  ],
+};
+
 function ProfileEdit() {
   const { user } = useUser();
 
   const { userID } = useParams();
-  // console.log("userID ->", userID);
 
   let navigate = useNavigate();
 
   // TODO: Upload / edit profile picture
-  const [profileEdit, setProfileEdit] = useState({
-    bio: "",
-    image: "",
-    socialMediaProfiles: [
-      {
-        platform: "twitter",
-        linkToProfile: "",
-      },
-      {
-        platform: "instagram",
-        linkToProfile: "",
-      },
-    ],
-  });
+  const [profileEdit, setProfileEdit] = useState(initialProfileDataObject);
+  const [imageFile, setImageFile] = useState("");
 
   useEffect(() => {
     if (!userID) {
@@ -35,18 +37,10 @@ function ProfileEdit() {
     fetch(`/api/users/${userID}`)
       .then((res) => res.json())
       .then((userData) => {
-        setProfileEdit(userData);
-        console.log(userData);
+        const newUserObject = { ...initialProfileDataObject, ...userData };
+        setProfileEdit(newUserObject);
       });
   }, [userID]);
-
-  // const handleChange = (e) => {
-  //   // console.log(e.target.files[0]);
-  //   setProfileEdit({
-  //     ...profileEdit,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
 
   const handleTwitterChange = (e) => {
     setProfileEdit({
@@ -80,18 +74,6 @@ function ProfileEdit() {
     });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(profileEdit);
-  //   updateProfileInfo(profileEdit, userID).then((res) => {
-  //     console.log("testing form data", res);
-  //     navigate(`/profile/${userID}`);
-  //   });
-
-  // const [profileEdit, setProfileEdit] = useState({
-  //   image: "",
-  // });
-
   async function getBase64(file) {
     return new Promise((resolve, reject) => {
       let baseURL = "";
@@ -113,6 +95,7 @@ function ProfileEdit() {
 
     // console.log(e.target); -> to get the name of image in console write: temp1['name']
     if (e.target["name"] === "image") {
+      setImageFile(e.target.value);
       const imageURL = await getBase64(e.target.files[0]);
       setProfileEdit({
         ...profileEdit,
@@ -124,15 +107,13 @@ function ProfileEdit() {
         [e.target.name]: e.target.value,
       });
     }
-
-    // console.log("profile image content", profileEdit);
-    // console.log(e.target.files);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("check submit", profileEdit);
+
     updateProfileInfo(profileEdit, userID).then((res) => {
+      console.log("profile info at submit", profileEdit);
       console.log("testing form data", res);
       navigate(`/profile/${userID}`);
     });
@@ -155,6 +136,7 @@ function ProfileEdit() {
           type="file"
           name="image"
           accept="image/*"
+          value={imageFile}
           onChange={handleChange}
         />
 
@@ -162,14 +144,14 @@ function ProfileEdit() {
         <input
           type="text"
           name="twitter"
-          value={profileEdit.socialMediaProfiles[0].linkToProfile}
+          value={profileEdit?.socialMediaProfiles[0]?.linkToProfile || ""}
           onChange={handleTwitterChange}
         />
         <label>Instagram handle:</label>
         <input
           type="text"
           name="instagram"
-          value={profileEdit.socialMediaProfiles[1].linkToProfile}
+          value={profileEdit?.socialMediaProfiles[1]?.linkToProfile || ""}
           onChange={handleInstagramChange}
         />
         <button>Submit</button>
