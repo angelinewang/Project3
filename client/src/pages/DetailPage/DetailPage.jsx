@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
 import blogService from "../../utils/blogService";
+import HTMLReactParser from 'html-react-parser';
+
 
 function DetailPage() {
 
@@ -41,7 +43,8 @@ function DetailPage() {
 
     React.useEffect(() => {
         fetchBlog()
-     })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     },[])
 
     let deleteBlog = () => {
         axios.delete(`api/blogs/${id}`)
@@ -100,11 +103,11 @@ function DetailPage() {
                 </div>
                 <div className="detail-box">
                     <div className="message-body">
-                        <p>{blog.content}</p>
+                        <div>{HTMLReactParser(blog.content || "")}</div>
                         <p><strong>Tags:</strong></p>
-                        {blog.tags ? ( <ul className="tags"><div className="tags-container"><div className="tags-box">{blog.tags[0].tags.map((tag) => (<li className="tag" id="tag" key={tag}>{tag}</li>))}</div></div></ul>) : null}
+                        {blog.tags ? ( <ul className="tags"><div className="tags-container"><div className="tags-box">{blog.tags.map((tag) => (<li className="tag" id="tag" key={tag}>{tag}</li>))}</div></div></ul>) : null}
                         <p><strong>Comments:</strong></p>
-                        {blog.comments ? ( <ul className="comments">{blog.comments[0].comments.map((comment) => (<li className="message is-dark comment" key={comment}>{comment}</li>))} </ul>) : null}
+                        {blog.comments ? ( <ul className="comments">{blog.comments[0]?.comments.map((comment) => (<li className="message is-dark comment" key={comment}>{comment}</li>))} </ul>) : null}
                         
                         {isUser ? (
                                 <div className="user-box">
