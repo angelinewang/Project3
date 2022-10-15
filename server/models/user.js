@@ -27,8 +27,8 @@ var userSchema = new mongoose.Schema(
         linkToProfile: String,
       },
     ],
-    //Blogs should not be made directly within the User Schema
-    // blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
+
+    blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
   },
   schemaOptions
   // {

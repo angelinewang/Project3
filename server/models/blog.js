@@ -1,16 +1,21 @@
 import mongoose from "mongoose";
 
-const tagSchema = new mongoose.Schema({ tags: [String] });
+const commentSchema = new mongoose.Schema({
+  comments: [String],
+});
 
-const commentSchema = new mongoose.Schema({ comments: [String] });
+const tagSchema = new mongoose.Schema({
+  tags: [String],
+});
 
 const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
     content: { type: String, required: true },
-    image: { type: mongoose.Schema.ObjectId, ref: "Image" },
-    tags: [tagSchema],
+    // image: { data: Buffer, contentType: String },
+    image: String,
+    tags: [String],
     comments: [commentSchema],
     //18 and 19 need double checking
     author: { type: mongoose.Schema.ObjectId, ref: "User" },

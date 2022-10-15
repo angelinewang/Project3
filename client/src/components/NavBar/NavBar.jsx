@@ -1,31 +1,44 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import useUser from '../../hooks/useUser';
-import './NavBar.css';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import useUser from "../../hooks/useUser";
+import "./NavBar.css";
 
 const NavBar = () => {
-  const { handleLogout, user } = useUser()
+  const { handleLogout, user } = useUser();
 
-  let nav = user ?
-    <div>
-      <NavLink to='/protected' className='NavBar-link'>Protected Route</NavLink>
-      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <NavLink to='' className='NavBar-link' onClick={handleLogout}>LOG OUT</NavLink>
-      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <span className='NavBar-welcome'>WELCOME, {user.name}</span>
+  let nav = user ? (
+    <div className="navBar-logged-in">
+
+      <NavLink to="" className="navBar-logout" onClick={handleLogout}>
+        Log out
+      </NavLink>
+      <Link to={`/profile/${user._id}`} className="user-name" >{user.name}</Link>
     </div>
-    :
-    <div>
-      <NavLink to='/login' className='NavBar-link'>LOG IN</NavLink>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <NavLink to='/signup' className='NavBar-link'>SIGN UP</NavLink>
-    </div>;
-
-  return (
-    <div className='NavBar'>
-      {nav}
+  ) : (
+    <div className="navbar-logged-out">
+      <NavLink to="/login" className="navBar-login">
+        Log in
+      </NavLink>
+      <NavLink to="/signup" className="navBar-signup">
+        Sign up
+      </NavLink>
     </div>
   );
-};
+
+  return( 
+  <div className='navBar'>
+
+
+  <h2> About</h2>
+
+
+  <h1 className='blog'>Blog </h1>
+
+
+    {nav}
+
+
+    </div>
+    )};
 
 export default NavBar;

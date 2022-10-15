@@ -1,8 +1,8 @@
 import Blog from "../models/blog.js";
-
+import User from "../models/user.js";
 import { CastError } from "mongoose";
 
-export async function getAllBlogs(req, res, next) {
+async function getAllBlogs(req, res, next) {
   try {
     const blogs = await Blog.find().populate("image author");
     return res.json(blogs);
@@ -11,7 +11,8 @@ export async function getAllBlogs(req, res, next) {
   }
 }
 
-export async function getABlog(req, res, next) {
+// ! Blog
+async function getABlog(req, res, next) {
   try {
     // console.log(req.params.id);
     const blog = await Blog.findById(req.params.id).populate("image author");
@@ -33,30 +34,62 @@ export async function getABlog(req, res, next) {
   }
 }
 
-export async function createBlog(req, res, next) {
+// ! User
+async function getUserBlog(req, res, next) {
   try {
-    const blog = await Blog(req.body);
-    res.json(blog);
+    const user = await User.findById(req.params.id).populate("blogs");
+
+    if (!user) {
+      return res.status(400).json({ error: true, message: "User not found." });
+    }
+
+    res.json(user);
   } catch (error) {
-    res.status(400).send({
-      error:
-        "You must provide a title, description and content when creating a blog.",
-    });
+    if (error instanceof CastError) {
+      res
+        .status(400)
+        .send({ error: "Invalid id - please enter the correct id." });
+    } else {
+      next(error);
+    }
   }
 }
 
-export async function updateBlog(req, res, next) {
+async function createBlog(req, res, next) {
+  // console.log("filename", req.file.size, req.file.filename, req.file.path);
+  // console.log("this is the request body", req.body);
+  //req.body.tags = req.body.tags.split(",");
+  console.log(req.body);
+  let userId = req.user._id;
   try {
+    let filePath = req.file.path;
+    let currentUser = await User.findById(userId);
+    const data = req.body;
+    data.author = userId;
+    data.image = filePath;
+    const newBlog = await Blog.create(data);
+    console.log(newBlog);
+    currentUser.blogs.push(newBlog._id);
+    await currentUser.save();
+    res.json(newBlog);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
+async function updatedBlog(req, res, next) {
+  try {
+    // console.log("the blog id is", req.params.id);
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.json(updateBlog);
+    res.json(updatedBlog);
   } catch (error) {
     next(error);
   }
 }
 
-export async function deleteBlog(req, res, next) {
+async function deleteBlog(req, res, next) {
   try {
     await Blog.findByIdAndDelete(req.params.id);
     res.status(204).send();
@@ -64,3 +97,12 @@ export async function deleteBlog(req, res, next) {
     next(error);
   }
 }
+
+export default {
+  createBlog,
+  getAllBlogs,
+  getABlog,
+  getUserBlog,
+  updatedBlog,
+  deleteBlog,
+};

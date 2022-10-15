@@ -69,6 +69,84 @@ function login(creds) {
     .then(({ token }) => tokenService.setToken(token));
 }
 
+// TODO: Post profile info
+//! dc
+export const updateProfileInfo = async (profileEdit, userID) => {
+  console.log("UserService check ->", profileEdit);
+
+  try {
+    console.log("user service check 2");
+    const token = tokenService.getToken();
+    let res = await fetch(`/api/users/${userID}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(profileEdit),
+    });
+    console.log("res ->", profileEdit);
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export const addProfileInfo = async (profileEdit, userID) => {
+//   try {
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${userID}`, {
+//       method: "POST",
+//       headers: {
+//         Authorization: "Bearer " + token,
+//       },
+//       body: JSON.stringify(profileEdit),
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// TODO: Update profile info
+// export const updateProfileInfo = async (profileEdit, userID) => {
+//   try {
+//     console.log("user service check", profileEdit);
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${userID}`, {
+//       method: "PATCH",
+//       headers: {
+//         "content-type": "application/json",
+//         Authorization: "Bearer " + token,
+//       },
+//       body: JSON.stringify(profileEdit),
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// // TODO: Delete profile info
+// export const deleteProfileBio = async (profileEdit, userID) => {
+//   console.log("user service check", profileEdit);
+//   try {
+//     const token = tokenService.getToken();
+//     let res = await fetch(`/api/users/${userID}`, {
+//       method: "DELETE",
+//       headers: {
+//         "content-type": "application/json",
+//         Authorization: "Bearer " + token,
+//       },
+//       body: JSON.stringify(profileEdit.bio),
+//     });
+//     console.log("body check user service", profileEdit.bio);
+//     return res;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 const exports = {
   signup,
   getUser,

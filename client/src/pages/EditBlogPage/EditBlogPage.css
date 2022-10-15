@@ -1,0 +1,136 @@
+.form_container {
+    display: flex;
+    flex-direction: column;
+
+    border: 2px solid red;
+    /* align-content: center; */
+    margin: 0px 20px;
+    width: 70vw;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form_container  label {
+    display: block;
+
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.form_container span {
+    color: #D0342C;
+}
+
+.form_container > input, 
+.form_container > textarea,
+.tags_input_container,
+.tags_input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    width: 95%;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    padding: 0.25rem 0.25rem;
+}
+
+.tags_input_container:focus-within {
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.tags_input_container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: .15em;
+}
+
+.tag_item {
+    display: inline-block;
+
+    background-color: rgb(218, 216, 216);
+    padding: .15em .50em;
+    border-radius: 20px;
+}
+
+.tag_item .span_text {
+    color: black;
+}
+
+
+.tag_item .span_close {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 20px;
+    width: 20px;
+    background-color: rgb(48, 48, 48);
+    color: #fff;
+    border-radius: 50%;
+    margin-left: .5em;
+}
+
+.tag_item .span_close:hover {
+    cursor: pointer;
+    background-color: #D0342C;
+}
+
+.tags_input {
+    flex-grow: 1;
+    padding: .15em 0;
+    border: none;
+    outline: none;
+    width: fit-content;
+}
+
+.error_message {
+    margin: 5px 0px;
+    font-size: 12px;
+    color: #D0342C;
+}
+
+.not_allowed_button {
+    background-color: #EBEBE4;
+    border: none;
+}
+
+.cancel_button {
+    background-color: white;
+    border: 1px solid #084CDF;
+    color: #084CDF;
+}
+
+.not_allowed_button,
+.cancel_button,
+.allowed_button {
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.not_allowed_button:hover {
+    cursor: not-allowed;
+}
+
+.allowed_button {
+    border: none;
+    background-color: #084CDF;
+    color: white;
+}
+
+.cancel_button:hover,
+.allowed_button:hover {
+    cursor: pointer;
+    box-shadow: 3px 2px 2px #2F4858;
+}
+
+.button_container {
+    margin: 20px 0px;
+    width: max-content;
+}
+
+.button_container > button {
+    margin-right: 1.5rem;
+}

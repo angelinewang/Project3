@@ -3,7 +3,7 @@ import express from "express";
 import multer from "multer";
 // import mongoose from "mongoose";
 import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import path, { dirname, join } from "path";
 import userSchema from "./models/user.js";
 import blogSchema from "./models/blog.js";
 
@@ -31,7 +31,9 @@ dotenv.config();
 const app = express();
 
 app.use(logger("dev"));
-app.use(express.json());
+app.use(express.json({ limit: "30mb" }));
+// ? Teach the app to understand/parse forms
+// app.use(express.urlencoded());
 app.use(cors());
 app.use(auth);
 
@@ -56,7 +58,7 @@ const upload = multer({ storage: storage });
 
 // Proxy
 app.use(express.static(join(__dirname, "..", "client", "build")));
-
+app.use("/uploads", express.static("uploads"));
 // Put API routes here, before the "catch all" route
 
 app.use("/api/users", userRoutes);

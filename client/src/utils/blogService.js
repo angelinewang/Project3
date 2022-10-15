@@ -49,9 +49,18 @@ export const getBlogs = async () => {
 
 export const getBlog = async (id) => {
   try {
-    // axios.get(`api/blogs/${id}`);
-    let res = await fetch(BASE_URL + `/api/blogs/${id}`);
-    // console.log(res.json());
+    let res = await fetch(`/api/blogs/${blogID}`);
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserBlog = async (userID) => {
+  try {
+    // console.log("service ran");
+    let res = await fetch(`/api/users/${userID}`);
+
     return res.json();
   } catch (error) {
     console.log(error);
@@ -82,10 +91,10 @@ export const createABlog = async (blog) => {
     let res = await fetch(BASE_URL + `/api/blogs/`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        //"content-type": 'multipart/form-data',
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(blog),
+      body: blog,
     });
     return res.json();
   } catch (error) {
@@ -105,7 +114,9 @@ export const removeABlog = async (blog) => {
       body: JSON.stringify(blog),
     });
     return res;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const exports = {

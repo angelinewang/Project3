@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import formidable from "formidable";
 
 dotenv.config();
 
@@ -56,41 +57,72 @@ export async function login(req, res) {
     //Blogs successfully populated
     console.log(user.blogs);
     if (!user) return res.status(401).json({ err: "bad credentials" });
-    if (user.password == req.body.password) {
-      console.log("Reached the conditional function");
-      const token = createJWT(user);
-      res.json({ token });
-    } else {
-      return res.status(401).json({ err: "bad credentials" });
-    }
-
-    //Pass in custom error messages so I know which actual error i
-    //More specific responses from server, the easier to find it
-    //Better error-handling
-    //YouTube video on debugging: Place breakpoints where it would pause code, line by line keep going until it gets to the error
-    //Debugging in VSCode, and debugging for client-side stuff: Debugger
-
-    // How can I approach it step by step to figure out how to fic it
-    // Console.logging at different points to see where the error is
-    // Did it reach the server? Which line in the control function caused it?
-    // Understanding the data flow from beginning to end, timeline
-
-    // user.comparePassword(req.body.password, (err, isMatch) => {
-    //   console.log(isMatch);
-    //   if (isMatch) {
-    //     console.log("Reached the conditional function");
-    //     const token = createJWT(user);
-    //     res.json({ token });
-    //   } else {
-    //     return res.status(401).json({ err: "bad credentials" });
-    //   }
-    // });
-
-    //Implement Bcrypt and then use the comparePassword login to compare properly
+    user.comparePassword(req.body.pw, (err, isMatch) => {
+      if (isMatch) {
+        user.image = "";
+        console.log(user);
+        const token = createJWT(user);
+        res.json({ token });
+      } else {
+        return res.status(401).json({ err: "bad credentials" });
+      }
+    });
   } catch (err) {
     return res.status(401).json(err);
   }
 }
+
+// // TODO: Add profile info
+// export async function addProfile(req, res, next) {
+//   console.log("req received on server");
+//   let userId = req.user._id;
+//   try {
+//     let currentUser = await User.findById(userId);
+//     const data = req.body;
+//     const addedProfile = await User.create(data);
+//     // currentUser.bio.push(data);
+
+//     await currentUser.save();
+
+//     // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+//     //   new: true,
+//     // });
+
+//     res.json(addedProfile);
+//   } catch (error) {
+//     next(error);
+//   }
+// }
+
+// TODO: Update profile info
+export async function updatedProfile(req, res, next) {
+  console.log("check req body", req.body);
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    console.log(updatedProfile);
+    res.json(updatedProfile);
+  } catch (error) {
+    next(error);
+  }
+}
+
+// // TODO: Delete profile info
+// export async function deleteProfile(req, res, next) {
+//   console.log("req body", req.body);
+//   try {
+//     await User.findByIdAndDelete(req.params.id);
+//     res.status(204).send();
+//   } catch (error) {
+//     next(error);
+//   }
+// }
 
 /*----- Helper Functions -----*/
 
