@@ -1,8 +1,13 @@
 .form_container {
     display: flex;
     flex-direction: column;
+
+    border: 2px solid red;
+    /* align-content: center; */
+    margin: 0px 20px;
     width: 70vw;
     margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .form_container  label {
@@ -18,20 +23,22 @@
 
 .form_container > input, 
 .form_container > textarea,
-.tags-input-container,
-.tags-input {
+.tags_input_container,
+.tags_input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
     width: 95%;
     border: 1px solid #ccc;
     background: #f8f8f8;
-    padding: 0.15rem 0.25rem;
+    padding: 0.25rem 0.25rem;
 }
 
-.tags-input-container:focus-within {
+.tags_input_container:focus-within {
     border: 2px solid black;
     border-radius: 3px;
 }
 
-.tags-input-container {
+.tags_input_container {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -39,7 +46,7 @@
     gap: .15em;
 }
 
-.tag-item {
+.tag_item {
     display: inline-block;
 
     background-color: rgb(218, 216, 216);
@@ -47,13 +54,12 @@
     border-radius: 20px;
 }
 
-.tag-item .text {
-    font-size: 12px;
+.tag_item .span_text {
     color: black;
 }
 
 
-.tag-item .close {
+.tag_item .span_close {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -64,15 +70,14 @@
     color: #fff;
     border-radius: 50%;
     margin-left: .5em;
-    font-size: 10px;
 }
 
-.tag-item .close:hover {
+.tag_item .span_close:hover {
     cursor: pointer;
     background-color: #D0342C;
 }
 
-.tags-input {
+.tags_input {
     flex-grow: 1;
     padding: .15em 0;
     border: none;
@@ -80,54 +85,52 @@
     width: fit-content;
 }
 
-.error-message {
+.error_message {
     margin: 5px 0px;
     font-size: 12px;
     color: #D0342C;
 }
 
-.image-input {
-    width: max-content;
-}
-
-.not-allowed {
+.not_allowed_button {
     background-color: #EBEBE4;
     border: none;
 }
 
-.cancel-button {
+.cancel_button {
     background-color: white;
     border: 1px solid #084CDF;
     color: #084CDF;
 }
 
-.not-allowed,
-.cancel-button,
-.allowed {
+.not_allowed_button,
+.cancel_button,
+.allowed_button {
+    font-size: 16px;
     padding: 5px;
     border-radius: 5px;
 }
 
-.not-allowed:hover {
+.not_allowed_button:hover {
     cursor: not-allowed;
 }
 
-.allowed {
+.allowed_button {
     border: none;
     background-color: #084CDF;
     color: white;
 }
 
-.cancel-button:hover {
+.cancel_button:hover,
+.allowed_button:hover {
     cursor: pointer;
     box-shadow: 3px 2px 2px #2F4858;
 }
 
-.button-container {
+.button_container {
     margin: 20px 0px;
     width: max-content;
 }
 
-.button-container > button {
+.button_container > button {
     margin-right: 1.5rem;
 }

@@ -1,13 +1,29 @@
-.NavBar {
+/* .NavBar {
   display: flex;
   justify-content: center;
   margin: 0 0 20px;
 }
 
-.NavBar-link {
+.NavBar-logout {
   margin: 0 10px;
 }
 
 .NavBar-welcome {
   color: grey;
+} */
+
+.navBar{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px blue solid
+}
+
+.navBar-logged-in{
+ border: 1px red solid
+}
+
+.user-name {
+
 }
