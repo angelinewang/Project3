@@ -4,7 +4,7 @@ info:
   title: blogging-platform-365219
   description: Sample API on API Gateway with a Google Cloud Functions backend
   version: 1.0.0
-host: "echo-api.endpoints.blogging-platform-365219.cloud.goog"
+host: "blogging-platform-365219.endpoints.blogging-platform-365219.cloud.goog"
 schemes:
   - https
 produces:
@@ -15,7 +15,7 @@ paths:
       summary: Greet a user
       operationId: hello
       x-google-backend:
-        address: "https://echo-api.endpoints.blogging-platform-365219.cloud.goog/helloGET"
+        address: "https://blogging-platform-365219.endpoints.blogging-platform-365219.cloud.goog/helloGET"
       responses:
         '200':
           description: A successful response
