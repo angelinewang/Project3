@@ -34,8 +34,8 @@ function App() {
       </header>
       <Routes>
         <Route exact path="*" element={<Navigate to="/" />} />
-        <Route exact path="*" element={<HomePage />} />
-        <Route exact path="/detail/:id" element={<DetailPage />} />        <Route exact path="/profile/:userID" element={<Profile />} />
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/blogpost/detail/:id" element={<DetailPage />} />        <Route exact path="/profile/:userID" element={<Profile />} />
         {/* user blogs and profile edit to be a protected route */}
         <Route exact path="/profile/:userID/edit" element={<ProfileEdit />} />
         <Route exact path="/profile/:userID/blogs" element={<UserBlogs />} />
@@ -46,7 +46,6 @@ function App() {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
-
 
         <Route
           exact

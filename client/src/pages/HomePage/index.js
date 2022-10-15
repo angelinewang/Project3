@@ -74,7 +74,7 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
-                  <Link to={`/blog/${post._id}`}>
+                  <Link to={`/blogpost/detail/${post._id}`}>
                     <button>Read on</button>
                   </Link>
                 </div>

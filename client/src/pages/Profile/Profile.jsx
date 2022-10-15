@@ -91,7 +91,7 @@ function Profile() {
               .slice(0, 3)
               .map((b) => (
                 <div key={b._id}>
-                  <Link to={`/blog/${b._id}`}>
+                  <Link to={`/blogpost/detail/${b._id}`}>
                     <h3>{b.title}</h3>
                   </Link>
 
