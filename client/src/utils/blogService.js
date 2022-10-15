@@ -1,46 +1,9 @@
 import tokenService from "./tokenService.js";
-const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com";
-
-// export const getImages = async () => {
-//   try {
-//     let res = await fetch("/images");
-//     return res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// export const getImage = async (id) => {
-//   try {
-//     // axios.get(`api/blogs/${id}`);
-//     let res = await fetch(`/images/${id}`);
-//     // console.log(res.json());
-//     return res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// export const createImage = async (image) => {
-//   try {
-//     const token = tokenService.getToken();
-//     let res = await fetch(`/images`, {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json",
-//         Authorization: "Bearer " + token,
-//       },
-//       body: JSON.stringify(image),
-//     });
-//     return res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+// const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com";
 
 export const getBlogs = async () => {
   try {
-    let res = await fetch("/api/blogs/");
+    let res = await fetch("/api/blogs");
     return res.json();
   } catch (error) {
     console.log(error);
@@ -104,6 +67,7 @@ export const createABlog = async (blog) => {
 
 export const removeABlog = async (blog) => {
   try {
+    console.log("blog was deleted");
     const token = tokenService();
     let res = await fetch(`/api/blogs/${blog._id}`, {
       method: "DELETE",
@@ -118,16 +82,3 @@ export const removeABlog = async (blog) => {
     console.log(error);
   }
 };
-
-const exports = {
-  getBlogs,
-  getBlog,
-  updateABlog,
-  createABlog,
-  removeABlog,
-  // getImage,
-  // getImages,
-  // createImage,
-};
-
-export default exports;

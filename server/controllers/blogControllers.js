@@ -4,7 +4,7 @@ import { CastError } from "mongoose";
 
 async function getAllBlogs(req, res, next) {
   try {
-    const blogs = await Blog.find().populate("image author");
+    const blogs = await Blog.find().populate("author");
     return res.json(blogs);
   } catch (err) {
     next(err);
@@ -14,11 +14,7 @@ async function getAllBlogs(req, res, next) {
 // ! Blog
 async function getABlog(req, res, next) {
   try {
-    // console.log(req.params.id);
     const blog = await Blog.findById(req.params.id).populate("author");
-    // blog.author.get("User");
-    // blog.populate("author");
-    // console.log(blog.author.name);
     if (!blog) {
       return res.status(400).json({ error: true, message: "Blog not found." });
     }
@@ -75,7 +71,6 @@ async function createBlog(req, res, next) {
 
 async function updatedBlog(req, res, next) {
   try {
-    // console.log("the blog id is", req.params.id);
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

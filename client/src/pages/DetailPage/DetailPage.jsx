@@ -5,15 +5,16 @@ import {Link, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
-import blogService from "../../utils/blogService";
+import { getBlog } from "../../utils/blogService";
 import HTMLReactParser from 'html-react-parser';
+import { removeABlog } from "../../utils/blogService";
 
 
 function DetailPage() {
 
     const id = useParams().id
 
-    const [blog, setBlog] = React.useState(!!blogService.getBlog(id))
+    const [blog, setBlog] = React.useState(!!getBlog(id))
 
     var MySwal = withReactContent(Swal)
 
@@ -26,7 +27,7 @@ function DetailPage() {
         // setBlog(blog = "Apple");
         console.log("Reached fetchBlog function!")
         console.log(id)
-        blogService.getBlog(id).then((res) => {console.log(res); setBlog(res)
+        getBlog(id).then((res) => {console.log(res); setBlog(res)
         if(TokenService.getUserFromToken()._id) {
             setIsUser(true)
             if(blog.author) {
@@ -46,9 +47,10 @@ function DetailPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
      },[])
 
-    let deleteBlog = () => {
-        axios.delete(`api/blogs/${id}`)
-        .then(res => console.log(res.data)) 
+    let deleteBlog = (blog) => {
+        removeABlog(blog)
+        // removeABlog(id)
+        // .then(res => console.log(res.data)) 
         .then(() =>  {MySwal.fire({
                 title: <strong>Blog Deleted!</strong>,
                 html: <i>Your blog was deleted</i>,
@@ -133,7 +135,7 @@ function DetailPage() {
                                 <p>Delete Blog</p>
                                 </div>
                                 
-                                <Link to={`/edit/${blog._id}`}>
+                                <Link to={`/blog/edit/${blog._id}`}>
                                     <button className="edit button is-info">Edit Blog</button>
                                 </Link>
                                 </div>
