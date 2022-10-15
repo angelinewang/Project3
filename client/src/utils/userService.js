@@ -4,7 +4,7 @@ const BASE_URL = "/api/users/"; // Note: Once deployed this should be updated.
 
 function signup(user) {
   return (
-    fetch(BASE_URL + "signup", {
+    fetch(BASE_URL + "/api/users/signup", {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify(user),
@@ -30,7 +30,11 @@ function logout() {
 }
 
 function login(creds) {
-  return fetch(BASE_URL + "login", {
+  console.log("Reached Login function!");
+  console.log(creds);
+  // debugger;
+  //Works for any client-side code
+  return fetch(BASE_URL + "/api/users/login", {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
     body: JSON.stringify(creds),
