@@ -15,7 +15,7 @@ paths:
       summary: Greet a user
       operationId: hello
       x-google-backend:
-        address: https://echo-api.endpoints.blogging-platform-365219.cloud.goog/helloGET
+        address: "https://echo-api.endpoints.blogging-platform-365219.cloud.goog/helloGET"
       responses:
         '200':
           description: A successful response
