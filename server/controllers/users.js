@@ -26,6 +26,8 @@ export async function login(req, res) {
     if (!user) return res.status(401).json({ err: "bad credentials" });
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
+        user.image = "";
+        console.log(user);
         const token = createJWT(user);
         res.json({ token });
       } else {
@@ -80,7 +82,10 @@ export async function updatedProfile(req, res, next) {
 
 // // TODO: Delete profile info
 // export async function deleteProfile(req, res, next) {
+//   console.log("req body", req.body);
 //   try {
+//     await User.findByIdAndDelete(req.params.id);
+//     res.status(204).send();
 //   } catch (error) {
 //     next(error);
 //   }
