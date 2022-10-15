@@ -20,10 +20,25 @@
   border: 1px blue solid
 }
 
-.navBar-logged-in{
- border: 1px red solid
+.navBar-logged-in{ 
+ border: 1px red solid;
 }
 
 .user-name {
+  margin-left: 5px;
+}
 
+.navBar-logout{
+  margin-right: 5px;
+}
+
+.navBar a {
+  text-decoration: none;
+  text-transform: uppercase;
+  /* color: black; */
+}
+
+.blog {
+  margin-left: 300px;
+  margin-right: 300px;
 }

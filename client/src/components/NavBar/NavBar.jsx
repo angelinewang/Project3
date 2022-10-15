@@ -27,18 +27,14 @@ const NavBar = () => {
 
   return( 
   <div className='navBar'>
-
-
-  <h2> About</h2>
-
-
-  <h1 className='blog'>Blog </h1>
-
-
+    <Link  to="/about">
+   <h2>About</h2>
+    </Link>
+    <h1 className='blog'>Blog </h1>
+    
     {nav}
-
-
-    </div>
-    )};
+ 
+  </div>
+  )};
 
 export default NavBar;
