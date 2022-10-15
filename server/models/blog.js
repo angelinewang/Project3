@@ -25,4 +25,27 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
+//Ensures that blogs are always found with their "image" and "author" fields populated
+// blogSchema.pre("find", function (doc, next) {
+//   const blog = this;
+//   if (blog.options._recursed) {
+//     return next();
+//   }
+//   blog.populate({ path: "image author", options: { _recursed: true } });
+//   next();
+// });
+
+// userSchema.pre("save", function (next) {
+//   // 'this' will be set to the current document
+//   const user = this;
+//   if (!user.isModified("password")) return next();
+//   // password has been changed - salt and hash it
+//   bcrypt.hash(user.password, SALT_ROUNDS, function (err, hash) {
+//     if (err) return next(err);
+//     // replace the user provided password with the hash
+//     user.password = hash;
+//     next();
+//   });
+// });
+
 export default mongoose.model("Blog", blogSchema);

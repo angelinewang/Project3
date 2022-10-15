@@ -19,6 +19,8 @@ export default function (req, res, next) {
       } else {
         // It's a valid token, so add user to req
         req.user = decoded.user;
+        // console.log("Reached auth.js");
+        // console.log(user.blogs);
         next();
       }
     });
