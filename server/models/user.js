@@ -3,18 +3,7 @@ import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 6;
 
-// var schemaOptions = {
-//   toObject: {
-//     virtuals: true,
-//   },
-//   toJSON: {
-//     virtuals: true,
-//   },
-// };
-
-// const opts = { toJSON: { virtuals: true }, toObject: { virtuals: true } };
-
-var userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, lowercase: true, unique: true },
@@ -29,54 +18,19 @@ var userSchema = new mongoose.Schema(
     ],
 
     blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
+  },
+  {
+    timestamps: true,
   }
-  // schemaOptions
-  // {
-  //   timestamps: true,
-  //   toJSON: { toObjectOptions {virtuals: true } },
-  //   toObject: { virtuals: true },
-  // }
-  // { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// userSchema.virtual("blogs", {
-//   ref: "Blog",
-//   localField: "_id",
-//   foreignField: "author",
-// });
-
 userSchema.set("toJSON", {
-  //Below line adds the Blogs population to the JSON content
-  virtuals: true,
-  transform: function (doc, res) {
-    console.log("Reached userSchema to JSON");
-    console.log(res);
+  transform: function (doc, ret) {
     // remove the password property when serializing doc to JSON
-    delete res.password;
-    // res.populate({
-    //   path: "blogs",
-    //   select: "title author",
-    //   options: { _recursed: true },
-    // });
-    // exec();
-    return res;
+    delete ret.password;
+    return ret;
   },
 });
-
-//Below broke the program and made the user undiscoverable
-// Ensures that users are always found with their "image" and "author" fields populated
-// userSchema.pre("findOne", function (doc, next) {
-//   const user = this;
-// if (user.options._recursed) {
-//   return next();
-// }
-//   user.populate({
-//     path: "blogs",
-//     select: "title author",
-//     // options: { _recursed: true },
-//   });
-//   next();
-// });
 
 userSchema.pre("save", function (next) {
   // 'this' will be set to the current document
@@ -93,13 +47,10 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.comparePassword = function (tryPassword, cb) {
   // 'this' represents the document that you called comparePassword on
-  // bcrypt.compare(tryPassword, this.password, function (err, isMatch) {
-  //   if (err) return cb(err);
-  //   cb(null, isMatch);
-  // });
-  if (this.password == tryPassword) {
-    return true;
-  }
+  bcrypt.compare(tryPassword, this.password, function (err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
 };
 
 export default mongoose.model("User", userSchema);

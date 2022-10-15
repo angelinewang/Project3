@@ -15,7 +15,7 @@ async function getAllBlogs(req, res, next) {
 async function getABlog(req, res, next) {
   try {
     // console.log(req.params.id);
-    const blog = await Blog.findById(req.params.id).populate("image author");
+    const blog = await Blog.findById(req.params.id).populate("author");
     // blog.author.get("User");
     // blog.populate("author");
     // console.log(blog.author.name);
@@ -56,10 +56,6 @@ async function getUserBlog(req, res, next) {
 }
 
 async function createBlog(req, res, next) {
-  // console.log("filename", req.file.size, req.file.filename, req.file.path);
-  // console.log("this is the request body", req.body);
-  //req.body.tags = req.body.tags.split(",");
-  console.log(req.body);
   let userId = req.user._id;
   try {
     let filePath = req.file.path;
