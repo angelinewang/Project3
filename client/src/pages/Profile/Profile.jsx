@@ -45,7 +45,7 @@ function Profile() {
               <p>Blogs: {blog.blogs.length}</p>
 
               <div>
-                {blog.socialMediaProfiles.length ? (
+                {blog.socialMediaProfiles[0].linkToProfile.length ? (
                   <a
                     href={`https://www.twitter.com/${blog.socialMediaProfiles[0].linkToProfile}`}
                     target="_blank"
@@ -58,7 +58,7 @@ function Profile() {
                     />
                   </a>
                 ) : null}
-                {blog.socialMediaProfiles.length ? (
+                {blog.socialMediaProfiles[1].linkToProfile.length ? (
                   <a
                     href={`https://www.instagram.com/${blog.socialMediaProfiles[1].linkToProfile}`}
                     target="_blank"
