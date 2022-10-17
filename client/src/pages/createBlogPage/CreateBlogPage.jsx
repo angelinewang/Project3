@@ -89,12 +89,13 @@ function CreateBlogPage() {
     titleIsValid && descriptionIsValid && contentIsValid && imageIsValid;
 
   return (
-    <>
-      {" "}
-      {user ? (
-        <form
-          className="form-container"
-          onSubmit={handleSubmit}
+
+ <>
+     {" "}
+     {user ? (
+       <form
+         className="form-container"
+         onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
           <h2>Create New Blog</h2>
@@ -134,6 +135,22 @@ function CreateBlogPage() {
               className="tags-input"
               onKeyDown={handleKeyDown}
             />
+
+    <> { user ?
+      
+      <form className='form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
+        <h2 className='main-header' >Create New Blog</h2>
+        <label>Title <span>*</span></label>
+        <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={50} className="title-input"/>
+        {titleIsInvalid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
+
+        <label>Tags</label>
+        <div className='tags-input-container'>
+        {blog.tags.map((tag, index) => (
+          <div className='tag-item' key={uuid()}>
+            <span className='text'>{tag}</span>
+            <span className='close' onClick={() => removeTag(index)}>&times;</span>
+
           </div>
 
           <label>
