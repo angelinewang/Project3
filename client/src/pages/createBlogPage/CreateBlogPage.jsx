@@ -94,7 +94,7 @@ function CreateBlogPage() {
     <> { user ?
       
       <form className='form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
-        <h2>Create New Blog</h2>
+        <h2 className='main-header' >Create New Blog</h2>
         <label>Title <span>*</span></label>
         <input name='title' value={blog.title} onChange={handleChange} onBlur={blurHandler} spellCheck="false" maxLength={50} className="title-input"/>
         {titleIsInvalid ? <p className='error-message'>Please provide a valid title (min. 25 characters)</p>: <></>}
