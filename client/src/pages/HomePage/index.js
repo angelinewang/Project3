@@ -53,7 +53,6 @@ export default function HomePage() {
   };
 
   const onFilterButton = (e) => {
-    console.log(e.target.value);
     const thisTag = e.target.value;
     setTags(tags.filter((tag) => tag === thisTag));
   };
@@ -85,7 +84,7 @@ export default function HomePage() {
                 <img src={post.image} alt={post.title} />
                 <p>{post.description}</p>
                 <div className="post-settings">
-                  <p>Posted on: {post.createdAt}</p>
+                  <p>Posted on: {post.createdAt.substring(0, 10)}</p>
                   <h2>Tags:</h2>
                   <ul className="tags">
                     {post.tags.map((tag) => (
