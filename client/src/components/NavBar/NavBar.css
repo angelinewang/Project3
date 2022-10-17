@@ -12,18 +12,75 @@
   color: grey;
 } */
 
-.navBar{
+/* Logged in user */
+.navBar {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px blue solid
+  border: 1px blue solid;
+  padding: 5px;
 }
 
-.navBar-logged-in{
- border: 1px red solid
+.navBar-logged-in {
+  color: #bcbcbc;
 }
 
 .user-name {
+  margin-left: 5px;
+}
 
+.navBar-logout {
+  margin-right: 5px;
+}
+
+.navBar a {
+  text-decoration: none;
+  text-transform: uppercase;
+  /* color: #bcbcbc; */
+}
+
+.navBar a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  padding-bottom: 5px;
+}
+
+.navBar h2,
+.navBar-login,
+.navBar-signup {
+  font-family: "Roboto", sans-serif;
+}
+
+.blen {
+  margin-left: 100px;
+  margin-right: 100px;
+  font-family: "Space Mono", monospace;
+  font-size: 24pt;
+}
+
+.navBar-left {
+  display: flex;
+}
+
+.about {
+  margin-right: 5px;
+}
+
+.create-blog {
+  margin-left: 5px;
+}
+
+/* Logged out/non-user: */
+
+.navBar-login {
+  margin-right: 5px;
+}
+
+.navBar-signup {
+  margin-left: 5px;
+  /* background-color: #fa9500; */
+  border: 2px solid #fa9500;
+  border-radius: 3px;
+  padding: 4px;
 }

@@ -4,7 +4,7 @@ import { CastError } from "mongoose";
 
 async function getAllBlogs(req, res, next) {
   try {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find().populate("author");
     return res.json(blogs);
   } catch (err) {
     next(err);
@@ -15,12 +15,10 @@ async function getAllBlogs(req, res, next) {
 async function getABlog(req, res, next) {
   try {
     const blog = await Blog.findById(req.params.id).populate("author");
-
     if (!blog) {
       return res.status(400).json({ error: true, message: "Blog not found." });
     }
-
-    res.json(blog);
+    return res.json(blog);
   } catch (error) {
     if (error instanceof CastError) {
       res
@@ -54,10 +52,6 @@ async function getUserBlog(req, res, next) {
 }
 
 async function createBlog(req, res, next) {
-  // console.log("filename", req.file.size, req.file.filename, req.file.path);
-  // console.log("this is the request body", req.body);
-  //req.body.tags = req.body.tags.split(",");
-  console.log(req.body);
   let userId = req.user._id;
   try {
     let filePath = req.file.path;
@@ -77,7 +71,6 @@ async function createBlog(req, res, next) {
 
 async function updatedBlog(req, res, next) {
   try {
-    // console.log("the blog id is", req.params.id);
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

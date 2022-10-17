@@ -1,4 +1,5 @@
 import tokenService from "./tokenService.js";
+// const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com";
 
 export const getBlogs = async () => {
   try {
@@ -66,6 +67,7 @@ export const createABlog = async (blog) => {
 
 export const removeABlog = async (blog) => {
   try {
+    console.log("blog was deleted");
     const token = tokenService();
     let res = await fetch(`/api/blogs/${blog._id}`, {
       method: "DELETE",

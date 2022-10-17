@@ -1,0 +1,33 @@
+steps:
+# Docker Build
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['build', '-t', 
+#           'europe-west1-docker.pkg.dev/$blogging-platform-365219/my-docker-repo/myimage', 
+#           '.']
+
+# Docker Push
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['push', 
+#           'europe-west1-docker.pkg.dev/$blogging-platform-365219/my-docker-repo/myimage']
+# Node 
+- name: node
+  entrypoint: npm
+  args: ['install']
+- name: node
+  entrypoint: npm
+  args: ['run']
+# Entrypoint, timeout and environment variables
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  timeout: 240s
+  args: ['compute', 'instances', 
+          'create-with-container', 'my-vm-name',
+          '--container-image', 
+          'us-central1-docker.pkg.dev/$blogging-platform-365219/my-docker-repo/myimage']
+  env:
+    - 'CLOUDSDK_COMPUTE_REGION=europe-west1'
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-a'
+    - 'DATABASE_URL="mongodb+srv://angelinewang02:Database02910@project3.zlhbvxc.mongodb.net/Project-3"'
+    - 'PORT=3001'
+    - 'API_KEY="testTESTtest"'
+    - 'SECRET="SEI Rocks!"'

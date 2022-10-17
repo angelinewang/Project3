@@ -76,6 +76,7 @@ export default function HomePage() {
             tags.some((el) => post.tags.includes(el)) ? (
               <article className="article-post" key={post._id}>
                 <h2>{post.title}</h2>
+                <img src={post.image} alt={post.title} />
                 <p>{post.description}</p>
                 <div className="post-settings">
                   <p>Posted on: {post.createdAt}</p>
@@ -87,7 +88,7 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
-                  <Link to={`/blog/${post._id}`}>
+                  <Link to={`/blogpost/detail/${post._id}`}>
                     <button>Read on</button>
                   </Link>
                 </div>
