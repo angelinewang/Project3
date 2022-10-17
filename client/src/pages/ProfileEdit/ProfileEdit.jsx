@@ -12,7 +12,7 @@ const initialProfileDataObject = {
 };
 
 function ProfileEdit() {
-  const { user } = useUser();
+  // const { user } = useUser();
 
   const { userID } = useParams();
 

@@ -52,7 +52,7 @@ function App() {
         <Route
           exact
           path="/protected"
-          element={<ProtectedRoute>{/* <ProtectedPage /> */}</ProtectedRoute>}
+          element={<ProtectedRoute> <ProtectedPage /> </ProtectedRoute>}
         />
       </Routes>
     </div>

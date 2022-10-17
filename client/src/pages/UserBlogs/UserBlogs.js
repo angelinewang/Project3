@@ -5,7 +5,7 @@ import HTMLReactParser from "html-react-parser";
 import useUser from "../../hooks/useUser";
 
 function UserBlogs() {
-  const { user } = useUser();
+  // const { user } = useUser();
 
   const [userBlogs, setUserBlogs] = useState();
   const { userID } = useParams();
