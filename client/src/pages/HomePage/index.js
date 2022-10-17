@@ -52,6 +52,12 @@ export default function HomePage() {
     }
   };
 
+  const onFilterButton = (e) => {
+    console.log(e.target.value);
+    const thisTag = e.target.value;
+    setTags(tags.filter((tag) => tag === thisTag));
+  };
+
   const onDateSortChange = (e) => {
     console.log(e.target);
     const newBlogs = structuredClone(blogs);
@@ -84,7 +90,9 @@ export default function HomePage() {
                   <ul className="tags">
                     {post.tags.map((tag) => (
                       <li key={tag}>
-                        <button>{tag}</button>
+                        <button value={tag} onClick={onFilterButton}>
+                          {tag}
+                        </button>
                       </li>
                     ))}
                   </ul>
