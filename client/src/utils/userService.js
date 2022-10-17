@@ -1,10 +1,10 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "/api/users/"; // Note: Once deployed this should be updated.
+const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com/api/users/"; // Note: Once deployed this should be updated.
 
 function signup(user) {
   return (
-    fetch(BASE_URL + "/api/users/signup", {
+    fetch(BASE_URL + "signup", {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify(user),
@@ -34,7 +34,7 @@ function login(creds) {
   console.log(creds);
   // debugger;
   //Works for any client-side code
-  return fetch(BASE_URL + "/api/users/login", {
+  return fetch(BASE_URL + "login", {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
     body: JSON.stringify(creds),
@@ -55,7 +55,7 @@ export const updateProfileInfo = async (profileEdit, userID) => {
   try {
     console.log("user service check 2");
     const token = tokenService.getToken();
-    let res = await fetch(`/api/users/${userID}`, {
+    let res = await fetch(BASE_URL + `${userID}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

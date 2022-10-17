@@ -15,7 +15,7 @@ async function getAllBlogs(req, res, next) {
 // ! Blog
 async function getABlog(req, res, next) {
   try {
-    const blog = await Blog.findById(req.params.id).populate("author");
+    const blog = await Blog.findById(req.params.id).populate("image author");
     if (!blog) {
       return res.status(400).json({ error: true, message: "Blog not found." });
     }
@@ -34,6 +34,8 @@ async function getABlog(req, res, next) {
 // ! User
 async function getUserBlog(req, res, next) {
   try {
+    console.log("Reached Backend getUserBlog function");
+
     const user = await User.findById(req.params.id).populate("blogs");
 
     if (!user) {
@@ -51,6 +53,24 @@ async function getUserBlog(req, res, next) {
     }
   }
 }
+
+// async function createBlog(req, res, next) {
+//   let userId = req.user._id;
+//   try {
+//     let filePath = req.file.path;
+//     let currentUser = await User.findById(userId);
+//     const data = req.body;
+//     data.author = userId;
+//     data.image = filePath;
+//     const newBlog = await Blog.create(data);
+//     console.log(newBlog);
+//     currentUser.blogs.push(newBlog._id);
+//     await currentUser.save();
+//     res.json(newBlog);
+//   } catch (error) {
+//     res.status(400).json(error);
+//   }
+// }
 
 async function createBlog(req, res, next) {
   let userId = req.user._id;

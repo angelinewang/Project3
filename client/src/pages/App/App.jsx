@@ -11,7 +11,7 @@ import Profile from "../Profile/Profile";
 import { ProtectedRoute } from "../../utils/route";
 import useUser from "../../hooks/useUser";
 import NavBar from "../../components/NavBar/NavBar";
-import ProtectedPage from "../ProtectedPage";
+// import ProtectedPage from "../ProtectedPage";
 import CreateBlogPage from "../createBlogPage/CreateBlogPage";
 import EditBlogPage from "../EditBlogPage/EditBlogPage";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
