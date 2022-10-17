@@ -24,7 +24,6 @@ function DetailPage() {
     const [isUser, setIsUser] = React.useState(!!blog)
 
     let fetchBlog = () => {
-        // setBlog(blog = "Apple");
         console.log("Reached fetchBlog function!")
         console.log(id)
         getBlog(id).then((res) => {console.log(res); setBlog(res)
@@ -60,29 +59,12 @@ function DetailPage() {
         .then(() => {fetchBlog()})
     }
 
-//Function triggered if the user presses the "like" button 
-//Edits the blog like count in the blog database table
-    // let likeBlog = () => {
-    //     setLike(!like)
-    //     // const id = "634540287131dc0fdff1164b"
-    //     axios.post(`api/blogs/${id}`)
-    //     .then(res => console.log(res.data)) 
-    //     .then(() =>  {MySwal.fire({
-    //             title: <strong>Blog Liked</strong>,
-    //             html: <i>You liked this blog!</i>,
-    //             icon: 'success'
-    //         })
-    //     })
-    //     .then(() => {fetchBlog()})
-    // }
-
     let handleChange = (e) => {
         setComment(`${e.target.value}`)
     }
 
     let handleSubmit = (e) => {
         e.preventDefault()
-        // const id = "6341881d24ab218818a7ceba"
         console.log('comment was submitted!')
         axios.patch(`api/blogs/${id}`, comment)
         .then((res) => {
@@ -113,8 +95,6 @@ function DetailPage() {
                         
                         {isUser ? (
                                 <div className="user-box">
-
-                                {/* <button className="button is-small is-rounded" onClick={() => {likeBlog(blog._id)}}>Like</button> */}
 
                                 <form onSubmit={handleSubmit} className="message is-primary user-only">
                                 <label className="message-header"><strong>Add a comment</strong></label>
@@ -148,6 +128,7 @@ function DetailPage() {
                             <p>This blog was posted at: {blog.createdAt} </p>
                             <p>This blog was updated at: {blog.updatedAt} </p>
                         </div>
+                        
                     </div>
                     </div>
               
