@@ -8,15 +8,10 @@ const userSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, lowercase: true, unique: true },
     password: { type: String, required: true },
-    bio: String,
+    bio: { type: String, maxLength: 100 },
     image: { data: Buffer, contentType: String },
-    socialMediaProfiles: [
-      {
-        platform: String,
-        linkToProfile: String,
-      },
-    ],
-
+    twitter: String,
+    instagram: String,
     blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
   },
   {

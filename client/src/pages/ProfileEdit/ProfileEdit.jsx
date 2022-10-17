@@ -7,16 +7,8 @@ import "./ProfileEdit.css";
 const initialProfileDataObject = {
   bio: "",
   image: "",
-  socialMediaProfiles: [
-    {
-      platform: "twitter",
-      linkToProfile: "",
-    },
-    {
-      platform: "instagram",
-      linkToProfile: "",
-    },
-  ],
+  twitter: "",
+  instagram: "",
 };
 
 function ProfileEdit() {
@@ -26,7 +18,6 @@ function ProfileEdit() {
 
   let navigate = useNavigate();
 
-  // TODO: Upload / edit profile picture
   const [profileEdit, setProfileEdit] = useState(initialProfileDataObject);
   const [imageFile, setImageFile] = useState("");
 
@@ -42,37 +33,66 @@ function ProfileEdit() {
       });
   }, [userID]);
 
-  const handleTwitterChange = (e) => {
-    setProfileEdit({
-      ...profileEdit,
-      socialMediaProfiles: [
-        {
-          platform: "twitter",
-          linkToProfile: e.target.value,
-        },
-        {
-          platform: "instagram",
-          linkToProfile: profileEdit.socialMediaProfiles[1].linkToProfile,
-        },
-      ],
-    });
-  };
+  // console.log({ profileEdit });
 
-  const handleInstagramChange = (e) => {
-    setProfileEdit({
-      ...profileEdit,
-      socialMediaProfiles: [
-        {
-          platform: "twitter",
-          linkToProfile: profileEdit.socialMediaProfiles[0].linkToProfile,
-        },
-        {
-          platform: "instagram",
-          linkToProfile: e.target.value,
-        },
-      ],
-    });
-  };
+  // const handleTwitterChange = (e) => {
+  //   console.log({ twitter: e.target.value });
+  //   setProfileEdit({
+  //     ...profileEdit,
+  //     socialMediaProfiles: [
+  //       // ...profileEdit.socialMediaProfiles,
+  //       { platform: "twitter", linkToProfile: e.target.value },
+  //     ],
+  //     // socialMediaProfiles: [
+  //     //   {
+  //     //     platform: "twitter",
+  //     //     linkToProfile: e.target.value,
+  //     //   },
+  //     //   {
+  //     //     platform: "instagram",
+  //     //     linkToProfile: profileEdit.socialMediaProfiles[1].linkToProfile,
+  //     //   },
+  //     // ],
+  //   });
+  // };
+
+  // const handleInstagramChange = (e) => {
+  //   console.log({ insta: e.target.value });
+
+  //   setProfileEdit({
+  //     ...profileEdit,
+  //     socialMediaProfiles: [
+  //       // ...profileEdit.socialMediaProfiles,
+  //       { platform: "instagram", linkToProfile: e.target.value },
+  //     ],
+  //   });
+  //   // setProfileEdit({
+  //   //   ...profileEdit,
+  //   //   socialMediaProfiles: [
+  //   //     ...profileEdit.socialMediaProfiles,
+  //   //     {
+  //   //       platform: "instagram",
+  //   //       linkToProfile: e.target.value,
+  //   //     },
+  //   //   ],
+  //   // });
+  // };
+
+  // const handleInstagramChange = (e) => {
+  //   setProfileEdit({
+  //     ...profileEdit,
+  //     socialMediaProfiles: [
+  //       {
+  //         platform: "twitter",
+  //         linkToProfile: profileEdit.socialMediaProfiles[0].linkToProfile,
+  //       },
+  //       {
+  //         platform: "instagram",
+  //         linkToProfile: e.target.value,
+  //       },
+  //     ],
+  //   });
+  // };
 
   async function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -88,11 +108,8 @@ function ProfileEdit() {
   }
 
   const handleChange = async (e) => {
-    // console.log(e.target.files[0]);
-
     // If there is an image then we'll want to convert to a Base64
     // - have conditional to test for image
-
     // console.log(e.target); -> to get the name of image in console write: temp1['name']
     if (e.target["name"] === "image") {
       setImageFile(e.target.value);
@@ -113,8 +130,6 @@ function ProfileEdit() {
     e.preventDefault();
 
     updateProfileInfo(profileEdit, userID).then((res) => {
-      console.log("profile info at submit", profileEdit);
-      console.log("testing form data", res);
       navigate(`/profile/${userID}`);
     });
   };
@@ -131,7 +146,20 @@ function ProfileEdit() {
         />
 
         <label>Profile picture:</label>
-        <img src={profileEdit.image} alt="profile avatar" className="profile" />
+        {profileEdit.image ? (
+          <img
+            src={profileEdit.image}
+            alt="profile avatar"
+            className="profile"
+          />
+        ) : (
+          <img
+            src={require("../../images/default-user.png")}
+            alt="profile avatar"
+            className="pfp"
+          />
+        )}
+
         <input
           type="file"
           name="image"
@@ -144,15 +172,17 @@ function ProfileEdit() {
         <input
           type="text"
           name="twitter"
-          value={profileEdit?.socialMediaProfiles[0]?.linkToProfile || ""}
-          onChange={handleTwitterChange}
+          value={profileEdit.twitter}
+          // onChange={(e) => handleTwitterChange(e)}
+          onChange={handleChange}
         />
         <label>Instagram handle:</label>
         <input
           type="text"
           name="instagram"
-          value={profileEdit?.socialMediaProfiles[1]?.linkToProfile || ""}
-          onChange={handleInstagramChange}
+          value={profileEdit.instagram}
+          // onChange={(e) => handleInstagramChange(e)}
+          onChange={handleChange}
         />
         <button>Submit</button>
       </form>
