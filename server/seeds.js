@@ -40,7 +40,7 @@ Blog.insertMany([
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ab ex dolorem quaerat labore velit incidunt amet, adipisci, vero porro possimus nulla veritatis assumenda eius quisquam sed repellat temporibus laboriosam.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ab ex dolorem quaerat labore velit incidunt amet, adipisci, vero porro possimus nulla veritatis assumenda eius quisquam sed repellat temporibus laboriosam.",
     image: "6341871058225b9257903e6e",
-    tags: { tags: ["JavaScript", "How-To"] },
+    tags: ["JavaScript", "How-To"],
     comments: { comments: ["Awesome", "Great"] },
     //18 and 19 need double checking
     author: "6341888e3ef0c4526bc0d224",
@@ -51,7 +51,7 @@ Blog.insertMany([
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ab ex dolorem quaerat labore velit incidunt amet, adipisci, vero porro possimus nulla veritatis assumenda eius quisquam sed repellat temporibus laboriosam.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ab ex dolorem quaerat labore velit incidunt amet, adipisci, vero porro possimus nulla veritatis assumenda eius quisquam sed repellat temporibus laboriosam.",
     image: "6341871058225b9257903e71",
-    tags: { tags: ["Coding", "Tutorial"] },
+    tags: ["Coding", "Tutorial"],
     comments: { comments: ["Beautiful", "Fantastic"] },
     //18 and 19 need double checking
     author: "6341888e3ef0c4526bc0d219",
@@ -62,7 +62,7 @@ Blog.insertMany([
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ab ex dolorem quaerat labore velit incidunt amet, adipisci, vero porro possimus nulla veritatis assumenda eius quisquam sed repellat temporibus laboriosam.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ab ex dolorem quaerat labore velit incidunt amet, adipisci, vero porro possimus nulla veritatis assumenda eius quisquam sed repellat temporibus laboriosam.",
     image: "6341871058225b9257903e73",
-    tags: { tags: ["MongoDB", "Databases"] },
+    tags: ["MongoDB", "Databases"],
     comments: { comments: ["Cool story", "Nice one"] },
     //18 and 19 need double checking
     author: "6341888e3ef0c4526bc0d219",
