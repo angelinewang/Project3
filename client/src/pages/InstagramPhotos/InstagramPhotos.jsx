@@ -1,25 +1,22 @@
 import React from 'react';
 import './InstagramPhotos.css';
-import axios from 'axios';
-import {Link, useParams, useSearchParams} from 'react-router-dom';
+
+import {useParams} from 'react-router-dom';
 
 import {instagramAccessToken, instagramMediaEdge} from "../../utils/instagramService";
 
-
 function InstagramPhotos() {
-
-const [searchParams, setSearchParams] = useSearchParams();
 
 const [photos, setPhotos] = React.useState([]);
 
+const code = useParams().code;
 
-let getAccessToken = (searchParams) => {
-    let code = searchParams.get("code")
+let getAccessToken = (code) => {
     setPhotos(instagramMediaEdge(instagramAccessToken(code).access_token).data)
 }
 
     React.useEffect(() => {
-        getAccessToken()
+        getAccessToken(code)
         // eslint-disable-next-line react-hooks/exhaustive-deps
      },[])
 
