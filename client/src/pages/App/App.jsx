@@ -8,7 +8,7 @@ import DetailPage from "../DetailPage/DetailPage";
 import ImageUpload from "../ImageUpload/ImageUpload";
 import UserBlogs from "../UserBlogs/UserBlogs";
 import Profile from "../Profile/Profile";
-import { ProtectedRoute } from "../../utils/route";
+// import { ProtectedRoute } from "../../utils/route";
 import useUser from "../../hooks/useUser";
 import NavBar from "../../components/NavBar/NavBar";
 // import ProtectedPage from "../ProtectedPage";

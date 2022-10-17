@@ -6,12 +6,6 @@ export default function HomePage() {
   let [blogs, setBlogs] = useState([]);
   let [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    getBlogs();
-    getTags();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getTags]);
-
   console.log(blogs, tags);
 
   async function getBlogs() {
@@ -37,6 +31,12 @@ export default function HomePage() {
       console.log(err);
     }
   }
+
+  useEffect(() => {
+    getBlogs();
+    getTags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onFilterChange = (e) => {
     const thisTag = e.target["name"];
