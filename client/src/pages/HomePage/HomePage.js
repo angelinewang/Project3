@@ -8,6 +8,7 @@ export default function HomePage() {
     getBlogs();
     getTags();
   }, []);
+
   async function getBlogs() {
     try {
       const response = await fetch("/api/blogs");
@@ -45,11 +46,13 @@ export default function HomePage() {
       );
     }
   };
+
   const onFilterButton = (e) => {
     console.log(e.target.value);
     const thisTag = e.target.value;
     setTags(tags.filter((tag) => tag === thisTag));
   };
+
   const onDateSortChange = (e) => {
     console.log(e.target);
     const newBlogs = structuredClone(blogs);
@@ -59,10 +62,12 @@ export default function HomePage() {
       })
     );
   };
+
   const onAlphabetSortChange = (e) => {
     const newBlogs = structuredClone(blogs);
     setBlogs(newBlogs.sort((a, b) => a.title.localeCompare(b.title)));
   };
+
   return (
     <div>
       <h1>HomePage</h1>
@@ -104,6 +109,7 @@ export default function HomePage() {
             onChange={onDateSortChange}
           />
           <label for="latest">Latest</label>
+
           <input
             type="radio"
             id="title"
