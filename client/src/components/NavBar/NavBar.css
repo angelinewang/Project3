@@ -18,7 +18,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px blue solid;
+  /* border: 1px blue solid; */
   padding: 5px;
 }
 
@@ -80,7 +80,7 @@
 .navBar-signup {
   margin-left: 5px;
   /* background-color: #fa9500; */
-  border: 2px solid #fa9500;
+  border: 1px solid #fa9500;
   border-radius: 3px;
   padding: 4px;
 }

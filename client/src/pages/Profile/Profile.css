@@ -1,3 +1,12 @@
+.profile-page {
+  font-family: "Roboto", sans-serif;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  /* display: flex;
+  justify-content: center; */
+}
+
 .pfp {
   /* vertical-align: middle;
   width: 50px;
@@ -17,4 +26,38 @@
 .instagram {
   height: 30px;
   width: 30px;
+}
+
+.profile-card {
+  /* border: 1px solid red; */
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.profile-user-name {
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+.profile-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-btn {
+  border: 1px solid #fa9500;
+  border-radius: 3px;
+  background: none;
+  padding: 5px;
+}
+
+.blogs-num {
+  font-weight: bold;
+}
+
+.profile-hr {
+  margin: 5px 0 10px 0;
 }
