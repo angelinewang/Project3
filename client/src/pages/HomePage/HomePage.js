@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./homepage.css";
-
+import "./HomePage.css";
 export default function HomePage() {
   let [blogs, setBlogs] = useState([]);
   let [tags, setTags] = useState([]);
-
   useEffect(() => {
     getBlogs();
     getTags();
   }, []);
-
-  console.log(blogs, tags);
-
   async function getBlogs() {
     try {
       const response = await fetch("/api/blogs");
@@ -22,7 +17,6 @@ export default function HomePage() {
       console.log(err);
     }
   }
-
   async function getTags() {
     try {
       const response = await fetch("/api/blogs");
@@ -36,7 +30,6 @@ export default function HomePage() {
       console.log(err);
     }
   }
-
   const onFilterChange = (e) => {
     const thisTag = e.target["name"];
     if (e.target.checked) {
@@ -44,7 +37,6 @@ export default function HomePage() {
     } else {
       setTags(tags.filter((tag) => tag !== thisTag));
     }
-
     if (tags.size) {
       setBlogs(
         blogs.filter((blog) => {
@@ -53,7 +45,24 @@ export default function HomePage() {
       );
     }
   };
-
+  const onFilterButton = (e) => {
+    console.log(e.target.value);
+    const thisTag = e.target.value;
+    setTags(tags.filter((tag) => tag === thisTag));
+  };
+  const onDateSortChange = (e) => {
+    console.log(e.target);
+    const newBlogs = structuredClone(blogs);
+    setBlogs(
+      newBlogs.sort(function (a, b) {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      })
+    );
+  };
+  const onAlphabetSortChange = (e) => {
+    const newBlogs = structuredClone(blogs);
+    setBlogs(newBlogs.sort((a, b) => a.title.localeCompare(b.title)));
+  };
   return (
     <div>
       <h1>HomePage</h1>
@@ -61,7 +70,7 @@ export default function HomePage() {
         <main className="blogs-feed">
           {blogs.map((post) =>
             tags.some((el) => post.tags.includes(el)) ? (
-              <article className="article-post">
+              <article className="article-post" key={post._id}>
                 <h2>{post.title}</h2>
                 <img src={post.image} alt={post.title} />
                 <p>{post.description}</p>
@@ -70,8 +79,10 @@ export default function HomePage() {
                   <h2>Tags:</h2>
                   <ul className="tags">
                     {post.tags.map((tag) => (
-                      <li>
-                        <button>{tag}</button>
+                      <li key={tag}>
+                        <button value={tag} onClick={onFilterButton}>
+                          {tag}
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -85,11 +96,22 @@ export default function HomePage() {
         </main>
         <div className="blogs-side">
           <h2>Sort by:</h2>
-          <input type="radio" id="latest" name="filter_option" value="latest" />
+          <input
+            type="radio"
+            id="latest"
+            name="sort"
+            value="latest"
+            onChange={onDateSortChange}
+          />
           <label for="latest">Latest</label>
-          <br />
-          <input type="radio" id="title" name="filter_option" value="title" />
-          <label for="css">Title</label>
+          <input
+            type="radio"
+            id="title"
+            name="sort"
+            value="title"
+            onChange={onAlphabetSortChange}
+          />
+          <label for="title">Title</label>
           <hr />
           <h2>Filter by:</h2>
           {blogs.map((blog) =>
@@ -102,7 +124,6 @@ export default function HomePage() {
                   onChange={onFilterChange}
                   checked={tags.includes(tag)}
                 />
-                {/* <span class="checkmark"></span> */}
               </label>
             ))
           )}
@@ -111,74 +132,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-/*
-function Product(props) {
-  const { product } = props
-  
-  return (
-    <li
-      key={product.id}
-      className="product">
-      <img src={product.image} />
-      <div className="product-details">
-        <header>{product.title}</header>
-        <div className="category">{product.category}</div>
-        <div className="price">{`$${padPrice(product.price)}`}</div>
-      </div>
-    </li>
-  )
-}
-
-function ProductsList(props) {
-  const { products } = props
-  
-  return (
-    <ul className="products">
-      {products.map(product => (
-        <Product product={product} />
-      ))}
-    </ul>
-  )
-}
-
-function App() {
-  const [state, setState] = useState({
-    products: PRODUCTS,
-    filters: new Set(),
-  })
-  
-  const handleFilterChange = useCallback(event => {
-    setState(previousState => {
-      let filters = new Set(previousState.filters)
-      let products = PRODUCTS
-      
-      if (event.target.checked) {
-        filters.add(event.target.value)
-      } else {
-        filters.delete(event.target.value)
-      }
-      
-      if (filters.size) {
-        products = products.filter(product => {
-          return filters.has(product.category)
-        })
-      }
-      
-      return {
-        filters,
-        products,
-      }
-    })
-  }, [setState])
-  
-  return (
-    <main>
-      <ProductFilters 
-        categories={CATEGORIES}
-        onFilterChange={handleFilterChange}/>
-      <ProductsList products={state.products} />
-    </main>
-  )
-}
-*/

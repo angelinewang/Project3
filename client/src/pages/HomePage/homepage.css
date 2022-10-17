@@ -1,0 +1,38 @@
+.main-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: solid 2px red;
+}
+.blogs-side {
+  border: solid 2px blue;
+}
+.blogs-feed {
+  border: solid 2px orange;
+  margin-left: 200px;
+}
+.article-post {
+  border: solid 2px green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  border-radius: 5px;
+  background-color: beige;
+}
+.post-settings {
+  border: solid 2px black;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px grey;
+}
+
+li {
+  list-style: none;
+}

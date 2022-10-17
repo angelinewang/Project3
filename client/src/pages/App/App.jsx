@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import HomePage from "../HomePage/index"
+import HomePage from "../HomePage/HomePage";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import DetailPage from "../DetailPage/DetailPage";
@@ -36,7 +36,12 @@ function App() {
       <Routes>
         <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/blogpost/detail/:id" element={<DetailPage />} />        <Route exact path="/about" element={<AboutPage />} />
+        <Route
+          exact
+          path="/blogpost/detail/:id"
+          element={<DetailPage />}
+        />{" "}
+        <Route exact path="/about" element={<AboutPage />} />
         <Route exact path="/profile/:userID" element={<Profile />} />
         {/* user blogs and profile edit to be a protected route */}
         <Route exact path="/profile/:userID/edit" element={<ProfileEdit />} />
@@ -48,7 +53,6 @@ function App() {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
-
         <Route
           exact
           path="/protected"
