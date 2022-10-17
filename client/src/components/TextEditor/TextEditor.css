@@ -1,33 +1,28 @@
-:root {
-  --main-color: #fa9500;
-  --shades: #ffcb80;
-  --grey: #f2f2f2;
-}
-
 .text-editor {
+  border-top: 2px solid grey;
   border: 1px solid grey;
-  width: 95%;
+  border-radius: 5px;
+  width: 96%;
 }
 
 .menu-bar button {
   font-size: 15px;
-  margin: 5px;
+  margin: 7px;
   outline: none;
   border: none;
   background: none;
+  color: rgb(70,70,70);
   cursor: pointer;
 }
 
 .menu-bar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 3rem;
 }
 
 button.is-active {
-  background: var(--main-color);
-  padding: 5px;
+  background: rgb(197, 197, 197);
+  padding: 3px;
   border-radius: 2px;
 }
 
@@ -35,7 +30,8 @@ button.is-active {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   padding: 10px;
-  background: var(--grey);
+  border-top: 1px solid black;
+  background: rgb(236, 236, 236);
   border-radius: 0 0 5px 5px;
   min-height: 200px;
 }
@@ -44,21 +40,12 @@ button.is-active {
     margin-top: 0.75em;
   }
 
-  .ProseMirror p {
-    color: black;
-  }
-
   .ProseMirror ul,
   .ProseMirror ol {
     padding: 0 1rem;
   }
 
-  .ProseMirror h3 {
-    display: block; 
-    font-size: 1.17em; 
-    margin-top: 0.5em; 
-    margin-bottom: 0.5em; 
-    margin-left: 0; 
-    margin-right: 0; 
-    font-weight: bold;
+
+  .ProseMirror h2 {
+    line-height: 1.1;
   }

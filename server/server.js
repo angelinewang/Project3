@@ -57,7 +57,6 @@ const upload = multer({ storage: storage });
 // Proxy
 app.use(express.static(join(__dirname, "..", "client", "build")));
 app.use("/uploads", express.static("uploads"));
-app.use("/blogpost/detail/uploads", express.static("uploads"));
 // Put API routes here, before the "catch all" route
 
 app.use("/api/users", userRoutes);
