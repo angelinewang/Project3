@@ -16,6 +16,8 @@ import CreateBlogPage from "../createBlogPage/CreateBlogPage";
 import EditBlogPage from "../EditBlogPage/EditBlogPage";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import AboutPage from "../AboutPage/AboutPage";
+import InstagramAuth from "../InstagramAuth/InstagramAuth";
+import InstagramPhotos from "../InstagramPhotos/InstagramPhotos";
 
 function App() {
   const { refreshAuth } = useUser();
@@ -48,7 +50,8 @@ function App() {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
-
+        <Route exact path="/instagram/auth" element={<InstagramAuth />} />
+          <Route exact path="/instagram/photos" element={<InstagramPhotos />} />
         {/* <Route
           exact
           path="/protected"
