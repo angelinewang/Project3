@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useUser from "../../hooks/useUser";
+// import useUser from "../../hooks/useUser";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateProfileInfo } from "../../utils/userService";
 import "./ProfileEdit.css";

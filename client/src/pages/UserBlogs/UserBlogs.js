@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getUserBlog } from "../../utils/blogService";
 import HTMLReactParser from "html-react-parser";
-import useUser from "../../hooks/useUser";
+// import useUser from "../../hooks/useUser";
 
 function UserBlogs() {
   // const { user } = useUser();

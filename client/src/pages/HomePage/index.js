@@ -10,7 +10,7 @@ export default function HomePage() {
     getBlogs();
     getTags();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getTags]);
 
   console.log(blogs, tags);
 
