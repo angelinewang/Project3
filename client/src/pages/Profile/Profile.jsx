@@ -21,37 +21,54 @@ function Profile() {
       const blog = await getUserBlog(userID);
       setBlog(blog);
       console.log("profile data ->", blog);
-      // console.log("blog data", blog.blogs);
     }
     getBlogData();
   }, [userID]);
 
-  // console.log(blog.socialMediaProfiles.linkToProfile);
-  // {blog.socialMediaProfiles.map(social => (
-
-  // ))}
-  console.log('help me smh')
   return (
     <div>
-      <section>
-
+      <section className="profile-page">
         {blog ? (
           <div>
-            <div>
-              {blog.image ? (
-                <img src={blog.image} alt="profile avatar" className="pfp" />
-              ) : null}
-              <p>User: {blog.name}</p>
-              <p>Bio: {blog.bio} </p>
-              <p>Joined: {blog.createdAt.split("T")[0]}</p>
-              <p>Blogs: {blog.blogs.length}</p>
+            <div className="profile-card">
+              <div className="profile-edit">
+                <div className="profile-image">
+                  {blog.image ? (
+                    <img
+                      src={blog.image}
+                      alt="profile avatar"
+                      className="pfp"
+                    />
+                  ) : (
+                    <img
+                      src={require("../../images/default-user.png")}
+                      alt="profile avatar"
+                      className="pfp"
+                    />
+                  )}
+                </div>
+                {blog._id === user._id ? (
+                  <Link to={`/profile/${blog._id}/edit`}>
+                    {" "}
+                    <button className="edit-btn">Edit profile</button>{" "}
+                  </Link>
+                ) : null}
+              </div>
+
+              <div className="profile-info">
+                <h3 className="profile-user-name">{blog.name}</h3>
+                <p>{blog.bio} </p>
+                <p>
+                  {" "}
+                  Blogs: <span className="blogs-num">{blog.blogs.length}</span>
+                </p>
+                <p>Joined: {blog.createdAt.split("T")[0]}</p>
+              </div>
 
               <div>
-                
-                {blog.socialMediaProfiles[0] &&
-                blog.socialMediaProfiles[0]?.linkToProfile?.length ? (
+                {blog.twitter ? (
                   <a
-                    href={`https://www.twitter.com/${blog.socialMediaProfiles[0]?.linkToProfile}`}
+                    href={`https://www.twitter.com/${blog.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -62,9 +79,9 @@ function Profile() {
                     />
                   </a>
                 ) : null}
-                {blog.socialMediaProfiles[1] && blog.socialMediaProfiles[1]?.linkToProfile?.length ? (
+                {blog.instagram ? (
                   <a
-                    href={`https://www.instagram.com/${blog.socialMediaProfiles[1]?.linkToProfile}`}
+                    href={`https://www.instagram.com/${blog.instagram}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -76,23 +93,16 @@ function Profile() {
                   </a>
                 ) : null}
               </div>
-
-              {blog._id === user._id ? (
-                <Link to={`/profile/${blog._id}/edit`}>
-                  {" "}
-                  <button>Edit</button>{" "}
-                </Link>
-              ) : null}
             </div>
-
-            <h2> Blogs by {blog.name}</h2>
+            <hr className="profile-hr" />
+            <h3> Blogs by {blog.name}</h3>
             {blog.blogs
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .slice(0, 3)
               .map((b) => (
                 <div key={b._id}>
                   <Link to={`/blog/${b._id}`}>
-                    <h3>{b.title}</h3>
+                    <h4>{b.title}</h4>
                   </Link>
 
                   <div>{HTMLReactParser(b.description)}</div>
