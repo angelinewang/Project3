@@ -46,6 +46,7 @@ function DetailPage() {
      },[])
 
     let deleteBlog = () => {
+        
         axios.delete(`api/blogs/${id}`)
         .then(res => console.log(res.data)) 
         .then(() =>  {MySwal.fire({
