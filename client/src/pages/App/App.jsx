@@ -57,9 +57,9 @@ function App() {
         <Route exact path="/user" element={<UserBlogs />} />
         <Route exact path="/instagram/auth" element={<InstagramAuth />} />
         {/* <Route path={`/instagram/photos/?code=${useQueryParams()}`} search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} /> */}
-        <Route path={`/instagram/photos/?code=${search.code}`} element={<InstagramPhotos />} />
+        {/* <Route path={`/instagram/photos/?code=${search}`} element={<InstagramPhotos />} /> */}
 
-        {/* <Route path={`/instagram/photos/?code=${search.code}#_`} search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} /> */}
+        <Route path={`/instagram/photos/`} code="AQB6yR79a5eLEqByjiBY0Dtori8BMKoijvLh09PiWhfCDUDs5T3bb5jwxIC1sGnPi4p-QHPuJlnFYBX9nqFSKEHXcL3CR_c1IjLeuvM8m1y-X1ewoEZJ0E63t9mFU5ni1FNhrrBohhmfJpWnAS4ctB867Titac8JrelVyRFep_a17jS_c-kNlS0DaZanUsjunaPYKg6zWb2q_b57_-eTt4rKGBTnHaehPRmbtxyP6QYGLg" element={<InstagramPhotos />} />
 
         <Route exact path="*" element={<Navigate to="/" />} />
 
