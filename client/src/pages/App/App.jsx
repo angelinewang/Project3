@@ -20,13 +20,13 @@ import AboutPage from "../AboutPage/AboutPage";
 import InstagramAuth from "../InstagramAuth/InstagramAuth";
 import InstagramPhotos from "../InstagramPhotos/InstagramPhotos";
 import {useQueryParams, StringParam} from 'use-query-params';
-import {instagramAccessToken, instagramMediaEdge} from "../../utils/instagramService";
+import {instagramAccessToken} from "../../utils/instagramService";
 
 
 function App() {
   const { refreshAuth } = useUser();
 
-  const [search, setSearch] = useQueryParams({code: StringParam})
+  const [search] = useQueryParams({code: StringParam})
 
   console.log(instagramAccessToken(search.code))
   React.useEffect(() => {

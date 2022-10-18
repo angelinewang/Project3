@@ -11,7 +11,7 @@ const getAccessToken = (code) => {
     console.log(code)
     console.log(instagramAccessToken(code))
     instagramAccessToken(code)
-    // setPhotos(instagramMediaEdge(instagramAccessToken(code).access_token).data)
+    setPhotos(instagramMediaEdge(instagramAccessToken(code).access_token).data)
 }
 
     React.useEffect(() => {
