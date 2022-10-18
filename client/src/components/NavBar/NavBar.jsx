@@ -19,7 +19,7 @@ const NavBar = () => {
       <Link
         to={`/profile/${user._id}`}
         className="user-name"
-        style={{ color: "#BCBCBC", textDecoration: "dotted" }}
+        style={{ color: "#BCBCBC" }}
       >
         {user.name}
       </Link>
