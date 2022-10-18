@@ -5,7 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
-import { getBlog } from "../../utils/blogService";
+import { getBlog, updateABlog } from "../../utils/blogService";
 import HTMLReactParser from 'html-react-parser';
 import { removeABlog } from "../../utils/blogService";
 
@@ -15,6 +15,8 @@ function DetailPage() {
     const id = useParams().id
 
     const [blog, setBlog] = React.useState(!!getBlog(id))
+
+let newBlog;
 
     var MySwal = withReactContent(Swal)
 
@@ -62,19 +64,6 @@ function DetailPage() {
 
 //Function triggered if the user presses the "like" button 
 //Edits the blog like count in the blog database table
-    // let likeBlog = () => {
-    //     setLike(!like)
-    //     // const id = "634540287131dc0fdff1164b"
-    //     axios.post(`api/blogs/${id}`)
-    //     .then(res => console.log(res.data)) 
-    //     .then(() =>  {MySwal.fire({
-    //             title: <strong>Blog Liked</strong>,
-    //             html: <i>You liked this blog!</i>,
-    //             icon: 'success'
-    //         })
-    //     })
-    //     .then(() => {fetchBlog()})
-    // }
 
     let handleChange = (e) => {
         setComment(`${e.target.value}`)
@@ -82,9 +71,12 @@ function DetailPage() {
 
     let handleSubmit = (e) => {
         e.preventDefault()
-        // const id = "6341881d24ab218818a7ceba"
+        //This is for commenting not editting
         console.log('comment was submitted!')
-        axios.patch(`api/blogs/${id}`, comment)
+
+        newBlog = blog;
+        newBlog.comments.push(comment)
+        updateABlog(newBlog)
         .then((res) => {
             console.log(res.data)
             fetchBlog()
@@ -118,7 +110,7 @@ function DetailPage() {
 
                                 <form onSubmit={handleSubmit} className="message is-primary user-only">
                                 <label className="message-header"><strong>Add a comment</strong></label>
-                                    <textarea id='comment-input' className="comment-input textarea is-small is-hover" name="comment" value={comment} onChange={handleChange}></textarea>
+                                    <textarea id='comment-input' className="comment-input textarea is-small is-hover" name={newBlog.comments} onChange={handleChange}></textarea>
                                     <button className="add button is-primary" type="Submit" value="Submit">Submit</button>
                                 </form>
 
