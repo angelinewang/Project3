@@ -13,10 +13,6 @@ function Profile() {
   const { userID } = useParams();
 
   useEffect(() => {
-    if (!userID) {
-      return;
-    }
-
     async function getBlogData() {
       const blog = await getUserBlog(userID);
       setBlog(blog);
@@ -47,7 +43,8 @@ function Profile() {
                     />
                   )}
                 </div>
-                {blog._id === user._id ? (
+
+                {user && blog._id === user._id ? (
                   <Link to={`/profile/${blog._id}/edit`}>
                     {" "}
                     <button className="edit-btn">Edit profile</button>{" "}
@@ -95,24 +92,32 @@ function Profile() {
               </div>
             </div>
             <hr className="profile-hr" />
-            <h3> Blogs by {blog.name}</h3>
-            {blog.blogs
-              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-              .slice(0, 3)
-              .map((b) => (
-                <div key={b._id}>
-                  <Link to={`/blog/${b._id}`}>
-                    <h4>{b.title}</h4>
-                  </Link>
+            <section className="selected-blogs">
+              <div className="blogs-title">
+                <h3>{blog.name}'s recent blog posts</h3>
+              </div>
+              <div className="blog-preview">
+                {blog.blogs
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .slice(0, 4)
+                  .map((b) => (
+                    <div className="blog-cards" key={b._id}>
+                      <Link to={`/blogpost/detail/${b._id}`}>
+                        <h4>{b.title}</h4>
+                      </Link>
 
-                  <div>{HTMLReactParser(b.description)}</div>
-                </div>
-              ))}
+                      <div>{HTMLReactParser(b.description)}</div>
+                    </div>
+                  ))}
+              </div>
+            </section>
             <Link to={`/profile/${blog._id}/blogs`}>
-              <p>View more of {blog.name}'s blogs </p>
+              <p>View all blog posts by {blog.name}</p>
             </Link>
           </div>
-        ) : null}
+        ) : (
+          <p>Loading, please wait.</p>
+        )}
       </section>
     </div>
   );

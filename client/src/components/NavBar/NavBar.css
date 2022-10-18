@@ -42,7 +42,6 @@
 
 .navBar a:hover {
   cursor: pointer;
-  text-decoration: underline;
   padding-bottom: 5px;
 }
 
