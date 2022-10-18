@@ -58,6 +58,9 @@ export default function HomePage() {
   return (
     <div>
       <Link to="/instagram/auth">Instagram Auth</Link>
+      <Link to="/instagram/photos?code=AQDRUP3uFrmuPME83ZecHv8iZE7pAk7bcarAB6hebD3ZUbGC46dPzNkUXA7e8K6jY4WZX77uaygwE9mYP85Z8FuCiFMGNaaviVhb-MioE4Ds1FQQg5QZPi5-HZN7Jr4YbfBo6yftrGwMhYy0OxSKUPtm23L-aUTIlHpLBStzjrU56GDTpV-HpaA5Q8USrgoO2eWWjlycJyaqCBJVaW6dscLSxFRDafsGpmAcU1Px006Cjg#_">
+        Instagram Photos
+      </Link>
       <h1>HomePage</h1>
       <div className="main-flex">
         <main className="blogs-feed">
