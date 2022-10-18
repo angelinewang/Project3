@@ -1,8 +1,6 @@
 import React from 'react';
 import './InstagramPhotos.css';
-
-import {useParams} from 'react-router-dom';
-import {useQueryParams, StringParam, BooleanParam} from 'use-query-params';
+import {useQueryParams, StringParam} from 'use-query-params';
 
 import {instagramAccessToken, instagramMediaEdge} from "../../utils/instagramService";
 
