@@ -17,7 +17,7 @@ const getAccessToken = (code) => {
 }
 
     React.useEffect(() => {
-        getAccessToken(search.get('code'))
+        getAccessToken(search.code)
         // eslint-disable-next-line react-hooks/exhaustive-deps
      },[])
 
