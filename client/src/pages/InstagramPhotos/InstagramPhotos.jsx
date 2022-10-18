@@ -1,7 +1,7 @@
 import React from 'react';
 import './InstagramPhotos.css';
 
-import {instagramAccessToken, instagramMediaEdge} from "../../utils/instagramService";
+import {instagramMediaEdge} from "../../utils/instagramService";
 
 function InstagramPhotos(code) {
 
