@@ -174,3 +174,9 @@ input[type=file]::file-selector-button {
     color: #fff;
     cursor: pointer;
 }
+
+.authorization-error {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}

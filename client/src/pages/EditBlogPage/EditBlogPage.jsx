@@ -12,6 +12,8 @@ function EditPage() {
     const user = userService.getUser()
 
     const [blog, setBlog] = useState() 
+    const [contentTouched, setContentTouched] = useState(false)
+
 
     let navigate = useNavigate()
 
@@ -37,7 +39,7 @@ function EditPage() {
     if (blog) {
     titleIsValid = blog.title.length > 25
     descriptionIsValid = blog.description.length > 100
-    contentIsValid = blog.content.length > 1000
+    contentIsValid = blog.content.length > 250
     }
 
 
@@ -99,8 +101,8 @@ function EditPage() {
         {!descriptionIsValid ? <p className='error_message'>Please provide a valid description (min. 100 characters)</p>: <></> }
 
         <label>Content <span>*</span></label>
-        <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content}/>
-        {!contentIsValid ? <p className='error_message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
+        <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content} setContentTouched={setContentTouched}/>
+        {!contentIsValid ? <p className='error_message'>Please provide a valid content (min. 250 characters)</p> : <></> }
 
         <div className="button_container">
         <button className="cancel_button" onClick={handleCancel} >CANCEL</button>
@@ -109,7 +111,9 @@ function EditPage() {
       </form>
       </>
       : 
-      <p>You Do Not Have the Authorization to Edit This Blog</p>): <p>Blog does not exist</p> : <p>Only Logged In Users Can Edit Their Blogs</p>}
+      <p className='authorization_error'>YOU DO NOT HAVE THE AUTHORIZATION TO EDIT THIS BLOG</p>): 
+      <p className='authorization_error'>BLOG DOES NOT EXIST</p> 
+      : <p className='authorization_error'>YOU ARE NOT LOGGED IN</p>}
     </>
   )
 }
