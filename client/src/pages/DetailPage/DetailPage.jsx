@@ -1,6 +1,6 @@
 import React from 'react';
 import './DetailPage.css';
-import axios from 'axios';
+// import axios from 'axios';
 import {Link, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
