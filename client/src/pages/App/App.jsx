@@ -19,14 +19,14 @@ import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import AboutPage from "../AboutPage/AboutPage";
 import InstagramAuth from "../InstagramAuth/InstagramAuth";
 import InstagramPhotos from "../InstagramPhotos/InstagramPhotos";
-import {useQueryParams, StringParam} from 'use-query-params';
+// import {useQueryParams, StringParam} from 'use-query-params';
 // import {instagramAccessToken} from "../../utils/instagramService";
 
 
 function App() {
   const { refreshAuth } = useUser();
 
-  const [search] = useQueryParams({code: StringParam})
+  // const [search] = useQueryParams({code: StringParam})
 
   React.useEffect(() => {
     // async function run() {
@@ -59,7 +59,7 @@ function App() {
         {/* <Route path={`/instagram/photos/?code=${useQueryParams()}`} search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} /> */}
         {/* <Route path={`/instagram/photos/?code=${search}`} element={<InstagramPhotos />} /> */}
 
-        <Route path={`/instagram/photos/`} code="AQB6yR79a5eLEqByjiBY0Dtori8BMKoijvLh09PiWhfCDUDs5T3bb5jwxIC1sGnPi4p-QHPuJlnFYBX9nqFSKEHXcL3CR_c1IjLeuvM8m1y-X1ewoEZJ0E63t9mFU5ni1FNhrrBohhmfJpWnAS4ctB867Titac8JrelVyRFep_a17jS_c-kNlS0DaZanUsjunaPYKg6zWb2q_b57_-eTt4rKGBTnHaehPRmbtxyP6QYGLg" element={<InstagramPhotos />} />
+        <Route path={`/instagram/photos/`} code="AQB6yR79a5eLEqByjiBY0Dtori8BMKoijvLh09PiWhfCDUDs5T3bb5jwxIC1sGnPi4p-QHPuJlnFYBX9nqFSKEHXcL3CR_c1IjLeuvM8m1y-X1ewoEZJ0E63t9mFU5ni1FNhrrBohhmfJpWnAS4ctB867Titac8JrelVyRFep_a17jS_c-kNlS0DaZanUsjunaPYKg6zWb2q_b57_-eTt4rKGBTnHaehPRmbtxyP6QYGLggit " element={<InstagramPhotos />} />
 
         <Route exact path="*" element={<Navigate to="/" />} />
 
