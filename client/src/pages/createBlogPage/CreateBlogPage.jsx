@@ -28,7 +28,6 @@ function CreateBlogPage() {
   let titleIsValid = blog.title.trim() !== "" && blog.title.length > 25
   let descriptionIsValid = blog.description.trim() !== "" && blog.description.length > 100
   let contentIsValid = blog.content.trim() !== "" && blog.content.length > 1000
-  // let imageIsValid = blog.image !== undefined
 
 
   let handleChange = (e) => {
@@ -119,7 +118,7 @@ function CreateBlogPage() {
         {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
 
         <div className='image-input-container'>
-          <label>Upload Image <span>*</span></label>
+          <label>Upload Image</label>
           <input type="file" name="image" className='image-input' onChange={(e) => setBlog(state => ({ ...state, image:  e.target.files[0]}))} />
         </div>
 

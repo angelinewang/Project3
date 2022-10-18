@@ -78,7 +78,7 @@ function EditPage() {
         user._id === blog.author._id ?
         <>
         <form className='form_container' onSubmit={handleSubmit}>
-
+        <h2 className='main_header'>Edit Blog</h2>
         <label>Title <span>*</span></label>
         <input name='title' value={blog.title} onChange={handleChange} maxLength={50}/>
         {!titleIsValid ? <p className='error_message'>Please provide a valid title (min. 25 characters)</p>: <></>}
