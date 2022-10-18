@@ -21,7 +21,7 @@ export const instagramAccessToken = async (authCode) => {
         //Fill in "redirect_uri"
       }),
     });
-
+    console.log(res);
     return res.json();
     //Returned user-id and access-token will be used to query the user node
   } catch (error) {
