@@ -20,7 +20,7 @@ import AboutPage from "../AboutPage/AboutPage";
 import InstagramAuth from "../InstagramAuth/InstagramAuth";
 import InstagramPhotos from "../InstagramPhotos/InstagramPhotos";
 import {useQueryParams, StringParam} from 'use-query-params';
-import {instagramAccessToken} from "../../utils/instagramService";
+// import {instagramAccessToken} from "../../utils/instagramService";
 
 
 function App() {
@@ -42,8 +42,6 @@ function App() {
         <NavBar />
       </header>
       <Routes>
-
-        <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/blogpost/detail/:id" element={<DetailPage />} />        <Route exact path="/about" element={<AboutPage />} />
         <Route exact path="/profile/:userID" element={<Profile />} />
@@ -58,7 +56,9 @@ function App() {
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
         <Route exact path="/instagram/auth" element={<InstagramAuth />} />
-        <Route path="/instagram/photos/" search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} />
+        <Route path="/instagram/photos/:code?" search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} />
+                <Route exact path="*" element={<Navigate to="/" />} />
+
         {/* 
         path="/instagram/photos" search="" hash="" 
         <Route
