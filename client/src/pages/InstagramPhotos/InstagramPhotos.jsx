@@ -37,6 +37,7 @@ async function instagramAccessToken () {
     //     Authorization: "Bearer " + token,
     //   },
       body: JSON.stringify({
+        mode: "no-cors",
         client_id: `6002320329798591`,
         grant_type: `authorization_code`,
         client_secret: `f3a3601c3603c3ec30a8c73939de20e4`,
