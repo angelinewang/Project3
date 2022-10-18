@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes} from "react-router-dom";
+
 import HomePage from "../HomePage/index"
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
@@ -18,10 +19,16 @@ import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import AboutPage from "../AboutPage/AboutPage";
 import InstagramAuth from "../InstagramAuth/InstagramAuth";
 import InstagramPhotos from "../InstagramPhotos/InstagramPhotos";
+import {useQueryParams, StringParam} from 'use-query-params';
+import {instagramAccessToken, instagramMediaEdge} from "../../utils/instagramService";
+
 
 function App() {
   const { refreshAuth } = useUser();
 
+  const [search, setSearch] = useQueryParams({code: StringParam})
+
+  console.log(instagramAccessToken(search.code))
   React.useEffect(() => {
     // async function run() {
     refreshAuth();
@@ -36,6 +43,7 @@ function App() {
         <NavBar />
       </header>
       <Routes>
+
         <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/blogpost/detail/:id" element={<DetailPage />} />        <Route exact path="/about" element={<AboutPage />} />
@@ -51,13 +59,15 @@ function App() {
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
         <Route exact path="/instagram/auth" element={<InstagramAuth />} />
-        <Route path="/instagram/photos" search="" hash="" element={<InstagramPhotos />} />
-        {/* <Route
+        <Route exact path="/instagram/photos" props={search.code ? search.code : null} search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} />
+        {/* 
+        path="/instagram/photos" search="" hash="" 
+        <Route
           exact
           path="/protected"
           element={<ProtectedRoute> <ProtectedPage /> </ProtectedRoute>}
         /> */}
-        
+
       </Routes>
     </div>
   );

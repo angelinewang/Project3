@@ -1,24 +1,23 @@
 import React from 'react';
 import './InstagramPhotos.css';
-import {useQueryParams, StringParam} from 'use-query-params';
 
 import {instagramAccessToken, instagramMediaEdge} from "../../utils/instagramService";
 
-function InstagramPhotos() {
+function InstagramPhotos(code) {
 
 const [photos, setPhotos] = React.useState([]);
 
-const [search
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   ] = useQueryParams({code: StringParam})
+
 
 const getAccessToken = (code) => {
-    console.log(search.code)
-    setPhotos(instagramMediaEdge(instagramAccessToken(code).access_token).data)
+    console.log(code)
+    console.log(instagramAccessToken(code))
+    instagramAccessToken(code)
+    // setPhotos(instagramMediaEdge(instagramAccessToken(code).access_token).data)
 }
 
     React.useEffect(() => {
-        getAccessToken(search.code)
+        getAccessToken(code)
         // eslint-disable-next-line react-hooks/exhaustive-deps
      },[])
 

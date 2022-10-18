@@ -15,7 +15,7 @@ export const instagramAccessToken = async (authCode) => {
         grant_type: `authorization_code`,
         client_secret: `f3a3601c3603c3ec30a8c73939de20e4`,
         scope: ["user_media"],
-        redirect_uri: `https://celebrated-salmiakki-a8925d.netlify.app/instagram/auth`,
+        redirect_uri: `https://localhost:3000/`,
         code: { authCode },
         //Fill in "code"
         //Fill in "redirect_uri"
