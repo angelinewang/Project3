@@ -7,8 +7,6 @@ function InstagramPhotos(code) {
 
 const [photos, setPhotos] = React.useState([]);
 
-
-
 const getAccessToken = (code) => {
     console.log(code)
     console.log(instagramAccessToken(code))
