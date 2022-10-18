@@ -51,12 +51,13 @@ function App() {
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
         <Route exact path="/instagram/auth" element={<InstagramAuth />} />
-        <Route path="/instagram/photos:code" element={<InstagramPhotos />} />
+        <Route path="/instagram/photos" search="" element={<InstagramPhotos />} />
         {/* <Route
           exact
           path="/protected"
           element={<ProtectedRoute> <ProtectedPage /> </ProtectedRoute>}
         /> */}
+        
       </Routes>
     </div>
   );
