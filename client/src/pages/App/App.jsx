@@ -56,8 +56,8 @@ function App() {
         <Route exact path="/upload" element={<ImageUpload />} />
         <Route exact path="/user" element={<UserBlogs />} />
         <Route exact path="/instagram/auth" element={<InstagramAuth />} />
-        <Route path="/instagram/photos/?code" search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} />
-                <Route exact path="*" element={<Navigate to="/" />} />
+        <Route path="/instagram/photos/?code=:code#_" search={`?code=${search.code ? search.code : null}`} element={<InstagramPhotos />} />
+        <Route exact path="*" element={<Navigate to="/" />} />
 
         {/* 
         path="/instagram/photos" search="" hash="" 
