@@ -13,6 +13,7 @@ const [search
    ] = useQueryParams({code: StringParam})
 
 const getAccessToken = (code) => {
+    console.log(search.code)
     setPhotos(instagramMediaEdge(instagramAccessToken(code).access_token).data)
 }
 
