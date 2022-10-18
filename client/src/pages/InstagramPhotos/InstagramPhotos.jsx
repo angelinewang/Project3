@@ -16,7 +16,6 @@ const [photos, setPhotos] = React.useState([]);
 //     setPhotos(images)
 // }   
 
-
 //   async function getBlogs() {
 //     try {
 //       const response = await fetch("/api/blogs");
