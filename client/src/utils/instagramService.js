@@ -16,7 +16,7 @@ export const instagramAccessToken = async (authCode) => {
         client_secret: `f3a3601c3603c3ec30a8c73939de20e4`,
         scope: ["user_media"],
         redirect_uri: `https://celebrated-salmiakki-a8925d.netlify.app/instagram/photos/`,
-        code: { authCode },
+        code: "AQB8CQ2MX2QBVh8xHKyJyNy8vsmFbkIF5xtYSETwQqkALtRf5FykbMiw1zbmW_hCGzX9w1Z_LL4ZX8XY0x2pCB5VAJWeYZi1_Hk21UQtlGsG0QYTPo50ttIB_fs_VUAoNipAqWpl1PSx_KOKagMzS5VhYX_nQkNEPIVc8pYwWfdU1NzUhOWf_At9yRAjiiQZF2d6K3ip8mDcZgLGg0kNUuYqS2owaRW4caRpq8ShlqzC3w",
         //Fill in "code"
         //Fill in "redirect_uri"
       }),
