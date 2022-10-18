@@ -27,7 +27,7 @@ function CreateBlogPage() {
 
   let titleIsValid = blog.title.trim() !== "" && blog.title.length > 25
   let descriptionIsValid = blog.description.trim() !== "" && blog.description.length > 100
-  let contentIsValid = blog.content.trim() !== "" && blog.content.length > 1000
+  let contentIsValid = blog.content.trim() !== "" && blog.content.length > 250
 
 
   let handleChange = (e) => {
@@ -115,7 +115,7 @@ function CreateBlogPage() {
 
         <label>Content <span>*</span></label>
         <TextEditor  setBlog={setBlog} initContValue='' setContentTouched={setContentTouched} />
-        {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 1000 characters)</p> : <></> }
+        {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 250 characters)</p> : <></> }
 
         <div className='image-input-container'>
           <label>Upload Image</label>
@@ -127,7 +127,7 @@ function CreateBlogPage() {
           <button type='Submit' disabled={!formIsValid} className={!formIsValid ? 'not-allowed': 'allowed'}>CREATE NEW BLOG</button>
         </div>
 
-      </form>: <p>You are not logged in</p> }
+      </form>: <p className='authorization-error'>YOU ARE NOT LOGGED IN</p> }
     </>
   )
 }
