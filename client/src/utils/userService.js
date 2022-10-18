@@ -1,6 +1,6 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "/api/users/"; // Note: Once deployed this should be updated.
+const BASE_URL = "https://blogging-platform-365219.ew.r.appspot.com/api/users/"; // Note: Once deployed this should be updated.
 
 function signup(user) {
   return (
