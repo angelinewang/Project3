@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./homepage.css";
+import { instagramAccessToken } from "../../utils/instagramService";
 
 export default function HomePage() {
   let [blogs, setBlogs] = useState([]);
   let [tags, setTags] = useState([]);
 
   console.log(blogs, tags);
+  console.log(
+    instagramAccessToken(
+      "AQAO6nr2koqjT_UWGBwvFSMcRpWQv1GEdXbixtSP2le1kqCx5F5hzBD-YTCU6VRB5pJA_aBY-yy2tN9_yGOA6HcTzw9EYbnmh6LKgu6HsMPX_lyYBwLojJLqG4eTXWLJtsv7ELkWn2HzHiNy1yfsUC6sR_WU0W453JgBKOS2QD6nh71qioPteNPN1UjtEvnxjnf8usfmWzYs5e5LQpr8K-dkIDvQtQaAVtba5Nl1-XVVHg"
+    )
+  );
 
   async function getBlogs() {
     try {

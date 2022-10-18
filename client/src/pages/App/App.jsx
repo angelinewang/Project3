@@ -28,7 +28,6 @@ function App() {
 
   const [search] = useQueryParams({code: StringParam})
 
-  console.log(instagramAccessToken(search.code))
   React.useEffect(() => {
     // async function run() {
     refreshAuth();
