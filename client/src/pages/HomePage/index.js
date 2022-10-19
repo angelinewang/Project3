@@ -35,7 +35,7 @@ export default function HomePage() {
           console.log(newTag);
           newTag.pop();
           console.log(newTag);
-          const realTag = newTag.join().replace(",", "");
+          const realTag = newTag.join().replace(/,/g, "");
           console.log(realTag);
           tags.push(realTag);
           console.log(tags);
