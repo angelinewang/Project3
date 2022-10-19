@@ -12,13 +12,15 @@ function Profile() {
 
   const userID = useParams().userID;
 
+  async function getBlogData() {
+  const blog = getUserBlog(userID);
+  setBlog(blog);
+  console.log("profile data ->", blog);
+  }
+
   useEffect(() => {
-    // async function getBlogData() {
-      const blog = getUserBlog(userID);
-      setBlog(blog);
-      console.log("profile data ->", blog);
-    // }
-    // getBlogData();
+    getBlogData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
 
   return (
