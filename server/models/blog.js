@@ -4,10 +4,6 @@ const commentSchema = new mongoose.Schema({
   comments: [String],
 });
 
-const tagSchema = new mongoose.Schema({
-  tags: [String],
-});
-
 const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
