@@ -22,23 +22,29 @@ function DetailPage() {
     const [isAuthor, setIsAuthor] = React.useState(!!TokenService.getUserFromToken())
     const [isUser, setIsUser] = React.useState(!!blog)
 
-    let fetchBlog = () => {
+        async function fetchBlog() {
         // setBlog(blog = "Apple");
         console.log("Reached fetchBlog function!")
         console.log(id)
-        getBlog(id).then((res) => {console.log(res); setBlog(res)
-        if(TokenService.getUserFromToken()._id) {
+        const blog = await getBlog(id)
+
+        setBlog(blog)
+
+        const user = await TokenService.getUserFromToken()
+        
+        if(user._id) {
             setIsUser(true)
             if(blog.author) {
-                console.log(TokenService.getUserFromToken()._id)
+                console.log(user._id)
                 console.log(blog.author._id)
-                if(TokenService.getUserFromToken()._id === blog.author._id) {
+                if(user._id === blog.author._id) {
                     setIsAuthor(true)
                 }
+                else return
             }
-           
+        else return
     }
-        })
+        else return
 }
 
     React.useEffect(() => {
