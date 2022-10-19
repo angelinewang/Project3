@@ -148,19 +148,21 @@ export default function HomePage() {
           <label for="title">Title</label>
           <hr />
           <h2>Filter by:</h2>
-          {blogs.map((blog) =>
-            blog.tags.map((tag) => (
-              <label class="container">
-                {tag}
-                <input
-                  type="checkbox"
-                  name={tag}
-                  onChange={onFilterChange}
-                  checked={tags.includes(tag)}
-                />
-              </label>
-            ))
-          )}
+          {blogs.tags
+            ? blogs.map((blog) =>
+                blog.tags.map((tag) => (
+                  <label class="container">
+                    {tag}
+                    <input
+                      type="checkbox"
+                      name={tag}
+                      onChange={onFilterChange}
+                      checked={tags.includes(tag)}
+                    />
+                  </label>
+                ))
+              )
+            : null}
         </div>
       </div>
     </div>
