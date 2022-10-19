@@ -38,6 +38,8 @@ export default function HomePage() {
           const realTag = newTag.join().replace(/,/g, "");
           console.log(realTag);
           tags.push(realTag);
+
+          tag = realTag;
           console.log(tags);
         });
 
