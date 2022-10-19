@@ -10,19 +10,17 @@ function Profile() {
 
   const [blog, setBlog] = useState();
 
-  const { userID } = useParams();
+  const userID = useParams().userID;
+
+  async function getBlogData() {
+  const blog = getUserBlog(userID);
+  setBlog(blog);
+  console.log("profile data ->", blog);
+  }
 
   useEffect(() => {
-    if (!userID) {
-      return;
-    }
-
-    async function getBlogData() {
-      const blog = await getUserBlog(userID);
-      setBlog(blog);
-      console.log("profile data ->", blog);
-    }
     getBlogData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
 
   return (
@@ -47,7 +45,8 @@ function Profile() {
                     />
                   )}
                 </div>
-                {blog._id === user._id ? (
+
+                {user && blog._id === user._id ? (
                   <Link to={`/profile/${blog._id}/edit`}>
                     {" "}
                     <button className="edit-btn">Edit profile</button>{" "}
@@ -95,24 +94,50 @@ function Profile() {
               </div>
             </div>
             <hr className="profile-hr" />
-            <h3> Blogs by {blog.name}</h3>
-            {blog.blogs
-              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-              .slice(0, 3)
-              .map((b) => (
-                <div key={b._id}>
-                  <Link to={`/blog/${b._id}`}>
-                    <h4>{b.title}</h4>
-                  </Link>
+            <section className="selected-blogs">
+              <div className="blogs-title">
+                <h3>{blog.name}'s recent blog posts</h3>
+              </div>
+              <div className="blog-preview">
+                {blog.blogs
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .slice(0, 4)
+                  .map((b) => (
+                    <div className="blog-cards" key={b._id}>
+                      <div className="blog-title">
+                        <Link
+                          to={`/blogpost/detail/${b._id}`}
+                          style={{ color: "black" }}
+                        >
+                          <h4>{b.title}</h4>
+                        </Link>
+                      </div>
 
-                  <div>{HTMLReactParser(b.description)}</div>
-                </div>
-              ))}
-            <Link to={`/profile/${blog._id}/blogs`}>
-              <p>View more of {blog.name}'s blogs </p>
-            </Link>
+                      <div className="blog-description">
+                        {HTMLReactParser(b.description)}...{" "}
+                        <Link
+                          to={`/blogpost/detail/${b._id}`}
+                          style={{ color: "#fa9500" }}
+                        >
+                          Read more
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </section>
+            <div className="user-blog-link">
+              <Link
+                to={`/profile/${blog._id}/blogs`}
+                style={{ color: "black" }}
+              >
+                <p>View all blog posts by {blog.name} →</p>
+              </Link>
+            </div>
           </div>
-        ) : null}
+        ) : (
+          <p>Loading, please wait.</p>
+        )}
       </section>
     </div>
   );

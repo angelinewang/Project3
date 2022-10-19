@@ -1,24 +1,9 @@
-/* .NavBar {
-  display: flex;
-  justify-content: center;
-  margin: 0 0 20px;
-}
-
-.NavBar-logout {
-  margin: 0 10px;
-}
-
-.NavBar-welcome {
-  color: grey;
-} */
-
 /* Logged in user */
 .navBar {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* border: 1px blue solid; */
   padding: 5px;
 }
 
@@ -37,12 +22,10 @@
 .navBar a {
   text-decoration: none;
   text-transform: uppercase;
-  /* color: #bcbcbc; */
 }
 
 .navBar a:hover {
   cursor: pointer;
-  text-decoration: underline;
   padding-bottom: 5px;
 }
 
@@ -50,37 +33,47 @@
 .navBar-login,
 .navBar-signup {
   font-family: "Roboto", sans-serif;
+  font-size: 16pt;
 }
 
 .blen {
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 50px;
+  margin-right: 50px;
   font-family: "Space Mono", monospace;
-  font-size: 24pt;
+  font-size: 26pt;
 }
 
 .navBar-left {
   display: flex;
 }
 
-.about {
-  margin-right: 5px;
-}
-
 .create-blog {
   margin-left: 5px;
+  color: #BCBCBC;
+  font-weight: normal;
 }
 
 /* Logged out/non-user: */
 
 .navBar-login {
   margin-right: 5px;
+  font-size: 16pt;
 }
 
 .navBar-signup {
   margin-left: 5px;
-  /* background-color: #fa9500; */
   border: 1px solid #fa9500;
   border-radius: 3px;
   padding: 4px;
+  font-size: 16pt;
+}
+
+.user-name,
+.navBar-logout,
+.navBar-login,
+.navBar-signup,
+.create-blog {
+  font-size: 16pt;
+  color: #BCBCBC;
+  font-weight: normal;
 }

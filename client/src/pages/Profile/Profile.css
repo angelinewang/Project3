@@ -52,6 +52,7 @@
   border-radius: 3px;
   background: none;
   padding: 5px;
+  font-family: "Roboto", sans-serif;
 }
 
 .blogs-num {
@@ -61,3 +62,51 @@
 .profile-hr {
   margin: 5px 0 10px 0;
 }
+
+/* Blogs section */
+
+.blog-cards {
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.blog-preview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
+}
+
+.blogs-title {
+  font-size: 18pt;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.blog-title h4 {
+  font-size: 14pt;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.blog-description {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.user-blog-link {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.read-more {
+  color: #fa9500;
+}
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 992px) {}
+
+@media only screen and (min-width: 1200px) {}

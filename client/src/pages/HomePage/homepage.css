@@ -1,0 +1,96 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.homepage-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.homepage-button {
+    background-color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin: 2px 5px;
+    transition: 0.2s;
+    text-decoration: underline;
+}
+
+.homepage-button:hover,
+.user-details:hover {
+    background-color: #dbdbdb;
+}
+
+.user-details {
+    display: flex;
+    justify-content: left;
+    color: orange;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-details img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user-details-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.blogs-side {
+    border: solid 2px #dbdbdb;
+    margin-right: 10%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.blogs-feed {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.article-post {
+    border: solid 2px #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.post-settings {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+li {
+    list-style: none;
+}
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 992px) {}
+
+@media only screen and (min-width: 1200px) {}
