@@ -489,7 +489,7 @@ const [user, setUser] = React.useState(null)
     )
 ```
 
-#### 3.Managing Merge Conflicts 
+#### 3. Managing Merge Conflicts 
 
 This project was the first time I had to deal with a large amount of team synchronisation. And it was fun to work with the git necessary and also managing and resolving conflicts through VSCode. I'm happy with my level of familiarity with the VSCode interface for resolving merge conflicts now. Also, I had more time to familiarise myself with the process of fetching from a remote upstream and rebasing. I got good at using the terminal commands to direct the process of rebasing the fetched code with the local code through commands like aborting, continuing, etc. I had long struggled with the way this process of displayed on Git Bash. 
 
