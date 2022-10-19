@@ -32,8 +32,9 @@ export default function HomePage() {
           const newTag = Object.keys(tag).reduce(function (res, v) {
             return res.concat(tag[v]);
           }, []);
-          console.log(newTag);
-          tags.push(newTag);
+          const finalTag = newTag.join();
+          console.log(finalTag);
+          tags.push(finalTag);
           console.log(tags);
         });
       });
