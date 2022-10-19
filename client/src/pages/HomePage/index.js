@@ -86,55 +86,61 @@ export default function HomePage() {
     <div>
       <div className="main-flex">
         <main className="blogs-feed">
-          {blogs.map((post) =>
-            tags.some((el) => post.tags.includes(el)) ? (
-              <article className="article-post" key={post._id}>
-                <Link to={`/profile/${post.author._id}`}>
-                  <div className="user-details">
-                    <img
-                      src={
-                        post.author.image
-                          ? post.author.image
-                          : require("../../images/default-user.png")
-                      }
-                      alt="profile pic"
-                    />
-                    <div className="user-details-2">
-                      <p>{post.author.name}</p>
-                      <p>Joined: {post.author.createdAt.substring(0, 10)}</p>
-                    </div>
-                  </div>
-                </Link>
+          {tags
+            ? blogs.map((post) =>
+                tags.some((el) => post.tags.includes(el)) ? (
+                  <article className="article-post" key={post._id}>
+                    <Link to={`/profile/${post.author._id}`}>
+                      <div className="user-details">
+                        <img
+                          src={
+                            post.author.image
+                              ? post.author.image
+                              : require("../../images/default-user.png")
+                          }
+                          alt="profile pic"
+                        />
+                        <div className="user-details-2">
+                          <p>{post.author.name}</p>
+                          <p>
+                            Joined: {post.author.createdAt.substring(0, 10)}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
 
-                <h2 className="homepage-title">{post.title}</h2>
-                {post.image ? <img src={post.image} alt={post.title} /> : null}
-                <p>{post.description}</p>
-                <div className="post-settings">
-                  <p>
-                    Posted on: {post.createdAt.substring(0, 10)}, at{" "}
-                    {post.createdAt.substring(12, 16)}
-                  </p>
-                  <p>Tags:</p>
-                  <ul className="tags">
-                    {post.tags.map((tag) => (
-                      <li key={tag}>
-                        <button
-                          className="homepage-button"
-                          value={tag}
-                          onClick={onFilterButton}
-                        >
-                          {tag}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link to={`/blogpost/detail/${post._id}`}>
-                    <button className="homepage-button">Read on</button>
-                  </Link>
-                </div>
-              </article>
-            ) : null
-          )}
+                    <h2 className="homepage-title">{post.title}</h2>
+                    {post.image ? (
+                      <img src={post.image} alt={post.title} />
+                    ) : null}
+                    <p>{post.description}</p>
+                    <div className="post-settings">
+                      <p>
+                        Posted on: {post.createdAt.substring(0, 10)}, at{" "}
+                        {post.createdAt.substring(12, 16)}
+                      </p>
+                      <p>Tags:</p>
+                      <ul className="tags">
+                        {post.tags.map((tag) => (
+                          <li key={tag}>
+                            <button
+                              className="homepage-button"
+                              value={tag}
+                              onClick={onFilterButton}
+                            >
+                              {tag}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link to={`/blogpost/detail/${post._id}`}>
+                        <button className="homepage-button">Read on</button>
+                      </Link>
+                    </div>
+                  </article>
+                ) : null
+              )
+            : null}
         </main>
         <div className="blogs-side">
           <h2>Sort by:</h2>
@@ -157,20 +163,18 @@ export default function HomePage() {
           <label for="title">Title</label>
           <hr />
           <h2>Filter by:</h2>
-          {blogs.tags
-            ? blogs.map((blog) =>
-                blog.tags.map((tag) => (
-                  <label class="container">
-                    {tag}
-                    <input
-                      type="checkbox"
-                      name={tag}
-                      onChange={onFilterChange}
-                      checked={tags.includes(tag)}
-                    />
-                  </label>
-                ))
-              )
+          {tags
+            ? tags.map((tag) => (
+                <label class="container">
+                  {tag}
+                  <input
+                    type="checkbox"
+                    name={tag}
+                    onChange={onFilterChange}
+                    checked={tags.includes(tag)}
+                  />
+                </label>
+              ))
             : null}
         </div>
       </div>
