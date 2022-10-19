@@ -19,7 +19,7 @@ function DetailPage() {
     // const [comment, setComment] = React.useState(!!blog)
 
     const [isAuthor, setIsAuthor] = React.useState(!!TokenService.getUserFromToken())
-    const [isUser, setIsUser] = React.useState(!!blog)
+    const [user, setUser] = React.useState(!!blog)
 
         async function fetchBlog() {
         // setBlog(blog = "Apple");
@@ -29,21 +29,11 @@ function DetailPage() {
 
         setBlog(blog)
 
-        const user = await TokenService.getUserFromToken()
-        
-        if(user._id) {
-            setIsUser(true)
-            if(blog.author) {
-                console.log(user._id)
-                console.log(blog.author._id)
-                if(user._id === blog.author._id) {
-                    setIsAuthor(true)
-                }
-                else return
-            }
-        else return
-    }
-        else return
+      
+            setUser(TokenService.getUserFromToken())
+
+            setIsAuthor(blog.author._id === user._id)
+
 }
 
     React.useEffect(() => {
@@ -103,9 +93,9 @@ function DetailPage() {
                         <p><strong>Tags:</strong></p>
                         {blog.tags ? ( <ul className="tags"><div className="tags-container"><div className="tags-box">{blog.tags.map((tag) => (<li className="tag" id="tag" key={tag}>{tag}</li>))}</div></div></ul>) : null}
                         <p><strong>Comments:</strong></p>
-                        {blog.comments ? ( <ul className="comments">{blog.comments[0]?.comments.map((comment) => (<li className="message is-dark comment" key={comment}>{comment}</li>))} </ul>) : null}
+                        {blog.comments ? ( <ul className="comments">{blog.comments.map((comment) => (<li className="message is-dark comment" key={comment}>{comment}</li>))} </ul>) : null}
                         
-                        {isUser ? (
+                        {user ? (
                                 <div className="user-box">
 
                                 {/* <button className="button is-small is-rounded" onClick={() => {likeBlog(blog._id)}}>Like</button> */}
