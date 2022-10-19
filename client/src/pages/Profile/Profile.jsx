@@ -13,7 +13,7 @@ function Profile() {
   const userID = useParams().userID;
 
   async function getBlogData() {
-  const blog = getUserBlog(userID);
+  const blog = await getUserBlog(userID);
   setBlog(blog);
   console.log("profile data ->", blog);
   }
