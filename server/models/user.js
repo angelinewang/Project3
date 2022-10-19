@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
     image: { data: Buffer, contentType: String },
     twitter: String,
     instagram: String,
-    blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
+    // blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
   },
   {
     timestamps: true,

@@ -60,6 +60,25 @@ export async function getUserBlog(req, res, next) {
   }
 }
 
+// // ! Blog
+// async function getABlog(req, res, next) {
+//   try {
+//     const blog = await Blog.findById(req.params.id).populate("image author");
+//     if (!blog) {
+//       return res.status(400).json({ error: true, message: "Blog not found." });
+//     }
+//     return res.json(blog);
+//   } catch (error) {
+//     if (error instanceof CastError) {
+//       res
+//         .status(400)
+//         .send({ error: "Invalid id - please enter the correct id." });
+//     } else {
+//       next(error);
+//     }
+//   }
+// }
+
 // TODO: Update profile info
 export async function updatedProfile(req, res, next) {
   console.log("check req body", req.body);
