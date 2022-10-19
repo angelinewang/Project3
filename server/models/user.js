@@ -12,20 +12,20 @@ const userSchema = new mongoose.Schema(
     image: { data: Buffer, contentType: String },
     twitter: String,
     instagram: String,
-    // blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
+    blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
   },
   {
     timestamps: true,
   }
 );
 
-userSchema.set("toJSON", {
-  transform: function (doc, ret) {
-    // remove the password property when serializing doc to JSON
-    delete ret.password;
-    return ret;
-  },
-});
+// userSchema.set("toJSON", {
+//   transform: function (doc, ret) {
+//     // remove the password property when serializing doc to JSON
+//     delete ret.password;
+//     return ret;
+//   },
+// });
 
 userSchema.pre("save", function (next) {
   // 'this' will be set to the current document
