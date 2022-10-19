@@ -68,7 +68,8 @@ export const createABlog = async (blog) => {
         //"content-type": 'multipart/form-data',
         Authorization: "Bearer " + token,
       },
-      body: blog,
+      body: JSON.stringify(blog),
+      // body: blog,
     });
     return res.json();
   } catch (error) {
@@ -79,7 +80,7 @@ export const createABlog = async (blog) => {
 export const removeABlog = async (blog) => {
   try {
     console.log("blog was deleted");
-    const token = tokenService();
+    const token = tokenService.tokenService();
     let res = await fetch(BASE_URL + `/api/blogs/${blog._id}`, {
       method: "DELETE",
       headers: {
