@@ -9,7 +9,6 @@ import { getBlog } from "../../utils/blogService";
 import HTMLReactParser from 'html-react-parser';
 import { removeABlog } from "../../utils/blogService";
 
-
 function DetailPage() {
 
     const id = useParams().id

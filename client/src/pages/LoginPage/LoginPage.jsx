@@ -36,10 +36,10 @@ function LoginPage() {
   }
 
   return (
-    <div className="LoginPage">
-      <header className="header-footer">Log In</header>
+    <div className="LoginPage message is-primary">
+      <header className="header-footer message-header">Log In</header>
       <form className="form-horizontal" onSubmit={handleSubmit} >
-        <div className="form-group">
+        <div className="form-group message-body">
           <div className="col-sm-12">
             <input type="email" className="form-control" placeholder="Email" value={formState.email} name="email" onChange={handleChange} />
           </div>
