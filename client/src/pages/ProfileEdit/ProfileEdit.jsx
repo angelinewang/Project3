@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import useUser from "../../hooks/useUser";
+import useUser from "../../hooks/useUser";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateProfileInfo } from "../../utils/userService";
 import "./ProfileEdit.css";
@@ -12,7 +12,7 @@ const initialProfileDataObject = {
 };
 
 function ProfileEdit() {
-  // const { user } = useUser();
+  const { user } = useUser();
 
   const { userID } = useParams();
 
@@ -135,58 +135,63 @@ function ProfileEdit() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="form">
-        <label>Bio:</label>
-        <input
-          type="text"
-          name="bio"
-          value={profileEdit.bio}
-          onChange={handleChange}
-        />
-
-        <label>Profile picture:</label>
-        {profileEdit.image ? (
-          <img
-            src={profileEdit.image}
-            alt="profile avatar"
-            className="profile"
+    <section>
+      <div className="form-container">
+        <form onSubmit={handleSubmit} className="profile-edit-form">
+          <label>Bio:</label>
+          <input
+            className="edit-input bio"
+            type="text"
+            name="bio"
+            value={profileEdit.bio}
+            onChange={handleChange}
           />
-        ) : (
-          <img
-            src={require("../../images/default-user.png")}
-            alt="profile avatar"
-            className="pfp"
+
+          <label>Profile picture:</label>
+          <div className="profile-picture">
+            {profileEdit.image ? (
+              <img
+                src={profileEdit.image}
+                alt="profile avatar"
+                className="profile"
+              />
+            ) : (
+              <img
+                src={require("../../images/default-user.png")}
+                alt="profile avatar"
+                className="pfp"
+              />
+            )}
+          </div>
+
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            value={imageFile}
+            onChange={handleChange}
           />
-        )}
 
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          value={imageFile}
-          onChange={handleChange}
-        />
-
-        <label>Twitter handle:</label>
-        <input
-          type="text"
-          name="twitter"
-          value={profileEdit.twitter}
-          // onChange={(e) => handleTwitterChange(e)}
-          onChange={handleChange}
-        />
-        <label>Instagram handle:</label>
-        <input
-          type="text"
-          name="instagram"
-          value={profileEdit.instagram}
-          // onChange={(e) => handleInstagramChange(e)}
-          onChange={handleChange}
-        />
-        <button>Submit</button>
-      </form>
-    </div>
+          <label>www.twitter.com/</label>
+          <input
+            className="edit-input"
+            type="text"
+            name="twitter"
+            value={profileEdit.twitter}
+            onChange={handleChange}
+          />
+          <label>www.instagram.com/</label>
+          <input
+            className="edit-input"
+            type="text"
+            name="instagram"
+            value={profileEdit.instagram}
+            onChange={handleChange}
+          />
+          <button className="form-submit">Submit</button>
+        </form>
+      </div>
+    </section>
   );
 }
 

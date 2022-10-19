@@ -2,10 +2,8 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 import "./NavBar.css";
-
 const NavBar = () => {
   const { handleLogout, user } = useUser();
-
   let nav = user ? (
     <div className="navBar-logged-in">
       <NavLink
@@ -19,7 +17,7 @@ const NavBar = () => {
       <Link
         to={`/profile/${user._id}`}
         className="user-name"
-        style={{ color: "#BCBCBC", textDecoration: "dotted" }}
+        style={{ color: "#BCBCBC" }}
       >
         {user.name}
       </Link>
@@ -42,20 +40,18 @@ const NavBar = () => {
       </NavLink>
     </div>
   );
-
   return (
     <div className="navBar">
       <div className="navBar-left">
-        <Link to="/about" style={{ color: "#BCBCBC" }}>
+        {/* <Link to="/about" style={{ color: "#BCBCBC" }}>
           <h2 className="about">About</h2>
-        </Link>
+        </Link> */}
         {user ? (
           <Link to="/blog/new" style={{ color: "#BCBCBC" }}>
             <h2 className="create-blog">Create</h2>
           </Link>
         ) : null}
       </div>
-
       <Link to="/" style={{ color: "#fa9500" }}>
         <h1 className="blen">Blen </h1>
       </Link>
@@ -63,5 +59,4 @@ const NavBar = () => {
     </div>
   );
 };
-
 export default NavBar;

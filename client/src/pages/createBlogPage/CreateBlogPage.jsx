@@ -26,8 +26,8 @@ function CreateBlogPage() {
 
   let titleIsValid = blog.title.trim() !== "" && blog.title.length > 25;
   let descriptionIsValid =
-    blog.description.trim() !== "" && blog.description.length > 100;
-  let contentIsValid = blog.content.trim() !== "" && blog.content.length > 500;
+  blog.description.trim() !== "" && blog.description.length > 100;
+  let contentIsValid = blog.content.trim() !== "" && blog.content.length > 250;
   let imageIsValid = blog.image !== undefined;
 
   let handleChange = (e) => {
@@ -92,11 +92,7 @@ function CreateBlogPage() {
     <>
       {" "}
       {user ? (
-        <form
-          className="form-container"
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-        >
+              <form className='create-form-container' onSubmit={handleSubmit} encType="multipart/form-data" >
           <h2>Create New Blog</h2>
           <label>
             Title <span>*</span>
@@ -164,13 +160,7 @@ function CreateBlogPage() {
             initContValue=""
             setContentTouched={setContentTouched}
           />
-          {contentIsInvalid ? (
-            <p className="error-message">
-              Please provide a valid content (min. 1000 characters)
-            </p>
-          ) : (
-            <></>
-          )}
+          {contentIsInvalid ? <p className='error-message'>Please provide a valid content (min. 250 characters)</p> : <></> }
 
           <div className="image-input-container">
             <label>
@@ -200,7 +190,7 @@ function CreateBlogPage() {
           </div>
         </form>
       ) : (
-        <p>You are not logged in</p>
+        <p className='authorization-error'>YOU ARE NOT LOGGED IN</p>
       )}
     </>
   );

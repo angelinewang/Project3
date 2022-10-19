@@ -1,15 +1,28 @@
-.form {
+.form-container {
+  /* border: 1px solid blue; */
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  width: 350px;
+  background-color: #faf9f9;
+  margin-top: 50px;
+}
+
+.profile-edit-form {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   width: 200px;
   margin: 0 auto;
+  /* border: 1px solid red; */
+  font-family: "Roboto", sans-serif;
 }
 
 .profile {
-  /* vertical-align: middle;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; */
   border-radius: 50%;
   height: 4rem;
   width: 4rem;
@@ -18,4 +31,39 @@
 .profile img {
   height: 50%;
   width: 50%;
+}
+
+.edit-input {
+  height: 30px;
+  font-family: "Roboto", sans-serif;
+  font-size: 11pt;
+}
+
+.bio {
+  height: 70px;
+}
+
+.profile-picture {
+  align-self: center;
+  padding: 10px;
+}
+
+.form-submit {
+  padding: 5px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  background: none;
+  outline: inherit;
+  border: none;
+  background-color: #fa9500;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: white;
+  font-size: 11pt;
+}
+
+.profile-edit-form label {
+  font-size: 14pt;
 }
