@@ -61,7 +61,7 @@ function Profile() {
                   {" "}
                   Blogs: <span className="blogs-num">{blog.blogs ? blog.blogs.length : null}</span>
                 </p>
-                <p>Joined: {blog.createdAt.split("T")[0]}</p>
+                <p>Joined: {blog.createdAt ? blog.createdAt.split("T")[0] : null}</p>
               </div>
 
               <div>

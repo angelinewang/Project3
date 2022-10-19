@@ -65,7 +65,7 @@ export const createABlog = async (blog) => {
     let res = await fetch(BASE_URL + `/api/blogs`, {
       method: "POST",
       headers: {
-        //"content-type": 'multipart/form-data',
+        "content-type": "multipart/form-data",
         Authorization: "Bearer " + token,
       },
       body: blog,
