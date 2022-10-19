@@ -10,7 +10,7 @@ function Profile() {
 
   const [blog, setBlog] = useState();
 
-  const { userID } = useParams();
+  const userID = useParams().userID;
 
   useEffect(() => {
     async function getBlogData() {
