@@ -37,9 +37,10 @@ function LoginPage() {
 
   return (
     <div className="LoginPage message is-primary">
-      <header className="header-footer message-header">Log In</header>
+      <header className="header-footer message-header"><h1>Log In</h1></header>
+      <div className="form-box">
       <form className="form-horizontal" onSubmit={handleSubmit} >
-        <div className="form-group message-body">
+        <div className="form-group">
           <div className="col-sm-12">
             <input type="email" className="form-control" placeholder="Email" value={formState.email} name="email" onChange={handleChange} />
           </div>
@@ -49,13 +50,14 @@ function LoginPage() {
             <input type="password" className="form-control" placeholder="Password" value={formState.password} name="password" onChange={handleChange} />
           </div>
         </div>
-        <div className="form-group">
-          <div className="col-sm-12 text-center">
-            <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-            <Link to='/'>Cancel</Link>
-          </div>
+        <div className="form-group buttons">
+          {/* <div className="col-sm-12 text-center buttons group"> */}
+            <button className="button is-primary">Log In</button>&nbsp;&nbsp;&nbsp;
+            <button className="button is-primary"><Link to='/' style={{textDecoration: "none"}}><p>Cancel</p></Link></button>
+          {/* </div> */}
         </div>
       </form>
+      </div>
     </div>
   );
 }

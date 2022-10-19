@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import userService from '../../utils/userService';
 import useUser from '../../hooks/useUser';
 
+import "./SignupForm.css"
+
 function SignupForm({ updateMessage }) {
   const navigate = useNavigate()
   const { handleSignupOrLogin } = useUser()
@@ -42,8 +44,9 @@ function SignupForm({ updateMessage }) {
   }
 
   return (
-    <div>
-      <header className="header-footer">Sign Up</header>
+    <div className='SignupPage message is-primary'>
+      <header className="header-footer message-header"><h1>Sign Up</h1></header>
+      <div className="form-box">
       <form className="form-horizontal" onSubmit={handleSubmit} >
         <div className="form-group">
           <div className="col-sm-12">
@@ -65,13 +68,14 @@ function SignupForm({ updateMessage }) {
             <input type="password" className="form-control" placeholder="Confirm Password" value={state.passwordConf} name="passwordConf" onChange={handleChange} />
           </div>
         </div>
-        <div className="form-group">
-          <div className="col-sm-12 text-center">
-            <button className="btn btn-default" disabled={isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-            <Link to='/'>Cancel</Link>
-          </div>
+        <div className="form-group buttons">
+          {/* <div className="col-sm-12 text-center"> */}
+            <button className="button is-primary" style={{textDecoration: "none"}} disabled={isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
+           <button className="button is-primary"> <Link to='/' style={{textDecoration: "none"}}>Cancel</Link></button>
+          {/* </div> */}
         </div>
       </form>
+      </div>
     </div>
   );
 }
