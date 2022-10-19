@@ -35,6 +35,8 @@ export default function HomePage() {
           tags.push(tag);
         });
       });
+
+      console.log(blogs);
     } catch (err) {
       console.log(err);
     }
