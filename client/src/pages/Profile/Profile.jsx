@@ -13,12 +13,12 @@ function Profile() {
   const userID = useParams().userID;
 
   useEffect(() => {
-    async function getBlogData() {
-      const blog = await getUserBlog(userID);
+    // async function getBlogData() {
+      const blog = getUserBlog(userID);
       setBlog(blog);
       console.log("profile data ->", blog);
-    }
-    getBlogData();
+    // }
+    // getBlogData();
   }, [userID]);
 
   return (
