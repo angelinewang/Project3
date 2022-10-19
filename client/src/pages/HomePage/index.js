@@ -48,6 +48,7 @@ export default function HomePage() {
 
           tag.pop();
           tag.join().replace(/,/g, "");
+          console.log(blogs);
         });
       });
     } catch (err) {
