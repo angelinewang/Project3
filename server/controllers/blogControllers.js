@@ -33,22 +33,18 @@ async function getABlog(req, res, next) {
 
 async function createBlog(req, res, next) {
   let userId = req.user._id;
+  let filePath;
   try {
-    let filePath = req.file.path;
-    let currentUser = await User.findById(userId);
     const data = req.body;
+    if (req.file) {
+      filePath = req.file.path;
+      data.image = filePath;
+    }
+    let currentUser = await User.findById(userId);
     data.author = userId;
-
-    //The image field within the Blog must be the ObjectId of the Image in order to delete the image on Blog deletion
-    const newImage = await Image.create(filePath);
-    data.image = newImage._id;
-
     const newBlog = await Blog.create(data);
-    console.log(newBlog);
-
     currentUser.blogs.push(newBlog._id);
     await currentUser.save();
-
     res.json(newBlog);
   } catch (error) {
     res.status(400).json(error);
