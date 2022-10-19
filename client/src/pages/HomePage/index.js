@@ -33,9 +33,9 @@ export default function HomePage() {
             return res.concat(tag[v]);
           }, []);
           console.log(newTag);
-          const finalTag = newTag.pop();
-          console.log(finalTag);
-          const realTag = finalTag.join().replace(",", "");
+          newTag.pop();
+          console.log(newTag);
+          const realTag = newTag.join().replace(",", "");
           console.log(realTag);
           tags.push(realTag);
           console.log(tags);
