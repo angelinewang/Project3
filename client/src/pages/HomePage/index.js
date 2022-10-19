@@ -43,8 +43,9 @@ export default function HomePage() {
 
         blog.tags.forEach((tag) => {
           Object.keys(tag).reduce(function (res, v) {
-            return res.concat(tag[v]);
+            return (tag = res.concat(tag[v]));
           }, []);
+
           tag.pop();
           tag.join().replace(/,/g, "");
         });
