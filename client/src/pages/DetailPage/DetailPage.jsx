@@ -1,13 +1,12 @@
 import React from 'react';
 import './DetailPage.css';
-import axios from 'axios';
 import {Link, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
-import { getBlog } from "../../utils/blogService";
+import { getBlog} from "../../utils/blogService";
 import HTMLReactParser from 'html-react-parser';
-import { removeABlog } from "../../utils/blogService";
+import { removeABlog, updateABlog } from "../../utils/blogService";
 
 function DetailPage() {
 
@@ -17,7 +16,7 @@ function DetailPage() {
 
     var MySwal = withReactContent(Swal)
 
-    const [comment, setComment] = React.useState(!!blog)
+    // const [comment, setComment] = React.useState(!!blog)
 
     const [isAuthor, setIsAuthor] = React.useState(!!TokenService.getUserFromToken())
     const [isUser, setIsUser] = React.useState(!!blog)
@@ -65,35 +64,25 @@ function DetailPage() {
         .then(() => {fetchBlog()})
     }
 
-//Function triggered if the user presses the "like" button 
-//Edits the blog like count in the blog database table
-    // let likeBlog = () => {
-    //     setLike(!like)
-    //     // const id = "634540287131dc0fdff1164b"
-    //     axios.post(`api/blogs/${id}`)
-    //     .then(res => console.log(res.data)) 
-    //     .then(() =>  {MySwal.fire({
-    //             title: <strong>Blog Liked</strong>,
-    //             html: <i>You liked this blog!</i>,
-    //             icon: 'success'
-    //         })
-    //     })
-    //     .then(() => {fetchBlog()})
-    // }
-
     let handleChange = (e) => {
-        setComment(`${e.target.value}`)
+
+        let newComments = [...blog.comments, e.target.value];
+        setBlog({...blog, comments: [...newComments]})
     }
 
-    let handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault()
         // const id = "6341881d24ab218818a7ceba"
         console.log('comment was submitted!')
-        axios.patch(`api/blogs/${id}`, comment)
-        .then((res) => {
-            console.log(res.data)
-            fetchBlog()
-        })
+
+        await updateABlog(blog) 
+        fetchBlog()
+
+        // axios.patch(`api/blogs/${id}`, blog)
+        // .then((res) => {
+        //     console.log(res.data)
+        //     fetchBlog()
+        // })
     }
 
     return (
@@ -123,7 +112,7 @@ function DetailPage() {
 
                                 <form onSubmit={handleSubmit} className="message is-primary user-only">
                                 <label className="message-header"><strong>Add a comment</strong></label>
-                                    <textarea id='comment-input' className="comment-input textarea is-small is-hover" name="comment" value={comment} onChange={handleChange}></textarea>
+                                    <textarea id='comment-input' className="comment-input textarea is-small is-hover" name="comment" onChange={handleChange}></textarea>
                                     <button className="add button is-primary" type="Submit" value="Submit">Submit</button>
                                 </form>
 
@@ -136,7 +125,7 @@ function DetailPage() {
                                 <p className='message-header'>Author-only Functions</p>
                                 <div className="author-functions">
                                 <div className="delete-function">
-                                <button className="delete" aria-label="delete" onClick={() => {deleteBlog(blog._id)}}></button>
+                                <button className="delete" aria-label="delete" onClick={() => {deleteBlog(blog)}}></button>
                                 <p>Delete Blog</p>
                                 </div>
                                 
