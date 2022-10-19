@@ -66,19 +66,19 @@ async function updatedBlog(req, res, next) {
 async function deleteBlog(req, res, next) {
   try {
     await Blog.findByIdAndDelete(req.params.id);
-
-    // await Image.findByIdAndDelete(oldBlog.image._id);
-
-    // await Blog.findByIdAndDelete(req.params.id);
-    // res.status(204).send("Blog deleted!", oldBlog);
-
-    //There is no way to find and delete the Image from the uploads folder without a reference to its ObjectID with the Blog Schema
-    //Thus, I have changed the data saved under Image inside the Blog into the reference to the Image instead
-    //You can ignore these changes if you wish to keep the origin schema, however that just means we cannot delete the image upon Blog deletion
   } catch (error) {
     next(error);
   }
 }
+
+// await Image.findByIdAndDelete(oldBlog.image._id);
+
+// await Blog.findByIdAndDelete(req.params.id);
+// res.status(204).send("Blog deleted!", oldBlog);
+
+//There is no way to find and delete the Image from the uploads folder without a reference to its ObjectID with the Blog Schema
+//Thus, I have changed the data saved under Image inside the Blog into the reference to the Image instead
+//You can ignore these changes if you wish to keep the origin schema, however that just means we cannot delete the image upon Blog deletion
 
 export default {
   createBlog,
