@@ -37,8 +37,9 @@ button p {
 
 h1 {
   font-weight: bold;
-  font-size: 5vw;
+  font-size: 1vw;
 }
+
 @media only screen and (min-width: 768px) {}
 
 @media only screen and (min-width: 992px) {}
