@@ -7,6 +7,7 @@ export default function HomePage() {
   useEffect(() => {
     getBlogs();
     getTags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getBlogs() {
