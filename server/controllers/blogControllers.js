@@ -69,12 +69,12 @@ async function updatedBlog(req, res, next) {
 
 async function deleteBlog(req, res, next) {
   try {
-    let oldBlog = await Blog.findById(req.params.id).populate("image");
-
-    await Image.findByIdAndDelete(oldBlog.image._id);
-
     await Blog.findByIdAndDelete(req.params.id);
-    res.status(204).send();
+
+    // await Image.findByIdAndDelete(oldBlog.image._id);
+
+    // await Blog.findByIdAndDelete(req.params.id);
+    // res.status(204).send("Blog deleted!", oldBlog);
 
     //There is no way to find and delete the Image from the uploads folder without a reference to its ObjectID with the Blog Schema
     //Thus, I have changed the data saved under Image inside the Blog into the reference to the Image instead
