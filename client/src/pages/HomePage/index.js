@@ -29,11 +29,11 @@ export default function HomePage() {
       const blogs = await response.json();
       blogs.forEach((blog) => {
         blog.tags.forEach((tag) => {
-          Object.keys(tag).reduce(function (res, v) {
+          const newTag = Object.keys(tag).reduce(function (res, v) {
             return res.concat(tag[v]);
           }, []);
-          tags.push(tag);
-          console.log(blogs);
+          tags.push(newTag);
+          console.log(tags);
         });
       });
     } catch (err) {
