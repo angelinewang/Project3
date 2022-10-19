@@ -15,7 +15,7 @@ export default function HomePage() {
       const response = await fetch(
         "https://blogging-platform-365219.ew.r.appspot.com/api/blogs"
       );
-      const blogs = await response.json();
+      const blogs = await [response.json()];
       setBlogs(blogs);
     } catch (err) {
       console.log(err);
@@ -26,7 +26,7 @@ export default function HomePage() {
       const response = await fetch(
         "https://blogging-platform-365219.ew.r.appspot.com/api/blogs"
       );
-      const blogs = await response.json();
+      const blogs = await [response.json()];
       blogs.forEach((blog) => {
         blog.tags.forEach((tag) => {
           tags.push(tag);
