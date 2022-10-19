@@ -24,12 +24,12 @@ export const getUserBlog = async (userID) => {
   try {
     //1. Does the user ID exist? YES 2. Does the URL work for blogs? YES 3. Does the URL work for other users calls?
 
-    //4. Try users/login API WORKS 5. Try users/signup APi WORKS
+    //4. Try users/login API YES 5. Try users/signup APi YES
     // console.log("service ran");
     let res = await fetch(BASE_URL + `/api/users/${userID}`);
-    // #1 Test this API request in Postman: https://blogging-platform-365219.ew.r.appspot.com/api/users/6341888e3ef0c4526bc0d222
+    // #1 Test this API request in Postman: https://blogging-platform-365219.ew.r.appspot.com/api/users/6341888e3ef0c4526bc0d222 YES DOESNOT WORK
 
-    // #1.5 See if correct user id is being passed into the API
+    // #1 Fix 404 Not found on users/:id WORKS NOW AFTER: gcloud app deploy in terminal
 
     // #2 Finish making Profile work
     // #3 Finish making Profile user blogs work

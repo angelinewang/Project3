@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { getBlogs } from "../../utils/blogService";
 import "./homepage.css";
 export default function HomePage() {
   let [blogs, setBlogs] = useState([]);
   let [tags, setTags] = useState([]);
 
   useEffect(() => {
-    getBlogs();
+    getFinalBlogs();
     getTags();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function getBlogs() {
+  async function getFinalBlogs() {
     try {
-      const response = await fetch(
-        "https://blogging-platform-365219.ew.r.appspot.com/api/blogs"
-      );
-      const blogs = await [response.json()];
+      // const response = await fetch(
+      //   "https://blogging-platform-365219.ew.r.appspot.com/api/blogs"
+      // );
+      // const blogs = [response.json()];
+      const blogs = await getBlogs();
       setBlogs(blogs);
     } catch (err) {
       console.log(err);
@@ -24,10 +27,7 @@ export default function HomePage() {
   }
   async function getTags() {
     try {
-      const response = await fetch(
-        "https://blogging-platform-365219.ew.r.appspot.com/api/blogs"
-      );
-      const blogs = await response.json();
+      const blogs = await getBlogs();
       blogs.forEach((blog) => {
         blog.tags.forEach((tag) => {
           const newTag = Object.keys(tag).reduce(function (res, v) {

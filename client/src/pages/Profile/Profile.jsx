@@ -13,7 +13,7 @@ function Profile() {
   const userID = useParams().userID;
 
   async function getBlogData() {
-  const blog = getUserBlog(userID);
+  const blog = await getUserBlog(userID);
   setBlog(blog);
   console.log("profile data ->", blog);
   }
@@ -59,7 +59,7 @@ function Profile() {
                 <p>{blog.bio} </p>
                 <p>
                   {" "}
-                  Blogs: <span className="blogs-num">{blog.blogs.length}</span>
+                  Blogs: <span className="blogs-num">{blog.blogs ? blog.blogs.length : null}</span>
                 </p>
                 <p>Joined: {blog.createdAt.split("T")[0]}</p>
               </div>

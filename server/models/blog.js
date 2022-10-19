@@ -4,8 +4,6 @@ const commentSchema = new mongoose.Schema({
   comments: [String],
 });
 
-//Deleted tag schema since it was not in use
-
 const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },

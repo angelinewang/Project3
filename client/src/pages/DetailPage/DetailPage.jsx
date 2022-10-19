@@ -1,13 +1,12 @@
 import React from 'react';
 import './DetailPage.css';
-import axios from 'axios';
 import {Link, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TokenService from "../../utils/tokenService";
-import { getBlog } from "../../utils/blogService";
+import { getBlog} from "../../utils/blogService";
 import HTMLReactParser from 'html-react-parser';
-import { removeABlog } from "../../utils/blogService";
+import { removeABlog, updateABlog } from "../../utils/blogService";
 
 function DetailPage() {
 
@@ -17,27 +16,34 @@ function DetailPage() {
 
     var MySwal = withReactContent(Swal)
 
-    const [comment, setComment] = React.useState(!!blog)
+    // const [comment, setComment] = React.useState(!!blog)
 
     const [isAuthor, setIsAuthor] = React.useState(!!TokenService.getUserFromToken())
     const [isUser, setIsUser] = React.useState(!!blog)
 
-    let fetchBlog = () => {
+        async function fetchBlog() {
+        // setBlog(blog = "Apple");
         console.log("Reached fetchBlog function!")
         console.log(id)
-        getBlog(id).then((res) => {console.log(res); setBlog(res)
-        if(TokenService.getUserFromToken()._id) {
+        const blog = await getBlog(id)
+
+        setBlog(blog)
+
+        const user = await TokenService.getUserFromToken()
+        
+        if(user._id) {
             setIsUser(true)
             if(blog.author) {
-                console.log(TokenService.getUserFromToken()._id)
+                console.log(user._id)
                 console.log(blog.author._id)
-                if(TokenService.getUserFromToken()._id === blog.author._id) {
+                if(user._id === blog.author._id) {
                     setIsAuthor(true)
                 }
+                else return
             }
-           
+        else return
     }
-        })
+        else return
 }
 
     React.useEffect(() => {
@@ -59,17 +65,23 @@ function DetailPage() {
     }
 
     let handleChange = (e) => {
-        setComment(`${e.target.value}`)
+
+        let newComments = [...blog.comments, e.target.value];
+        setBlog({...blog, comments: [...newComments]})
     }
 
-    let handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault()
         console.log('comment was submitted!')
-        axios.patch(`api/blogs/${id}`, comment)
-        .then((res) => {
-            console.log(res.data)
-            fetchBlog()
-        })
+
+        await updateABlog(blog) 
+        fetchBlog()
+
+        // axios.patch(`api/blogs/${id}`, blog)
+        // .then((res) => {
+        //     console.log(res.data)
+        //     fetchBlog()
+        // })
     }
 
     return (
@@ -97,7 +109,7 @@ function DetailPage() {
 
                                 <form onSubmit={handleSubmit} className="message is-primary user-only">
                                 <label className="message-header"><strong>Add a comment</strong></label>
-                                    <textarea id='comment-input' className="comment-input textarea is-small is-hover" name="comment" value={comment} onChange={handleChange}></textarea>
+                                    <textarea id='comment-input' className="comment-input textarea is-small is-hover" name="comment" onChange={handleChange}></textarea>
                                     <button className="add button is-primary" type="Submit" value="Submit">Submit</button>
                                 </form>
 
@@ -110,7 +122,7 @@ function DetailPage() {
                                 <p className='message-header'>Author-only Functions</p>
                                 <div className="author-functions">
                                 <div className="delete-function">
-                                <button className="delete" aria-label="delete" onClick={() => {deleteBlog(blog._id)}}></button>
+                                <button className="delete" aria-label="delete" onClick={() => {deleteBlog(blog)}}></button>
                                 <p>Delete Blog</p>
                                 </div>
                                 
