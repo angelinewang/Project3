@@ -30,27 +30,6 @@ async function getABlog(req, res, next) {
   }
 }
 
-// ! User
-async function getUserBlog(req, res, next) {
-  try {
-    const user = await User.findById(req.params.id).populate("blogs");
-
-    if (!user) {
-      return res.status(400).json({ error: true, message: "User not found." });
-    }
-
-    res.json(user);
-  } catch (error) {
-    if (error instanceof CastError) {
-      res
-        .status(400)
-        .send({ error: "Invalid id - please enter the correct id." });
-    } else {
-      next(error);
-    }
-  }
-}
-
 async function createBlog(req, res, next) {
   let userId = req.user._id;
   try {
@@ -93,7 +72,6 @@ export default {
   createBlog,
   getAllBlogs,
   getABlog,
-  getUserBlog,
   updatedBlog,
   deleteBlog,
 };

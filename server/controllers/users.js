@@ -39,27 +39,26 @@ export async function login(req, res) {
   }
 }
 
-// // TODO: Add profile info
-// export async function addProfile(req, res, next) {
-//   console.log("req received on server");
-//   let userId = req.user._id;
-//   try {
-//     let currentUser = await User.findById(userId);
-//     const data = req.body;
-//     const addedProfile = await User.create(data);
-//     // currentUser.bio.push(data);
+// ! User
+export async function getUserBlog(req, res, next) {
+  try {
+    const user = await User.findById(req.params.id).populate("blogs");
 
-//     await currentUser.save();
+    if (!user) {
+      return res.status(400).json({ error: true, message: "User not found." });
+    }
 
-//     // const currentUser = await User.findByIdAndUpdate(req.user._id, req.body, {
-//     //   new: true,
-//     // });
-
-//     res.json(addedProfile);
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+    res.json(user);
+  } catch (error) {
+    if (error instanceof CastError) {
+      res
+        .status(400)
+        .send({ error: "Invalid id - please enter the correct id." });
+    } else {
+      next(error);
+    }
+  }
+}
 
 // TODO: Update profile info
 export async function updatedProfile(req, res, next) {
