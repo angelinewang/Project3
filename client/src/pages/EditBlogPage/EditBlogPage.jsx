@@ -100,7 +100,7 @@ function EditPage() {
         {!descriptionIsValid ? <p className='error_message'>Please provide a valid description (min. 100 characters)</p>: <></> }
 
         <label>Content <span>*</span></label>
-        <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content} setContentTouched={setContentTouched}/>
+        <TextEditor blog={blog} setBlog={setBlog} initContValue={blog.content} setContentTouched={setContentTouched} contentTouched={contentTouched}/>
         {!contentIsValid ? <p className='error_message'>Please provide a valid content (min. 250 characters)</p> : <></> }
 
         <div className="button_container">
