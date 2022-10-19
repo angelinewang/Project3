@@ -40,6 +40,11 @@ export default function HomePage() {
           tags.push(realTag);
           console.log(tags);
         });
+
+        blog.tags.forEach((tag) => {
+          tag.pop();
+          tag.join().replace(/,/g, "");
+        });
       });
     } catch (err) {
       console.log(err);
