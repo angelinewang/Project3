@@ -15,10 +15,6 @@ export default function HomePage() {
 
   async function getFinalBlogs() {
     try {
-      // const response = await fetch(
-      //   "https://blogging-platform-365219.ew.r.appspot.com/api/blogs"
-      // );
-      // const blogs = [response.json()];
       const blogs = await getBlogs();
       setBlogs(blogs);
     } catch (err) {
@@ -116,7 +112,12 @@ export default function HomePage() {
                       />
                       <div className="user-details-2">
                         <p>{post.author.name}</p>
-                        <p>Joined: {post.author.createdAt.substring(0, 10)}</p>
+                        <p>
+                          Joined:{" "}
+                          {post.author.createdAt
+                            ? post.author.createdAt.substring(0, 10)
+                            : null}
+                        </p>
                       </div>
                     </div>
                   </Link>
