@@ -4,6 +4,7 @@ import "./homepage.css";
 export default function HomePage() {
   let [blogs, setBlogs] = useState([]);
   let [tags, setTags] = useState([]);
+
   useEffect(() => {
     getBlogs();
     getTags();
@@ -98,7 +99,7 @@ export default function HomePage() {
     <div>
       <div className="main-flex">
         <main className="blogs-feed">
-          {blogs
+          {tags
             ? blogs.map(
                 (post) => (
                   // tags.some((el) => post.tags.includes(el)) ? (
