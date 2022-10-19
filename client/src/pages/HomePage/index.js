@@ -33,10 +33,9 @@ export default function HomePage() {
             return res.concat(tag[v]);
           }, []);
           tags.push(tag);
+          console.log(blogs);
         });
       });
-
-      console.log(blogs);
     } catch (err) {
       console.log(err);
     }
