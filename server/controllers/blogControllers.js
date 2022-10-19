@@ -60,7 +60,7 @@ async function updatedBlog(req, res, next) {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.status(204).send();
+    res.status(204).send(updatedBlog);
     res.json(updatedBlog);
   } catch (error) {
     next(error);

@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
 
-const commentSchema = new mongoose.Schema({
-  comments: [String],
-});
-
 const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
@@ -15,7 +11,7 @@ const blogSchema = new mongoose.Schema(
     //You can ignore these changes if you wish to keep the origin schema, however that just means we cannot delete the image upon Blog deletion
     // image: String,
     tags: [String],
-    comments: [commentSchema],
+    comments: [String],
     //18 and 19 need double checking
     author: { type: mongoose.Schema.ObjectId, ref: "User" },
   },
